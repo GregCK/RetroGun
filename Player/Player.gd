@@ -4,7 +4,7 @@ extends KinematicBody2D
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var camera = $PlayerCam
-onready var center = $Position2D
+onready var center = $Weapon
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
@@ -17,6 +17,7 @@ func _physics_process(delta):
 	set_camera(delta)
 
 func move_state(delta):
+#	handle movement
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -33,6 +34,8 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	move()
+	
+	
 
 
 func move():
