@@ -75,4 +75,4 @@ position = Vector2( 13.3369, 1.9945 )
 texture = ExtResource( 3 )
 
 [node name="Firepoint" type="Position2D" parent="Weapon/Pistol"]
-position = Vector2( 16.822, 1.961 )
+position = Vector2( 16.6347, 2.05464 )

@@ -4,10 +4,11 @@ const Bullet = preload("res://Player/PlayerBullet.tscn")
 
 onready var sprite = $Pistol
 onready var firepoint = $Firepoint
+var world
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	world = get_parent().get_parent().get_parent()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +30,7 @@ func isFacingLeft():
 func attack(direction:Vector2):
 	var bullet = Bullet.instance()
 	bullet.init(direction)
-	bullet.position = firepoint.position
+	bullet.set_global_position( firepoint.get_global_position() )
+	world.add_child(bullet)
 	
 	

@@ -1,8 +1,10 @@
 extends Position2D
 
 
-onready var weapon = $Pistol
+onready var pistol = $Pistol
 onready var firepoint = $Pistol/Firepoint
+
+onready var weapon = pistol
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +15,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
+		var mouse_pos = get_global_mouse_position()
 		var self_pos = get_global_position()
-		var weapon_pos = firepoint.get_global_position()
-		var direction = self_pos - weapon_pos
+		var direction = mouse_pos - self_pos
+		direction = direction.normalized()
+		
 		weapon.attack(direction)

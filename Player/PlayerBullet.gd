@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 var velocity = Vector2.ZERO
+const speed = 100
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +11,7 @@ func _ready():
 
 
 func init(direction:Vector2):
-	velocity = direction
+	velocity = direction * speed
 
 
 func _physics_process(delta):
