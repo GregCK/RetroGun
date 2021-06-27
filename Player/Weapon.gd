@@ -21,3 +21,7 @@ func _process(delta):
 		direction = direction.normalized()
 		
 		weapon.attack(direction)
+
+func _input(event):
+	if event.is_action_pressed("click"):
+		pass
