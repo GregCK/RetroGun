@@ -2,24 +2,23 @@ extends KinematicBody2D
 
 onready var sprite = $Sprite
 
+
+const DeathEffect = preload("res://Effects/BulletEffect.tscn")
+
 var direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 const speed = 350
 
+var world
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	var look_vec = to_local(direction)
-#	look_at(look_vec)
-#	look_at(direction)
-#	look_at(velocity)
-#	var angle = Vector2.ZERO.angle_to(direction)
-#	set_rotation_degrees(angle) 
-#	sprite.set_rotation_degrees(angle)
 	var rotation = velocity.angle()
 	rotation = rad2deg(rotation)
 	set_rotation_degrees(rotation)
-	pass
+	
+	world = get_parent()
 
 
 func init(new_direction:Vector2):
@@ -30,3 +29,19 @@ func init(new_direction:Vector2):
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity)
+	if get_slide_count() != 0:
+		create_death_effect()
+		
+		queue_free()
+
+func create_death_effect():
+		var deathEffect = DeathEffect.instance()
+		world.add_child(deathEffect)
+		
+		var col = get_slide_collision(0)
+		var normal = col.get_normal() 
+		var dir = direction.bounce(normal)
+		
+		deathEffect.init(dir)
+		deathEffect.set_global_position(col.get_position() )
+		

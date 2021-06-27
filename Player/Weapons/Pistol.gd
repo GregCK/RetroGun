@@ -54,7 +54,7 @@ func attack(direction:Vector2):
 	muzzleFlareSprite.visible = true
 	muzzleFlareTimer.start()
 	
-	Globals.camera.shake(100, 0.1, 200)
+	Globals.camera.shake(50, 0.1, 200)
 
 
 func _on_Timer_timeout():
