@@ -52,8 +52,8 @@ func set_camera(delta):
 	
 	var cam_pos = camera.get_global_position()
 	
-	
-	var new_cam_pos = lerp(cam_pos, middle_pos, 2 * delta)
+	var camSpeed = 4
+	var new_cam_pos = lerp(cam_pos, middle_pos, camSpeed * delta)
 	
 	camera.set_global_position(new_cam_pos)
 
