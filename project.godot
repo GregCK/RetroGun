@@ -87,6 +87,8 @@ click={
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Player Hurtbox"
+2d_physics/layer_5="Enemy Hurtbox"
 
 [rendering]
 

@@ -45,7 +45,7 @@ func attack(direction:Vector2):
 	
 	
 	#raise pitch
-	pitch = pitch + 0.02
+	pitch = pitch + 0.01
 	audioStreamPlayer.set_pitch_scale(pitch) 
 	gunPitchTimer.start()
 	audioStreamPlayer.play()

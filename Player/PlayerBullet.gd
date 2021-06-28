@@ -4,6 +4,7 @@ onready var sprite = $Sprite
 
 
 const DeathEffect = preload("res://Effects/BulletEffect.tscn")
+const HitEffect = preload("res://Effects/HitEffect.tscn")
 
 var direction = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -51,3 +52,14 @@ func create_death_effect():
 		deathEffect.init(dir)
 		deathEffect.set_global_position(col.get_position() )
 		
+
+func create_hit_effect():
+	var effect = HitEffect.instance()
+	var main = get_tree().current_scene
+	main.add_child(effect)
+	effect.global_position = global_position
+
+
+func _on_Hitbox_area_entered(area):
+	create_hit_effect()
+	queue_free()
