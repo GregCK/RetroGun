@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var sprite = $Sprite
-
+onready var hitbox = $Hitbox
 
 const DeathEffect = preload("res://Effects/BulletEffect.tscn")
 const HitEffect = preload("res://Effects/HitEffect.tscn")
@@ -18,7 +18,9 @@ func _ready():
 	var rotation = velocity.angle()
 	rotation = rad2deg(rotation)
 	set_rotation_degrees(rotation)
-	
+
+	hitbox.set_knockback_vector(velocity)
+
 	world = get_parent()
 	rng.randomize()
 

@@ -1,20 +1,20 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Sounds/hit2.wav" type="AudioStream" id=1]
-[ext_resource path="res://Assets/HitEffect.png" type="Texture" id=2]
+[ext_resource path="res://Assets/HitEffect-export.png" type="Texture" id=2]
 [ext_resource path="res://Effects/HitEffect.gd" type="Script" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 24, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "Animate",
 "speed": 20.0
@@ -27,4 +27,5 @@ script = ExtResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+volume_db = 4.0
 autoplay = true
