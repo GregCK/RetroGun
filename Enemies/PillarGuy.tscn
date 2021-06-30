@@ -1,72 +1,28 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/pillarguy.png" type="Texture" id=2]
-[ext_resource path="res://Enemies/PillarGuy.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Enemy.gd" type="Script" id=3]
 [ext_resource path="res://Enemies/Stats.gd" type="Script" id=4]
+[ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=5]
+[ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Shader" id=4]
-code = "shader_type canvas_item;
-
-uniform bool active = false;
-
-void fragment() {
-	vec4 previous_color = texture(TEXTURE, UV);
-	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
-	vec4 new_color = previous_color;
-	if (active == true){
-		new_color = white_color;
-	}
-	COLOR = new_color;
-}"
-custom_defines = ""
-
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = ExtResource( 5 )
 shader_param/active = false
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 6.12634
 height = 11.6641
 
-[sub_resource type="Animation" id=6]
-resource_name = "Start"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "Stop"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[node name="PillarGuy" type="KinematicBody2D"]
+[node name="PillarGuy" type="KinematicBody2D" groups=[
+"enemies",
+]]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
+material = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
@@ -74,14 +30,13 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 6 )
-anims/Stop = SubResource( 7 )
+[node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 6 )]
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 4 )
+max_health = 10
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 

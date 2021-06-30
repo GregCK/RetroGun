@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Tile2.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/PillarGuy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Goblin.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -49,3 +50,6 @@ tile_data = PoolIntArray( -393224, 0, 0, -393223, 0, 0, -393222, 0, 0, -393221, 
 
 [node name="PillarGuy" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( -62.7024, -38.0976 )
+
+[node name="Goblin" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -119.055, 13.8898 )

@@ -1,10 +1,11 @@
 extends KinematicBody2D
-
+class_name Player
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var camera = $PlayerCam
 onready var center = $Weapon
+onready var stats = $Stats
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
@@ -62,3 +63,7 @@ func set_flip(input_vector):
 		sprite.set_flip_h(true)
 	elif input_vector.x > 0:
 		sprite.set_flip_h(false)
+
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage
