@@ -104,6 +104,7 @@ shape = SubResource( 4 )
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 
 [node name="PlayerDetectionZone" type="Area2D" parent="."]
+visible = false
 monitoring = false
 monitorable = false
 collision_layer = 0

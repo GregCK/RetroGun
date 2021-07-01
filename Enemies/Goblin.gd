@@ -21,7 +21,7 @@ enum State{
 }
 
 var current_state : int = -1 setget set_state
-var player : Player = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +31,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if player != null:
+		can_see_player()
+	
 	match current_state:
 		State.PATROL:
 			pass
@@ -38,6 +41,15 @@ func _physics_process(delta):
 			pass
 		State.SHOOT:
 			pass
+
+func can_see_player():
+	var player_pos = player.get_global_position()
+	var ray_pos = playerCast.get_global_position()
+	var ray_vector = player_pos - ray_pos
+	playerCast.set_cast_to(ray_vector)
+	var coll = playerCast.get_collider()
+	
+
 
 func set_state(new_state: int):
 	if new_state == current_state:

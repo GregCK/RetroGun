@@ -14,6 +14,10 @@ const FRICTION = 500
 
 var velocity = Vector2.ZERO
 
+func _ready():
+	yield(get_tree(), "idle_frame")
+	get_tree().call_group("enemies", "set_player", self)
+
 func _physics_process(delta):
 	move_state(delta)
 	set_camera(delta)

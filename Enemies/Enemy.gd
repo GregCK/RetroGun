@@ -6,9 +6,14 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
 
 var parent = null
+var player : Player = null
 
 func _ready():
 	parent = get_parent()
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 
 
 func _on_Hurtbox_area_entered(area):
@@ -24,3 +29,7 @@ func _on_Stats_no_health():
 	
 	queue_free()
 	
+
+
+func set_player(p):
+	player = p
