@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/holy goblin yellow and pink.png" type="Texture" id=1]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -65,9 +65,6 @@ height = 5.88675
 radius = 11.7791
 height = 1.13563
 
-[sub_resource type="CircleShape2D" id=6]
-radius = 154.978
-
 [node name="Goblin" type="KinematicBody2D" groups=[
 "enemies",
 ]]
@@ -79,7 +76,6 @@ material = SubResource( 5 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 4
-frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/summon = SubResource( 1 )
@@ -103,16 +99,6 @@ shape = SubResource( 4 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 
-[node name="PlayerDetectionZone" type="Area2D" parent="."]
-visible = false
-monitoring = false
-monitorable = false
-collision_layer = 0
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionZone"]
-shape = SubResource( 6 )
-
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, -10.692 )
 
@@ -123,9 +109,9 @@ collision_mask = 11
 
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="body_entered" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_entered"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
 
 [editable path="Hurtbox"]
