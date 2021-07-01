@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/guySS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -10,6 +10,13 @@
 [ext_resource path="res://Effects/ShakeCam.gd" type="Script" id=8]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=11]
+[ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=12]
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.52633
@@ -62,6 +69,7 @@ collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 6 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 3
@@ -125,6 +133,8 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="Stats" parent="." instance=ExtResource( 10 )]
+
+[node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 [connection signal="timeout" from="PlayerCam/Timer" to="PlayerCam" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Weapon/Pistol/MuzzleFlareSprite/Timer" to="Weapon/Pistol" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Weapon/Pistol/GunPitchTimer" to="Weapon/Pistol" method="_on_GunPitchTimer_timeout"]

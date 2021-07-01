@@ -6,6 +6,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var camera = $PlayerCam
 onready var center = $Weapon
 onready var stats = $Stats
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
@@ -66,4 +67,8 @@ func set_flip(input_vector):
 
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage
+	if not area.get("damage") == null:
+		stats.health -= area.damage
+		blinkAnimationPlayer.play("Start")
+	else:
+		print("area does not have damage car")

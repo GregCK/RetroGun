@@ -71,6 +71,7 @@ radius = 154.978
 [node name="Goblin" type="KinematicBody2D" groups=[
 "enemies",
 ]]
+collision_layer = 4
 script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -103,15 +104,27 @@ shape = SubResource( 4 )
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 
 [node name="PlayerDetectionZone" type="Area2D" parent="."]
-visible = false
+monitoring = false
+monitorable = false
+collision_layer = 0
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionZone"]
 shape = SubResource( 6 )
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, -10.692 )
+
+[node name="PlayerCast" type="RayCast2D" parent="FirePoint"]
+enabled = true
+exclude_parent = false
+collision_mask = 11
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
 
 [editable path="Hurtbox"]

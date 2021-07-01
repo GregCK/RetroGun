@@ -17,3 +17,7 @@ func init(new_direction:Vector2):
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity)
+
+
+func _on_Hitbox_area_entered(area):
+	queue_free()
