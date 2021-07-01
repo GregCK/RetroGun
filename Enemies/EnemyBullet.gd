@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 var direction : Vector2
 var velocity : Vector2
-const speed = 100
+const speed = 150
 
 
 # Called when the node enters the scene tree for the first time.

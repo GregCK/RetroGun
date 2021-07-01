@@ -9,6 +9,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var firePoint = $FirePoint
 onready var shotTimer = $ShotTimer
 onready var playerCast = $FirePoint/PlayerCast
+onready var spellSound = $SpellSound
 
 export var shots_to_fire = 3
 var shots_fired = 0
@@ -75,7 +76,8 @@ func fire():
 	shots_fired += 1
 	
 	shotTimer.start()
-
+	
+	spellSound.play()
 
 
 
@@ -85,6 +87,8 @@ func fire():
 func _on_ShotTimer_timeout():
 	if shots_fired < shots_to_fire:
 		fire()
+		if shots_fired == shots_to_fire:
+			animationPlayer.play("lower")
 	else:
 		shots_fired = 0
 		set_state(State.PATROL)

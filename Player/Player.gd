@@ -7,6 +7,7 @@ onready var camera = $PlayerCam
 onready var center = $Weapon
 onready var stats = $Stats
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var hurtSound = $HurtSound
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
@@ -74,5 +75,6 @@ func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:
 		stats.health -= area.damage
 		blinkAnimationPlayer.play("Start")
+		hurtSound.play()
 	else:
 		print("area does not have damage car")

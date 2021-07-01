@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/holy goblin yellow and pink.png" type="Texture" id=1]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -6,13 +6,29 @@
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=4]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/Goblin.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Sounds/retro spell.wav" type="AudioStream" id=7]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/active = false
 
-[sub_resource type="Animation" id=1]
-resource_name = "summon"
+[sub_resource type="Animation" id=6]
+resource_name = "lower"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -41,7 +57,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -57,11 +73,11 @@ tracks/0/keys = {
 "values": [ 8, 0, 9, 0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 3.27978
 height = 5.88675
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 11.7791
 height = 1.13563
 
@@ -72,20 +88,21 @@ collision_layer = 4
 script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/summon = SubResource( 1 )
-anims/walk = SubResource( 2 )
+anims/lower = SubResource( 6 )
+anims/summon = SubResource( 2 )
+anims/walk = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 11.977 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 
@@ -95,7 +112,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 5.736 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 
@@ -108,8 +125,11 @@ exclude_parent = false
 collision_mask = 11
 
 [node name="ShotTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
+
+[node name="SpellSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
