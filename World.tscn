@@ -50,3 +50,12 @@ position = Vector2( 110.324, -103.181 )
 
 [node name="Goblin" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 38.0975, -28.97 )
+
+[node name="Goblin2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -86.5136, 28.9702 )
+
+[node name="Goblin3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 206.362, 90.0852 )
+
+[node name="Goblin4" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -48.4159, -142.469 )
