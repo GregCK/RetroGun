@@ -8,7 +8,6 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var firePoint = $FirePoint
 onready var shotTimer = $ShotTimer
-onready var playerCast = $FirePoint/PlayerCast
 onready var spellSound = $SpellSound
 
 export var shots_to_fire = 3
@@ -26,7 +25,7 @@ var current_state : int = -1 setget set_state
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_state(State.PATROL)
-
+	playerCast = $FirePoint/PlayerCast
 
 
 
@@ -41,17 +40,7 @@ func _physics_process(delta):
 		State.SHOOT:
 			pass
 
-func can_see_player():
-	if player != null:
-		var player_pos = player.get_global_position()
-		var ray_pos = playerCast.get_global_position()
-		var ray_vector = player_pos - ray_pos
-		playerCast.set_cast_to(ray_vector)
-		var coll = playerCast.get_collider()
-		if playerCast.is_colliding() and coll.is_in_group("player"):
-			return true
-		else:
-			return false
+
 
 
 func set_state(new_state: int):

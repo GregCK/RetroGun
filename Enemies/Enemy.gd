@@ -4,6 +4,7 @@ const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
+onready var playerCast = null
 
 var parent = null
 var player : Player = null
@@ -30,6 +31,19 @@ func _on_Stats_no_health():
 	queue_free()
 	
 
+
+
+func can_see_player():
+	if player != null:
+		var player_pos = player.get_global_position()
+		var ray_pos = playerCast.get_global_position()
+		var ray_vector = player_pos - ray_pos
+		playerCast.set_cast_to(ray_vector)
+		var coll = playerCast.get_collider()
+		if playerCast.is_colliding() and coll.is_in_group("player"):
+			return true
+		else:
+			return false
 
 func set_player(p):
 	player = p

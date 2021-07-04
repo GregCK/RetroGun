@@ -1,8 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/ghost.png" type="Texture" id=1]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HitBoxes/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/ChaseGhost.gd" type="Script" id=4]
+[ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=7]
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/active = false
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.03086
@@ -10,9 +19,13 @@ radius = 7.03086
 [sub_resource type="CircleShape2D" id=2]
 radius = 6.22597
 
-[node name="ChaseGhost" type="KinematicBody2D"]
+[node name="ChaseGhost" type="KinematicBody2D" groups=[
+"enemies",
+]]
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
@@ -25,10 +38,21 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
-collision_layer = 8
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 2 )
+
+[node name="PlayerCast" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 11
+
+[node name="Stats" parent="." instance=ExtResource( 6 )]
+
+[node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
 

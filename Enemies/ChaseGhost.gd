@@ -1,16 +1,49 @@
-extends KinematicBody2D
+extends "res://Enemies/Enemy.gd"
+
+signal state_changed(new_state)
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+enum State{
+	PATROL,
+	CHASE
+}
+
+var current_state : int = -1 setget set_state
 
 
-# Called when the node enters the scene tree for the first time.
+var velocity = Vector2.ZERO
+const speed = 50
+
 func _ready():
-	pass # Replace with function body.
+	set_state(State.PATROL)
+	playerCast = $PlayerCast
+
+func _physics_process(delta):
+	match current_state:
+		State.PATROL:
+			if can_see_player():
+				set_state(State.CHASE)
+		State.CHASE:
+			if !can_see_player():
+				set_state(State.PATROL)
+			chase_state(delta)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func chase_state(delta):
+	var player_pos = player.get_global_position()
+	var self_pos = get_global_position()
+	var vec_to_player = player_pos - self_pos
+	vec_to_player = vec_to_player.normalized()
+	velocity = vec_to_player * speed
+	move()
+
+
+func move():
+	velocity = move_and_slide(velocity)
+
+func set_state(new_state: int):
+	if new_state == current_state:
+		return
+	
+	current_state = new_state
+	emit_signal("state_changed", current_state)

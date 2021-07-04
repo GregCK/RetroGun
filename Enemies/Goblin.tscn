@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Sounds/retro spell.wav" type="AudioStream" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/active = false
 
