@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
+const scent_scene = preload("res://Player/Scent.tscn")
+
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var camera = $PlayerCam
@@ -15,9 +17,23 @@ const FRICTION = 500
 
 var velocity = Vector2.ZERO
 
+var world = null
+
+var scent_trail = []
+var scentTimer = null
+var scentWaitTime = 0.1
+
 func _ready():
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("enemies", "set_player", self)
+	
+	world = get_tree().current_scene
+	
+	scentTimer = Timer.new()
+	scentTimer.connect("timeout",self,"add_scent")
+	add_child(scentTimer) #to process
+	scentTimer.wait_time = scentWaitTime
+	scentTimer.start() #to start
 
 func _physics_process(delta):
 	move_state(delta)
@@ -69,6 +85,16 @@ func set_flip(input_vector):
 		sprite.set_flip_h(true)
 	elif input_vector.x > 0:
 		sprite.set_flip_h(false)
+
+func add_scent():
+#	generate scent
+	var scent = scent_scene.instance()
+	world.call_deferred("add_child",scent)
+	var position = self.get_global_transform()
+	scent.set_global_transform(position)
+	
+	
+	scent_trail.push_front(scent)
 
 
 func _on_Hurtbox_area_entered(area):

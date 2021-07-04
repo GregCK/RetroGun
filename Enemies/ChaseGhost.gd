@@ -24,18 +24,25 @@ func _physics_process(delta):
 			if can_see_player():
 				set_state(State.CHASE)
 		State.CHASE:
-			if !can_see_player():
-				set_state(State.PATROL)
 			chase_state(delta)
 
 
 func chase_state(delta):
-	var player_pos = player.get_global_position()
-	var self_pos = get_global_position()
-	var vec_to_player = player_pos - self_pos
-	vec_to_player = vec_to_player.normalized()
-	velocity = vec_to_player * speed
-	move()
+	if can_see_player():
+		var player_pos = player.get_global_position()
+		var self_pos = get_global_position()
+		var vec_to_player = player_pos - self_pos
+		vec_to_player = vec_to_player.normalized()
+		velocity = vec_to_player * speed
+		move()
+	else:
+		var smell_dir = can_smell_player()
+		if smell_dir == null:
+			set_state(State.PATROL)
+			return
+		else:
+			velocity = smell_dir * speed
+			move()
 
 
 func move():

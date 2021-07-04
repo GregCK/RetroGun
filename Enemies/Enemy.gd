@@ -45,5 +45,19 @@ func can_see_player():
 		else:
 			return false
 
+
+func can_smell_player():
+	var scents = get_tree().get_nodes_in_group("scents")
+	var i = scents.size() - 1
+	while i >= 0:
+		playerCast.cast_to = (scents[i].position - position)
+		playerCast.force_raycast_update()
+		
+		if !playerCast.is_colliding():
+			return playerCast.cast_to.normalized()
+		i = i - 1
+	
+	return null
+
 func set_player(p):
 	player = p
