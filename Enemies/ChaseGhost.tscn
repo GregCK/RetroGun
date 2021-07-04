@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/ghost.png" type="Texture" id=1]
+[ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HitBoxes/Hitbox.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.03086
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.22597
+
+[node name="ChaseGhost" type="KinematicBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 4
+
+[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 2 )
+
+[editable path="Hurtbox"]
+
+[editable path="Hitbox"]
