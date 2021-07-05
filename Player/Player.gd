@@ -10,12 +10,15 @@ onready var center = $Weapon
 onready var stats = $Stats
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
+onready var label = $CanvasLayer/Label
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
 
 var velocity = Vector2.ZERO
+
+var hits = 0
 
 var world = null
 
@@ -34,6 +37,11 @@ func _ready():
 	add_child(scentTimer) #to process
 	scentTimer.wait_time = scentWaitTime
 	scentTimer.start() #to start
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("escape"):
+		get_tree().quit()
 
 func _physics_process(delta):
 	move_state(delta)
@@ -102,5 +110,7 @@ func _on_Hurtbox_area_entered(area):
 		stats.health -= area.damage
 		blinkAnimationPlayer.play("Start")
 		hurtSound.play()
+		hits += 1
+		label.set_text(String(hits))
 	else:
 		print("area does not have damage car")
