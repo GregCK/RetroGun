@@ -142,7 +142,7 @@ stream = ExtResource( 13 )
 [node name="Label" type="Label" parent="CanvasLayer"]
 margin_right = 40.0
 margin_bottom = 14.0
-text = "Hits: "
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
