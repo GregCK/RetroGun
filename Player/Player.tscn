@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/guySS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -9,10 +9,12 @@
 [ext_resource path="res://Assets/MuzzleFlare.png" type="Texture" id=7]
 [ext_resource path="res://Effects/ShakeCam.gd" type="Script" id=8]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=11]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Sounds/hurt1.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/empty health.png" type="Texture" id=14]
+[ext_resource path="res://Assets/full health.png" type="Texture" id=15]
+[ext_resource path="res://Player/HealthUI.gd" type="Script" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -130,8 +132,6 @@ collision_mask = 0
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 6 )
 
-[node name="Stats" parent="." instance=ExtResource( 10 )]
-
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
@@ -139,10 +139,29 @@ stream = ExtResource( 13 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "0"
+[node name="HealthUI" type="Control" parent="CanvasLayer"]
+margin_left = 2.70287
+margin_top = 2.55269
+margin_right = 42.7029
+margin_bottom = 42.5527
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthUIEmpty" type="TextureRect" parent="CanvasLayer/HealthUI"]
+modulate = Color( 1, 1, 1, 0.517647 )
+margin_right = 140.0
+margin_bottom = 5.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="HealthUIFull" type="TextureRect" parent="CanvasLayer/HealthUI"]
+modulate = Color( 1, 1, 1, 0.517647 )
+margin_right = 140.0
+margin_bottom = 5.0
+texture = ExtResource( 15 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

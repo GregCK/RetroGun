@@ -7,10 +7,9 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var camera = $PlayerCam
 onready var center = $Weapon
-onready var stats = $Stats
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
-onready var label = $CanvasLayer/Label
+
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
@@ -107,10 +106,8 @@ func add_scent():
 
 func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:
-		stats.health -= area.damage
+		PlayerStats.health -= area.damage
 		blinkAnimationPlayer.play("Start")
 		hurtSound.play()
-		hits += 1
-		label.set_text(String(hits))
 	else:
 		print("area does not have damage car")
