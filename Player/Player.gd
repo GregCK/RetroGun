@@ -74,18 +74,24 @@ func move():
 #calcs position between mouse and player
 #lerp between current cam pos and middle_pos
 func set_camera(delta):
-	var mouse_pos = get_global_mouse_position()
-	var player_pos = center.get_global_position()
-	var middle_x = (mouse_pos.x + player_pos.x) / 2.5
-	var middle_y = (mouse_pos.y + player_pos.y) / 2.5
-	var middle_pos = Vector2(middle_x, middle_y)
-	
-	var cam_pos = camera.get_global_position()
-	
-	var camSpeed = 4
-	var new_cam_pos = lerp(cam_pos, middle_pos, camSpeed * delta)
-	
-	camera.set_global_position(new_cam_pos)
+#	var mouse_pos = get_global_mouse_position()
+#	var player_pos = center.get_global_position()
+#	var middle_x = (mouse_pos.x + player_pos.x) / 2.5
+#	var middle_y = (mouse_pos.y + player_pos.y) / 2.5
+#	var middle_pos = Vector2(middle_x, middle_y)
+#
+#	var cam_pos = camera.get_global_position()
+#
+#	var camSpeed = 4
+#	var new_cam_pos = lerp(cam_pos, middle_pos, camSpeed * delta)
+#
+#	camera.set_global_position(new_cam_pos)
+#	camera.align()
+
+
+#	var mouse_offset = (get_viewport().get_mouse_position() - get_viewport().size / 2)
+#	camera.position = lerp(Vector2(), mouse_offset.normalized() * 500, mouse_offset.length() / 1000)
+	pass
 
 func set_flip(input_vector):
 	if input_vector.x < 0:
@@ -96,6 +102,7 @@ func set_flip(input_vector):
 func add_scent():
 #	generate scent
 	var scent = scent_scene.instance()
+	scent.set_player(self)
 	world.call_deferred("add_child",scent)
 	var position = self.get_global_transform()
 	scent.set_global_transform(position)

@@ -6,14 +6,17 @@ onready var removeTimer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var world = get_tree().current_scene
-	player = world.get_node("YSort/Player")
+#	var world = get_tree().current_scene
+#	player = world.get_node("YSort/Player")
 	
 	removeTimer.connect("timeout", self, "remove_scent")
 	removeTimer.start()
 	
 	add_to_group("scents")
-	
+
+
+func set_player(p):
+	player = p
 
 func remove_scent():
   player.scent_trail.erase(self)
