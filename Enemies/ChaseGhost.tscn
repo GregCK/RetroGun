@@ -8,15 +8,15 @@
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=7]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/active = false
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=23]
 radius = 7.03086
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=24]
 radius = 6.22597
 
 [node name="ChaseGhost" type="KinematicBody2D" groups=[
@@ -25,24 +25,24 @@ radius = 6.22597
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 4
-hframes = 4
+hframes = 5
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 23 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 24 )
 
 [node name="PlayerCast" type="RayCast2D" parent="."]
 enabled = true

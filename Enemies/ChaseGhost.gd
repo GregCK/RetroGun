@@ -2,6 +2,8 @@ extends "res://Enemies/Enemy.gd"
 
 signal state_changed(new_state)
 
+onready var sprite = $Sprite
+
 
 enum State{
 	PATROL,
@@ -17,6 +19,10 @@ const speed = 50
 func _ready():
 	set_state(State.PATROL)
 	playerCast = $PlayerCast
+
+
+
+
 
 func _physics_process(delta):
 	match current_state:
@@ -45,8 +51,28 @@ func chase_state(delta):
 			move()
 
 
+func _process(delta):
+	if abs(velocity.x) > abs(velocity.y):
+#		look horizontal
+		if velocity.x > 0:
+#			look right
+			sprite.frame = 0
+		else:
+#			look left
+			sprite.frame = 2
+	else:
+#		looking vertical
+		if velocity.y > 0:
+#			look down
+			sprite.frame = 1
+		else:
+#			look down
+			sprite.frame = 3
+			
+
 func move():
 	velocity = move_and_slide(velocity)
+	
 
 func set_state(new_state: int):
 	if new_state == current_state:
