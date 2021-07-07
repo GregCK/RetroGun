@@ -18,7 +18,7 @@ func _process(delta):
 	offset = Vector2(rand_range(-shake_amount, shake_amount), rand_range(-shake_amount, shake_amount)) * delta + default_offset
 
 #	camera follow mouse
-#	var player_pos = get_parent().get_position()
+#	var player_pos = get_parent().get_global_position()
 #	global_position=global_position-(get_global_mouse_position()-player_pos)/2
 
 func shake(new_shake, shake_time=0.4, shake_limit=100):
@@ -32,6 +32,9 @@ func shake(new_shake, shake_time=0.4, shake_limit=100):
 	tween.stop_all()
 	set_process(true)
 	shakeTimer.start()
+
+
+
 
 
 func _on_Timer_timeout():

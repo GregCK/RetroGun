@@ -73,7 +73,7 @@ func move():
 
 #calcs position between mouse and player
 #lerp between current cam pos and middle_pos
-func set_camera(delta):
+#func set_camera(delta):
 #	var mouse_pos = get_global_mouse_position()
 #	var player_pos = center.get_global_position()
 #	var middle_x = (mouse_pos.x + player_pos.x) / 2.5
@@ -91,7 +91,30 @@ func set_camera(delta):
 
 #	var mouse_offset = (get_viewport().get_mouse_position() - get_viewport().size / 2)
 #	camera.position = lerp(Vector2(), mouse_offset.normalized() * 500, mouse_offset.length() / 1000)
+#	pass
+
+func set_camera(delta):
+#	var mouse_pos = get_viewport().get_mouse_position()
+	var mouse_pos = get_global_mouse_position()
+##	var player_pos = get_global_transform_with_canvas()
+	var player_pos = get_global_position()
+#	var middle_pos = (mouse_pos + player_pos) / 2
+#
+#	camera.position = player_pos
+#
+#	camera.clear_current ( )
+#	var player_pos = get_position()
+#	camera.position = player_pos
+#	camera.align()
+
+
+	var diff = mouse_pos - player_pos
+	diff = diff / 3
+	if diff.length() > 100:
+		diff = diff.normalized() * 100
+	camera.position = diff
 	pass
+
 
 func set_flip(input_vector):
 	if input_vector.x < 0:
