@@ -14,3 +14,8 @@ texture = ExtResource( 1 )
 stream = ExtResource( 3 )
 volume_db = -30.0
 autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.08
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
