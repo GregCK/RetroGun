@@ -13,10 +13,10 @@ resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/active = false
 
-[sub_resource type="CircleShape2D" id=23]
+[sub_resource type="CircleShape2D" id=2]
 radius = 7.03086
 
-[sub_resource type="CircleShape2D" id=24]
+[sub_resource type="CircleShape2D" id=3]
 radius = 6.22597
 
 [node name="ChaseGhost" type="KinematicBody2D" groups=[
@@ -35,20 +35,21 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 23 )
+shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 24 )
+shape = SubResource( 3 )
 
 [node name="PlayerCast" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 11
 
 [node name="Stats" parent="." instance=ExtResource( 6 )]
+max_health = 3
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

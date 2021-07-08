@@ -107,6 +107,7 @@ rotation = 1.5708
 shape = SubResource( 5 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 16

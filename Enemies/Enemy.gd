@@ -40,7 +40,8 @@ func _on_Stats_no_health():
 
 func spawn_portal():
 	var portal = Portal.instance()
-	parent.add_child(portal)
+	portal.set_world(parent)
+	parent.call_deferred("add_child", portal)
 	portal.position = position
 
 func can_see_player():

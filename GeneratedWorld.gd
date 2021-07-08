@@ -52,9 +52,9 @@ func add_player():
 #careful! this one shiffles the map locations! do this one last
 func add_enemies():
 	map.shuffle()
-	for i in range(4):
+	for i in range(1):
 		add_enemy(Goblin)
-	for i in range(4):
+	for i in range(1):
 		add_enemy(ChaseGhost)
 
 
