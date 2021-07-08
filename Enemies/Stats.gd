@@ -1,5 +1,8 @@
 extends Node
 
+const titleScreen = preload("res://TitleScreen/TitleScreen.tscn")
+
+
 export(int) var max_health = 1 setget set_max_health
 var health = max_health setget set_health
 
@@ -22,3 +25,8 @@ func set_health(value):
 func _ready():
 	self.health = max_health
 
+
+
+func _on_PlayerStats_no_health():
+	health = max_health
+	get_tree().change_scene_to(titleScreen)

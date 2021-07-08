@@ -8,8 +8,11 @@ onready var audioStreamPlayer = $AudioStreamPlayer
 onready var muzzleFlareSprite = $MuzzleFlareSprite
 onready var muzzleFlareTimer = $MuzzleFlareSprite/Timer
 onready var gunPitchTimer = $GunPitchTimer
+onready var shotTimer = $ShotTimer
 var world
 var rng =  RandomNumberGenerator.new()
+
+var can_shoot = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,24 +40,28 @@ func isFacingLeft():
 const default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-#	create bullet
-	var bullet = Bullet.instance()
-	bullet.init(direction)
-	bullet.set_global_position( firepoint.get_global_position() )
-	world.add_child(bullet)
-	
-	
-	#raise pitch
-	pitch = pitch + 0.01
-	audioStreamPlayer.set_pitch_scale(pitch) 
-	gunPitchTimer.start()
-	audioStreamPlayer.play()
-	
-	
-	muzzleFlareSprite.visible = true
-	muzzleFlareTimer.start()
-	
-	Globals.camera.shake(50, 0.1, 200)
+	if can_shoot:
+	#	create bullet
+		var bullet = Bullet.instance()
+		bullet.init(direction)
+		bullet.set_global_position( firepoint.get_global_position() )
+		world.add_child(bullet)
+		
+		
+		#raise pitch
+		pitch = pitch + 0.01
+		audioStreamPlayer.set_pitch_scale(pitch) 
+		gunPitchTimer.start()
+		audioStreamPlayer.play()
+		
+		
+		muzzleFlareSprite.visible = true
+		muzzleFlareTimer.start()
+		
+		Globals.camera.shake(50, 0.1, 200)
+		
+		can_shoot = false
+		shotTimer.start()
 
 
 func _on_Timer_timeout():
@@ -63,3 +70,7 @@ func _on_Timer_timeout():
 
 func _on_GunPitchTimer_timeout():
 	pitch = default_pitch
+
+
+func _on_ShotTimer_timeout():
+	can_shoot = true

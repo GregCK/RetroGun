@@ -6,47 +6,47 @@
 [ext_resource path="res://Assets/Fonts/Pixeled.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://TitleScreen/TitleScreen.gd" type="Script" id=5]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 103, 0, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 206, 0, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 41, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 103, 41, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
 region = Rect2( 206, 41, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 82, 103, 41 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 103, 82, 103, 41 )
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=10]
 size = 4
 font_data = ExtResource( 4 )
 
@@ -69,8 +69,7 @@ __meta__ = {
 
 [node name="Logo" type="AnimatedSprite" parent="Menu"]
 position = Vector2( 140, -38 )
-frames = SubResource( 10 )
-frame = 2
+frames = SubResource( 9 )
 playing = true
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
@@ -94,7 +93,7 @@ margin_bottom = 44.0
 margin_top = 73.0
 margin_right = 280.0
 margin_bottom = 100.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 10 )
 text = "Verision 1.0
 Made by Greg Knowles"
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Start" to="." method="_on_Start_pressed"]

@@ -2,14 +2,14 @@ extends Node2D
 
 const Player = preload("res://Player/Player.tscn")
 
-const Goblin = preload("res://Enemies/Goblin.tscn")
-const ChaseGhost = preload("res://Enemies/ChaseGhost.tscn")
+var Goblin = load("res://Enemies/Goblin/Goblin.tscn")
+var ChaseGhost = load("res://Enemies/Ghost/ChaseGhost.tscn")
 
 onready var tileMap = $TileMap
 
 
 
-var borders = Rect2(1, 1, 27, 17)
+var borders = Rect2(1, 1, 84, 60)
 const tile_size = 32
 const offset = Vector2(16, 16)
 var map
@@ -25,7 +25,7 @@ func _ready():
 
 func generate_level():
 	var walker = Walker.new(Vector2(15, 10), borders)
-	map = walker.walk(400)
+	map = walker.walk(200)
 	walker.queue_free()
 	
 	
@@ -52,9 +52,9 @@ func add_player():
 #careful! this one shiffles the map locations! do this one last
 func add_enemies():
 	map.shuffle()
-	for i in range(1):
+	for i in range(4):
 		add_enemy(Goblin)
-	for i in range(1):
+	for i in range(4):
 		add_enemy(ChaseGhost)
 
 
@@ -77,3 +77,4 @@ func add_enemy(enemy_type):
 
 func reload_level():
 	get_tree().reload_current_scene()
+
