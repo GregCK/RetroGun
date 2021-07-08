@@ -9,11 +9,13 @@ onready var camera = $PlayerCam
 onready var center = $Weapon
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
+onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
+const DASH_SPEED = 200
 
 var velocity = Vector2.ZERO
 
@@ -25,9 +27,19 @@ var scent_trail = []
 var scentTimer = null
 var scentWaitTime = 0.1
 
+enum State{
+	MOVE,
+	DASH
+}
+
+var current_state : int = -1 setget set_state
+
 func _ready():
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("enemies", "set_player", self)
+	
+	
+	set_state(State.MOVE)
 	
 	world = get_tree().current_scene
 	
@@ -43,8 +55,32 @@ func _process(delta):
 		get_tree().quit()
 
 func _physics_process(delta):
-	move_state(delta)
+	match current_state:
+		State.MOVE:
+			move_state(delta)
+		State.DASH:
+			move()
 	set_camera(delta)
+
+
+
+func set_state(new_state: int):
+	if new_state == current_state:
+		return
+	match new_state:
+		State.MOVE:
+			pass
+		State.DASH:
+			var mouse_pos = get_global_mouse_position()
+			var self_pos = get_global_position()
+			var direction = mouse_pos - self_pos
+			direction = direction.normalized()
+			velocity = direction * DASH_SPEED
+			hurtboxCollisionShape.disabled = true
+			animationPlayer.play("Dash")
+			
+	current_state = new_state 
+
 
 func move_state(delta):
 #	handle movement
@@ -66,46 +102,18 @@ func move_state(delta):
 	move()
 	
 	
+	if Input.is_action_just_pressed("dash"):
+		set_state(State.DASH)
+	
 
 
 func move():
 	velocity = move_and_slide(velocity)
 
-#calcs position between mouse and player
-#lerp between current cam pos and middle_pos
-#func set_camera(delta):
-#	var mouse_pos = get_global_mouse_position()
-#	var player_pos = center.get_global_position()
-#	var middle_x = (mouse_pos.x + player_pos.x) / 2.5
-#	var middle_y = (mouse_pos.y + player_pos.y) / 2.5
-#	var middle_pos = Vector2(middle_x, middle_y)
-#
-#	var cam_pos = camera.get_global_position()
-#
-#	var camSpeed = 4
-#	var new_cam_pos = lerp(cam_pos, middle_pos, camSpeed * delta)
-#
-#	camera.set_global_position(new_cam_pos)
-#	camera.align()
-
-
-#	var mouse_offset = (get_viewport().get_mouse_position() - get_viewport().size / 2)
-#	camera.position = lerp(Vector2(), mouse_offset.normalized() * 500, mouse_offset.length() / 1000)
-#	pass
 
 func set_camera(delta):
-#	var mouse_pos = get_viewport().get_mouse_position()
 	var mouse_pos = get_global_mouse_position()
-##	var player_pos = get_global_transform_with_canvas()
 	var player_pos = get_global_position()
-#	var middle_pos = (mouse_pos + player_pos) / 2
-#
-#	camera.position = player_pos
-#
-#	camera.clear_current ( )
-#	var player_pos = get_position()
-#	camera.position = player_pos
-#	camera.align()
 
 
 	var diff = mouse_pos - player_pos
@@ -133,6 +141,11 @@ func add_scent():
 	
 	scent_trail.push_front(scent)
 
+
+func dash_animation_finished():
+	hurtboxCollisionShape.disabled = false
+	set_state(State.MOVE)
+	
 
 func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:
