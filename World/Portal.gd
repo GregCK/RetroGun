@@ -3,6 +3,12 @@ extends Area2D
 
 signal leaving_level
 
+onready var audio = $AudioStreamPlayer
+onready var sprite = $AnimatedSprite
+onready var collisionShape = $CollisionShape2D
+
+
+
 var world = null
 
 
@@ -20,3 +26,9 @@ func set_world(w):
 
 func _on_Portal_body_entered(body):
 	emit_signal("leaving_level")
+
+
+func _on_Timer_timeout():
+	sprite.visible = true
+	collisionShape.disabled = false
+	audio.play()
