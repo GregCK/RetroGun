@@ -14,6 +14,8 @@ const tile_size = 32
 const offset = Vector2(16, 16)
 var map
 
+var enemies = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,21 +36,28 @@ func generate_level():
 	
 	
 	add_player()
+	
+#	shuffles so do last
 	add_enemies()
+	
 
 
 func add_player():
 	var player = Player.instance()
 	add_child(player)
 	player.position = (map.pop_front() * tile_size) + offset
+	
 
 
+#careful! this one shiffles the map locations! do this one last
 func add_enemies():
 	map.shuffle()
 	for i in range(4):
 		add_enemy(Goblin)
 	for i in range(4):
 		add_enemy(ChaseGhost)
+
+
 
 func add_enemy(enemy_type):
 	var enemy = null
@@ -60,3 +69,11 @@ func add_enemy(enemy_type):
 	
 	add_child(enemy)
 	enemy.position = (map.pop_front() * tile_size) + offset
+	
+	enemies.append(enemy)
+
+
+
+
+func reload_level():
+	get_tree().reload_current_scene()

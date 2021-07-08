@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
+
+
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
+const Portal = preload("res://World/Portal.tscn")
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
@@ -28,10 +31,17 @@ func _on_Stats_no_health():
 	effect.set_global_position(get_global_position())
 	parent.add_child(effect)
 	
+	var enemies = get_tree().get_nodes_in_group("enemies").size()
+	if enemies <= 1:
+		spawn_portal()
+	
 	queue_free()
 	
 
-
+func spawn_portal():
+	var portal = Portal.instance()
+	parent.add_child(portal)
+	portal.position = position
 
 func can_see_player():
 	if player != null:
