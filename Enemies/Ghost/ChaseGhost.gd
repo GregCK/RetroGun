@@ -3,7 +3,7 @@ extends "res://Enemies/Enemy.gd"
 signal state_changed(new_state)
 
 onready var sprite = $Sprite
-
+onready var wallCast = $WallCast
 
 enum State{
 	PATROL,
@@ -13,7 +13,10 @@ enum State{
 var current_state : int = -1 setget set_state
 
 
-var velocity = Vector2.ZERO
+
+const patrol_directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
+var patrol_direction = Vector2.RIGHT
+var velocity = patrol_direction * speed
 const speed = 50
 
 func _ready():
@@ -29,9 +32,25 @@ func _physics_process(delta):
 		State.PATROL:
 			if can_see_player():
 				set_state(State.CHASE)
+			else:
+				patrol_state()
 		State.CHASE:
 			chase_state(delta)
 
+
+
+func patrol_state():
+	wallCast.set_cast_to(patrol_direction * 32)
+	if wallCast.is_colliding():
+		change_patrol_direction()
+	else:
+		pass
+	
+	move()
+
+func change_patrol_direction():
+	patrol_direction = patrol_directions[randi() % 4]
+	velocity = patrol_direction * speed
 
 func chase_state(delta):
 	if can_see_player():

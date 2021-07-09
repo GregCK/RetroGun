@@ -9,17 +9,19 @@ onready var camera = $PlayerCam
 onready var center = $Weapon
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
+onready var dashSound = $DashSound
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 
 
 const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
-const DASH_SPEED = 200
+const DASH_SPEED = 300
 
 var velocity = Vector2.ZERO
+var dash_vector = Vector2.DOWN
 
-var hits = 0
+
 
 var world = null
 
@@ -71,13 +73,10 @@ func set_state(new_state: int):
 		State.MOVE:
 			pass
 		State.DASH:
-			var mouse_pos = get_global_mouse_position()
-			var self_pos = get_global_position()
-			var direction = mouse_pos - self_pos
-			direction = direction.normalized()
-			velocity = direction * DASH_SPEED
+			velocity = dash_vector * DASH_SPEED
 			hurtboxCollisionShape.disabled = true
 			animationPlayer.play("Dash")
+			dashSound.play()
 			
 	current_state = new_state 
 
@@ -91,6 +90,7 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
+		dash_vector = input_vector
 		set_flip(input_vector)
 		
 		animationPlayer.play("Run")
@@ -143,6 +143,7 @@ func add_scent():
 
 
 func dash_animation_finished():
+	velocity = velocity / 2
 	hurtboxCollisionShape.disabled = false
 	set_state(State.MOVE)
 	

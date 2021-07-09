@@ -15,8 +15,7 @@ var shots_fired = 0
 
 enum State{
 	PATROL,
-	AIM,
-	SHOOT
+	AIM
 }
 
 var current_state : int = -1 setget set_state
@@ -37,8 +36,7 @@ func _physics_process(delta):
 				set_state(State.AIM)
 		State.AIM:
 			pass
-		State.SHOOT:
-			pass
+
 
 
 

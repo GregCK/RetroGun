@@ -6,7 +6,7 @@
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemies/Goblin/Goblin.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sounds/retro spell.wav" type="AudioStream" id=6]
-[ext_resource path="res://Assets/holy goblin pac man palette.png" type="Texture" id=7]
+[ext_resource path="res://Assets/turret.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -23,10 +23,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2, 1, 0 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -38,10 +38,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1, 2 ]
+"values": [ 1 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -78,11 +78,10 @@ tracks/0/keys = {
 radius = 3.27978
 height = 5.88675
 
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 11.7791
-height = 1.13563
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 12, 12 )
 
-[node name="Goblin" type="KinematicBody2D" groups=[
+[node name="Turret" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
@@ -91,9 +90,8 @@ script = ExtResource( 5 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 texture = ExtResource( 7 )
-vframes = 3
-hframes = 4
-frame = 2
+hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/lower = SubResource( 2 )
@@ -114,7 +112,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, 5.736 )
+rotation = 0.785398
 shape = SubResource( 6 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 2 )]

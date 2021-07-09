@@ -3,6 +3,7 @@ extends Node2D
 const Player = preload("res://Player/Player.tscn")
 
 var Goblin = load("res://Enemies/Goblin/Goblin.tscn")
+var Turret = load("res://Enemies/Goblin/Turret.tscn" )
 var ChaseGhost = load("res://Enemies/Ghost/ChaseGhost.tscn")
 
 onready var tileMap = $TileMap
@@ -15,7 +16,7 @@ const offset = Vector2(16, 16)
 var map
 
 var enemies = []
-
+var player_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,15 +46,16 @@ func generate_level():
 func add_player():
 	var player = Player.instance()
 	add_child(player)
-	player.position = (map.pop_front() * tile_size) + offset
+	player_pos = (map.pop_front() * tile_size) + offset
+	player.position = player_pos
 	
 
 
 #careful! this one shiffles the map locations! do this one last
 func add_enemies():
-	map.shuffle()
+#	map.shuffle()
 	for i in range(4):
-		add_enemy(Goblin)
+		add_enemy(Turret)
 	for i in range(4):
 		add_enemy(ChaseGhost)
 
@@ -61,15 +63,28 @@ func add_enemies():
 
 func add_enemy(enemy_type):
 	var enemy = null
-	match enemy_type:
-		Goblin:
-			enemy = Goblin.instance()
-		ChaseGhost:
-			enemy = ChaseGhost.instance()
+#	match enemy_type:
+#		Goblin:
+#			enemy = Goblin.instance()
+#		ChaseGhost:
+#			enemy = ChaseGhost.instance()
+	enemy = enemy_type.instance()
+	
+	
+	var enemy_pos
+	while true:
+		var i = randi() % map.size()
+		enemy_pos = (map[i] * tile_size) + offset
+		var distance_to_player = enemy_pos.distance_to(player_pos)
+		if distance_to_player > 250:
+			break
+	
+	
+	
+	enemy.position = enemy_pos
+	
 	
 	add_child(enemy)
-	enemy.position = (map.pop_front() * tile_size) + offset
-	
 	enemies.append(enemy)
 
 
