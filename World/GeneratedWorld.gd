@@ -65,7 +65,7 @@ func add_enemies():
 		enemies_to_spawn.append(Goblin)
 	for i in range(0):
 		enemies_to_spawn.append(ChaseGhost)
-	for i in range(1):
+	for i in range(20):
 		enemies_to_spawn.append(Bandit)
 	
 	enemies_to_spawn.shuffle()

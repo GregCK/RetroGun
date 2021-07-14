@@ -9,6 +9,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var strafeTimer = $StrafeTimer
 onready var pauseTimer = $PauseTimer
 
+
 enum State{
 	IDLE,
 	AIM,
@@ -24,7 +25,7 @@ const move_speed = 80
 
 func _ready():
 	playerCast = $PlayerCast
-	set_state(State.IDLE)
+	set_state(State.STRAFE)
 
 func _physics_process(delta):
 	seeLabel.text = str(can_see_player())
@@ -58,10 +59,12 @@ func set_state(new_state: int):
 			var x = rand_range(-1, 1)
 			var y = rand_range(-1, 1)
 			velocity = Vector2(x, y).normalized() * move_speed
+			strafeTimer.wait_time = rand_range(0.5, 1.1)
 			strafeTimer.start()
 		State.PAUSE:
 			stateLabel.text = "PAUSE"
 			velocity = Vector2.ZERO
+			pauseTimer.wait_time = rand_range(0.2, 1)
 			pauseTimer.start()
 			
 	
