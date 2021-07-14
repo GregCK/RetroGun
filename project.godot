@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
+"base": "Node2D",
+"class": "PortalSpawner",
+"language": "GDScript",
+"path": "res://Enemies/PortalSpawner.gd"
+}, {
 "base": "Node",
 "class": "Walker",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Player": "",
+"PortalSpawner": "",
 "Walker": ""
 }
 
@@ -34,6 +40,7 @@ config/icon="res://icon.png"
 
 Globals="*res://Globals.gd"
 PlayerStats="*res://Player/PlayerStats.tscn"
+MusicPlayer="*res://MusicPlayer.tscn"
 
 [display]
 
@@ -112,6 +119,7 @@ dash={
 2d_physics/layer_4="Player Hurtbox"
 2d_physics/layer_5="Enemy Hurtbox"
 2d_physics/layer_6="Portal"
+2d_physics/layer_7="SoftCollision"
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=1]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=2]
@@ -30,6 +30,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+resource_name = "stand"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -58,7 +74,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -74,11 +90,11 @@ tracks/0/keys = {
 "values": [ 8, 0, 9, 0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 3.27978
-height = 5.88675
-
 [sub_resource type="CapsuleShape2D" id=6]
+radius = 5.83535
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 11.7791
 height = 1.13563
 
@@ -90,32 +106,31 @@ script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
+position = Vector2( 0, -6.759 )
 texture = ExtResource( 7 )
 vframes = 3
 hframes = 4
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/lower = SubResource( 2 )
-anims/summon = SubResource( 3 )
-anims/walk = SubResource( 4 )
+anims/stand = SubResource( 3 )
+anims/summon = SubResource( 4 )
+anims/walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 11.977 )
-rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, 5.736 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 2 )]
 
@@ -132,8 +147,36 @@ one_shot = true
 
 [node name="SpellSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PatrolTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StateLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SeeLabel" type="Label" parent="."]
+margin_left = 0.0525551
+margin_top = 6.9374
+margin_right = 40.0526
+margin_bottom = 20.9374
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StrafeTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]
+[connection signal="timeout" from="StrafeTimer" to="." method="_on_StrafeTimer_timeout"]
 
 [editable path="Hurtbox"]

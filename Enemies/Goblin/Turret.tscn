@@ -4,7 +4,7 @@
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/Goblin/Goblin.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Goblin/Turret.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sounds/retro spell.wav" type="AudioStream" id=6]
 [ext_resource path="res://Assets/turret.png" type="Texture" id=7]
 

@@ -115,7 +115,7 @@ shape = SubResource( 2 )
 
 [node name="PlayerCam" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 8, 8 )
+zoom = Vector2( 4, 4 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 8 )

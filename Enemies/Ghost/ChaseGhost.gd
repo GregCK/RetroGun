@@ -1,9 +1,10 @@
 extends "res://Enemies/Enemy.gd"
 
-signal state_changed(new_state)
+
 
 onready var sprite = $Sprite
 onready var wallCast = $WallCast
+onready var softCollision = $SoftCollision
 
 enum State{
 	PATROL,
@@ -36,11 +37,16 @@ func _physics_process(delta):
 				patrol_state()
 		State.CHASE:
 			chase_state(delta)
+	
+	if softCollision.is_colliding():
+		velocity = velocity + (softCollision.get_push_vector() * delta * 400)
 
 
 
 func patrol_state():
-	wallCast.set_cast_to(patrol_direction * 32)
+	if velocity.length() < velocity.normalized().length():
+		change_patrol_direction()
+	wallCast.set_cast_to(velocity.normalized() * 8)
 	if wallCast.is_colliding():
 		change_patrol_direction()
 	else:
@@ -99,3 +105,8 @@ func set_state(new_state: int):
 	
 	current_state = new_state
 	emit_signal("state_changed", current_state)
+
+
+func _on_ChangeDirection_timeout():
+	if current_state == State.PATROL:
+		change_patrol_direction()

@@ -5,6 +5,7 @@ const Player = preload("res://Player/Player.tscn")
 var Goblin = load("res://Enemies/Goblin/Goblin.tscn")
 var Turret = load("res://Enemies/Goblin/Turret.tscn" )
 var ChaseGhost = load("res://Enemies/Ghost/ChaseGhost.tscn")
+var Bandit = load("res://Enemies/Bandit/Bandit.tscn")
 
 onready var tileMap = $TileMap
 
@@ -15,6 +16,7 @@ const tile_size = 32
 const offset = Vector2(16, 16)
 var map
 
+var taken_positions = []
 var enemies = []
 var player_pos
 
@@ -51,13 +53,32 @@ func add_player():
 	
 
 
-#careful! this one shiffles the map locations! do this one last
+#careful! this one shuffles the map locations! do this one last
 func add_enemies():
 #	map.shuffle()
-	for i in range(4):
-		add_enemy(Turret)
-	for i in range(4):
-		add_enemy(ChaseGhost)
+
+#	create array of enemies and spawn a segment of those enemies
+	var enemies_to_spawn = []
+	for i in range(0):
+		enemies_to_spawn.append(Turret)
+	for i in range(0):
+		enemies_to_spawn.append(Goblin)
+	for i in range(0):
+		enemies_to_spawn.append(ChaseGhost)
+	for i in range(1):
+		enemies_to_spawn.append(Bandit)
+	
+	enemies_to_spawn.shuffle()
+	var num_enemies = 1
+	for i in range(num_enemies):
+		add_enemy(enemies_to_spawn[i])
+
+
+##	spawn X of each enemies
+#	for i in range(0):
+#		add_enemy(Turret)
+#	for i in range(100):
+#		add_enemy(ChaseGhost)
 
 
 
@@ -76,7 +97,7 @@ func add_enemy(enemy_type):
 		var i = randi() % map.size()
 		enemy_pos = (map[i] * tile_size) + offset
 		var distance_to_player = enemy_pos.distance_to(player_pos)
-		if distance_to_player > 250:
+		if distance_to_player > 250 and !taken_positions.has(enemy_pos):
 			break
 	
 	
@@ -86,7 +107,7 @@ func add_enemy(enemy_type):
 	
 	add_child(enemy)
 	enemies.append(enemy)
-
+	taken_positions.append(enemy_pos)
 
 
 
