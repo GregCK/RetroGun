@@ -31,13 +31,11 @@ func _physics_process(delta):
 	seeLabel.text = str(can_see_player())
 	match current_state:
 		State.IDLE:
-			
 			if can_see_player():
 				set_state(State.AIM)
 		State.AIM:
 			pass
 		State.STRAFE:
-			
 			move_and_slide(velocity)
 		State.PAUSE:
 			pass
