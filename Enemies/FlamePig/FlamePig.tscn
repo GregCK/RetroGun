@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HitBoxes/Hitbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/FireBoar.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=6]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/FlamePig/PlayerCast.gd" type="Script" id=8]
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
@@ -54,7 +55,7 @@ extents = Vector2( 5.96111, 6.1482 )
 extents = Vector2( 6.37411, 10 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 5.52504, 6.4592 )
+extents = Vector2( 7.13858, 6.00704 )
 
 [node name="FlamePig" type="KinematicBody2D" groups=[
 "enemies",
@@ -65,7 +66,7 @@ script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 6 )
-position = Vector2( 0.5, 0 )
+rotation = -1.5708
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 3
@@ -77,6 +78,7 @@ anims/idle = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 visible = false
+rotation = -1.5708
 collision_layer = 2147483648
 collision_mask = 8
 
@@ -86,6 +88,7 @@ shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 visible = false
+rotation = -1.5708
 collision_layer = 16
 collision_mask = 0
 
@@ -96,12 +99,13 @@ shape = SubResource( 4 )
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 7.574 )
+position = Vector2( 6.755, 0.5 )
 shape = SubResource( 5 )
 
 [node name="PlayerCast" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 11
+script = ExtResource( 8 )
 
 [node name="StateLabel" type="Label" parent="."]
 margin_left = 0.0701561
