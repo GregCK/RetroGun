@@ -12,9 +12,9 @@ onready var tileMap = $TileMap
 
 
 
-var borders = Rect2(1, 1, 84, 60)
+var borders = Rect2(1, 1, 95, 67) #size of the grid in generated world 
 const tile_size = 32
-const offset = Vector2(16, 16)
+const offset = Vector2(16, 16) #half the size of a tile
 var map
 
 var taken_positions = []

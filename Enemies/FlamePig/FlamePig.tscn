@@ -9,13 +9,12 @@
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enemies/FlamePig/PlayerCast.gd" type="Script" id=8]
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 6 )
 shader_param/active = false
 
-[sub_resource type="Animation" id=1]
-resource_name = "charge"
+[sub_resource type="Animation" id=2]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -31,8 +30,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=3]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -48,14 +46,14 @@ tracks/0/keys = {
 "values": [ 4, 5, 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.96111, 6.1482 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 6.37411, 10 )
-
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 7.13858, 6.00704 )
+extents = Vector2( 6.20398, 6.95958 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 5.9451, 5.8504 )
 
 [node name="FlamePig" type="KinematicBody2D" groups=[
 "enemies",
@@ -65,7 +63,7 @@ collision_mask = 2147483649
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 6 )
+material = SubResource( 1 )
 rotation = -1.5708
 texture = ExtResource( 2 )
 vframes = 3
@@ -73,8 +71,8 @@ hframes = 3
 frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/charge = SubResource( 1 )
-anims/idle = SubResource( 2 )
+anims/charge = SubResource( 2 )
+anims/idle = SubResource( 3 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -83,8 +81,7 @@ collision_layer = 2147483648
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, 7.914 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -93,14 +90,13 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, 4.098 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 6.755, 0.5 )
-shape = SubResource( 5 )
+visible = false
+shape = SubResource( 6 )
 
 [node name="PlayerCast" type="RayCast2D" parent="."]
 enabled = true
@@ -124,6 +120,11 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AlignTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="timeout" from="AlignTimer" to="." method="_on_AlignTimer_timeout"]
 
 [editable path="Hitbox"]
 

@@ -36,7 +36,7 @@ func _physics_process(delta):
 		State.AIM:
 			pass
 		State.STRAFE:
-			move_and_slide(velocity)
+			velocity = move_and_slide(velocity)
 		State.PAUSE:
 			pass
 
