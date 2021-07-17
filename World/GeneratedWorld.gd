@@ -7,6 +7,7 @@ var Turret = load("res://Enemies/Goblin/Turret.tscn" )
 var ChaseGhost = load("res://Enemies/Ghost/ChaseGhost.tscn")
 var Bandit = load("res://Enemies/Bandit/Bandit.tscn")
 var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
+var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 
 onready var tileMap = $TileMap
 
@@ -69,6 +70,8 @@ func add_enemies():
 	for i in range(0):
 		enemies_to_spawn.append(Bandit)
 	for i in range(10):
+		enemies_to_spawn.append(RifleMan)
+	for i in range(0):
 		enemies_to_spawn.append(FlamePig)
 	
 	enemies_to_spawn.shuffle()

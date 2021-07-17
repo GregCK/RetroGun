@@ -150,8 +150,11 @@ func dash_animation_finished():
 
 func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:
-		PlayerStats.health -= area.damage
-		blinkAnimationPlayer.play("Start")
-		hurtSound.play()
+		take_damage(area.damage)
 	else:
 		print("area does not have damage car")
+
+func take_damage(damage):
+	PlayerStats.health -= damage
+	blinkAnimationPlayer.play("Start")
+	hurtSound.play()
