@@ -14,7 +14,8 @@ enum State{
 	IDLE,
 	AIM,
 	STRAFE,
-	PAUSE
+	PAUSE,
+	FOLLOW
 }
 
 
@@ -39,6 +40,8 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity)
 		State.PAUSE:
 			pass
+		State.FOLLOW:
+			follow_state()
 
 
 func set_state(new_state: int):
@@ -64,11 +67,26 @@ func set_state(new_state: int):
 			velocity = Vector2.ZERO
 			pauseTimer.wait_time = rand_range(0.0, 1)
 			pauseTimer.start()
+		State.FOLLOW:
+			stateLabel.text = "FOLLOW"
 			
 	
 	
 	current_state = new_state
 	emit_signal("state_changed", current_state)
+
+
+func follow_state():
+	if can_see_player():
+		set_state(State.PAUSE)
+	else:
+		var smell_dir = can_smell_player()
+		if smell_dir == null:
+			set_state(State.STRAFE)
+			return
+		velocity = smell_dir * move_speed
+		velocity = move_and_slide(velocity)
+		
 
 
 func fire():
@@ -93,5 +111,5 @@ func _on_PauseTimer_timeout():
 		elif move > 0:
 			set_state(State.AIM)
 	else:
-		set_state(State.STRAFE)
+		set_state(State.FOLLOW)
 	

@@ -58,7 +58,7 @@ extents = Vector2( 5.9451, 5.8504 )
 [node name="FlamePig" type="KinematicBody2D" groups=[
 "enemies",
 ]]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 2147483649
 script = ExtResource( 4 )
 
@@ -124,6 +124,8 @@ __meta__ = {
 [node name="AlignTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="AlignTimer" to="." method="_on_AlignTimer_timeout"]
 
 [editable path="Hitbox"]

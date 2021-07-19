@@ -13,7 +13,7 @@ enum State{
 	CHARGE
 }
 
-const charge_speed = 150
+const charge_speed = 300
 const idle_speed = 25
 var velocity = Vector2.ZERO
 
@@ -44,7 +44,7 @@ func _physics_process(delta):
 
 func idle_state():
 	if can_see_player():
-		var r = randi() % 500
+		var r = randi() % 100
 		if r == 0:
 			set_state(State.ALIGN)
 

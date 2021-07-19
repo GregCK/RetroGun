@@ -63,6 +63,7 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 2 )
 scale = Vector2( 0.255906, 0.255906 )
 texture = ExtResource( 1 )

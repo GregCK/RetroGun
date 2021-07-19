@@ -61,21 +61,21 @@ func add_enemies():
 
 #	create array of enemies and spawn a segment of those enemies
 	var enemies_to_spawn = []
-	for i in range(0):
+	for i in range(3):
 		enemies_to_spawn.append(Turret)
 	for i in range(0):
 		enemies_to_spawn.append(Goblin)
-	for i in range(0):
+	for i in range(3):
 		enemies_to_spawn.append(ChaseGhost)
-	for i in range(0):
+	for i in range(10):
 		enemies_to_spawn.append(Bandit)
 	for i in range(10):
 		enemies_to_spawn.append(RifleMan)
-	for i in range(0):
+	for i in range(3):
 		enemies_to_spawn.append(FlamePig)
 	
 	enemies_to_spawn.shuffle()
-	var num_enemies = 1
+	var num_enemies = 15
 	for i in range(num_enemies):
 		add_enemy(enemies_to_spawn[i])
 

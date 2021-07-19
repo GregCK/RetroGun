@@ -20,6 +20,7 @@ radius = 5.98396
 
 [sub_resource type="Animation" id=4]
 resource_name = "aim"
+length = 0.3
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -27,7 +28,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -41,7 +42,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 2, 1 ]
@@ -64,6 +65,7 @@ shape = SubResource( 1 )
 material = SubResource( 2 )
 scale = Vector2( 0.255906, 0.255906 )
 texture = ExtResource( 1 )
+hframes = 2
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 max_health = 3
