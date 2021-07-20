@@ -3,11 +3,14 @@ extends "res://Enemies/Bandit/Bandit2.gd"
 
 onready var shootCast = $ShootCast
 onready var fireSound = $FireSound
+onready var muzzleFlashSprite = $MuzzleFlashSprite
+
 const gun_damage = 1
 var rng
 
 func _ready():
 	._ready()
+	animationPlayer = $AnimationPlayer
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
@@ -23,7 +26,7 @@ func fire():
 	
 #	convert to radians and add a random adjustment to it
 	var ray_radians = ray_vector.angle()
-	var adjustment = rng.randfn(0.0, 0.1)
+	var adjustment = rng.randfn(0.0, 0.15)
 	ray_radians += adjustment
 
 
@@ -43,4 +46,8 @@ func fire():
 	set_state(State.PAUSE)
 	
 	fireSound.play()
+	
+	muzzleFlashSprite.look_at(player_pos)
+	animationPlayer.play("muzzleFlash")
+
 

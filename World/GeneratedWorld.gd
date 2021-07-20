@@ -60,7 +60,10 @@ func add_enemies():
 #	map.shuffle()
 
 #	create array of enemies and spawn a segment of those enemies
+	var num_enemies = 1
 	var enemies_to_spawn = []
+	
+	
 	for i in range(3):
 		enemies_to_spawn.append(Turret)
 	for i in range(0):
@@ -73,9 +76,13 @@ func add_enemies():
 		enemies_to_spawn.append(RifleMan)
 	for i in range(3):
 		enemies_to_spawn.append(FlamePig)
+	num_enemies = 15
+
+#	for i in range(1):
+#		enemies_to_spawn.append(RifleMan)
+#	num_enemies = 1
 	
 	enemies_to_spawn.shuffle()
-	var num_enemies = 15
 	for i in range(num_enemies):
 		add_enemy(enemies_to_spawn[i])
 

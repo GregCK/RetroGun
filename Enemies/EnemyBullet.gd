@@ -5,7 +5,7 @@ const HitEffect = preload("res://Effects/HitEffectRed.tscn")
 
 var direction : Vector2
 var velocity : Vector2
-const speed = 150
+const speed = 200
 
 var world
 var rng = RandomNumberGenerator.new()

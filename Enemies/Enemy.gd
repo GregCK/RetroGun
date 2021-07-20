@@ -45,18 +45,42 @@ func spawn_portal_spawner():
 	parent.call_deferred("add_child", portal)
 	portal.position = position
 
+#func can_see_player():
+#	if player != null:
+#		var player_pos = player.get_global_position()
+#		var ray_pos = playerCast.get_global_position()
+#		var ray_vector = player_pos - ray_pos
+#		playerCast.set_cast_to(ray_vector)
+#		var coll = playerCast.get_collider()
+#		if playerCast.is_colliding() and coll.is_in_group("player"):
+#			return true
+#		else:
+#			return false
+
+func get_distance_to_player():
+	if player != null:
+		var difference:Vector2 = get_vector_to_player()
+		var length = difference.length()
+		return length
+	return null
+
+func get_vector_to_player():
+	if player != null:
+		var player_pos = player.position
+		var my_pos = position
+		var difference:Vector2 = player_pos - my_pos
+		return difference
+	return null
+
 func can_see_player():
 	if player != null:
-		var player_pos = player.get_global_position()
-		var ray_pos = playerCast.get_global_position()
-		var ray_vector = player_pos - ray_pos
-		playerCast.set_cast_to(ray_vector)
-		var coll = playerCast.get_collider()
-		if playerCast.is_colliding() and coll.is_in_group("player"):
-			return true
-		else:
-			return false
-
+		var space_state = get_world_2d().direct_space_state
+		var sight_check = space_state.intersect_ray(position, player.position, [self], playerCast.collision_mask)
+		if sight_check:
+			if sight_check.collider.name == "Player":
+				return true
+			else:
+				return false
 
 func can_smell_player():
 	var scents = get_tree().get_nodes_in_group("scents")

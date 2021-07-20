@@ -135,7 +135,8 @@ func add_scent():
 	var scent = scent_scene.instance()
 	scent.set_player(self)
 	world.call_deferred("add_child",scent)
-	var position = self.get_global_transform()
+#	var position = self.get_global_transform()
+	var position = $CollisionShape2D.get_global_transform()
 	scent.set_global_transform(position)
 	
 	

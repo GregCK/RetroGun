@@ -57,9 +57,21 @@ func set_state(new_state: int):
 			animationPlayer.play("aim")
 		State.STRAFE:
 			stateLabel.text = "STRAFE"
+			
+			if player != null:
+				var vec_to_player = get_vector_to_player()
+				var distance_to_player = vec_to_player.length()
+				pass
+				if distance_to_player > 200:
+					pass
+
+			
+			
 			var x = rand_range(-1, 1)
 			var y = rand_range(-1, 1)
 			velocity = Vector2(x, y).normalized() * move_speed
+			
+			
 			strafeTimer.wait_time = rand_range(0.2, 1)
 			strafeTimer.start()
 		State.PAUSE:

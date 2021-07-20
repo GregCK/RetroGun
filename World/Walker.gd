@@ -18,6 +18,7 @@ func _init(starting_position, new_borders):
 func walk(steps):
 	create_room(position)
 	for step in steps:
+#		if randf() < 0.9 and steps_since_turn >= 20: #long hallways
 		if randf() <= 0.7 and steps_since_turn >= 5:
 			change_direction()
 		
@@ -48,7 +49,8 @@ func change_direction():
 
 
 func create_room(position):
-	var size = Vector2(randi() % 4 + 2, randi() % 4 + 2)
+	var size = Vector2(randi() % 4 + 2, randi() % 4 + 2) #small rooms
+#	var size = Vector2(randi() % 16 + 2, randi() % 16 + 2) #big rooms
 	var top_left_corner = (position - size/2).ceil()
 	for y in size.y:
 		for x in size.x:
