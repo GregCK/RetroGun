@@ -9,7 +9,7 @@ var Bandit = load("res://Enemies/Bandit/Bandit.tscn")
 var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
 var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 
-onready var tileMap = $TileMap
+onready var tileMap = $Navigation2D/TileMap
 
 
 
@@ -36,7 +36,8 @@ func generate_level():
 	
 #	remove tiles for all vectors in var map
 	for location in map:
-		tileMap.set_cellv(location, -1)
+#		tileMap.set_cellv(location, -1) #clears the cell
+		tileMap.set_cellv(location, 1)
 	tileMap.update_bitmask_region(borders.position, borders.end)
 	
 	
