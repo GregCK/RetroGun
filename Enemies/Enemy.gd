@@ -12,6 +12,8 @@ onready var playerCast = null
 var parent = null
 var player : Player = null
 
+var velocity = Vector2.ZERO
+
 func _ready():
 	parent = get_parent()
 	yield(get_tree(), "idle_frame")
@@ -97,3 +99,6 @@ func can_smell_player():
 
 func set_player(p):
 	player = p
+	
+func move():
+	velocity = move_and_slide(velocity)

@@ -21,7 +21,7 @@ enum State{
 
 var current_state : int = -1 setget set_state
 
-var velocity = Vector2.ZERO
+
 const move_speed = 80
 
 func _ready():

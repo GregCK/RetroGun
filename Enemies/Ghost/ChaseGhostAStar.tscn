@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/ghost.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/Ghost/ChaseGhostAStar.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.77207
+
+[node name="ChaseGhostAStar" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 4
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+
+[node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 4 )]
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]

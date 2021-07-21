@@ -18,7 +18,7 @@ onready var seeLabel = $SeeLabel
 export var shots_to_fire = 3
 var shots_fired = 0
 
-var velocity = Vector2.ZERO
+
 const move_speed = 80
 
 enum State{

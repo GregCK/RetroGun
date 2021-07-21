@@ -17,11 +17,12 @@ var current_state : int = -1 setget set_state
 
 const patrol_directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 var patrol_direction = Vector2.RIGHT
-var velocity = patrol_direction * speed
+
 const speed = 50
 
 func _ready():
 	set_state(State.PATROL)
+	velocity = patrol_direction * speed
 	playerCast = $PlayerCast
 
 

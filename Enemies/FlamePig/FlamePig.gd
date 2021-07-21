@@ -15,7 +15,7 @@ enum State{
 
 const charge_speed = 300
 const idle_speed = 25
-var velocity = Vector2.ZERO
+
 
 var current_state : int = -1 setget set_state
 

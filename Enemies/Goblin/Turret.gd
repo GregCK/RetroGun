@@ -13,7 +13,7 @@ onready var spellSound = $SpellSound
 export var shots_to_fire = 3
 var shots_fired = 0
 
-var velocity = Vector2.ZERO
+
 
 
 enum State{

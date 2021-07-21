@@ -5,11 +5,12 @@ const Player = preload("res://Player/Player.tscn")
 var Goblin = load("res://Enemies/Goblin/Goblin.tscn")
 var Turret = load("res://Enemies/Goblin/Turret.tscn" )
 var ChaseGhost = load("res://Enemies/Ghost/ChaseGhost.tscn")
+var ChaseGhostAStar = load("res://Enemies/Ghost/ChaseGhostAStar.tscn")
 var Bandit = load("res://Enemies/Bandit/Bandit.tscn")
 var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
 var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 
-onready var tileMap = $Navigation2D/TileMap
+onready var tileMap = $LevelNavigation/TileMap
 
 
 
@@ -65,24 +66,24 @@ func add_enemies():
 	var enemies_to_spawn = []
 	
 	
-	for i in range(3):
-		enemies_to_spawn.append(Turret)
-	for i in range(0):
-		enemies_to_spawn.append(Goblin)
-	for i in range(3):
-		enemies_to_spawn.append(ChaseGhost)
-	for i in range(10):
-		enemies_to_spawn.append(Bandit)
-	for i in range(10):
-		enemies_to_spawn.append(RifleMan)
-	for i in range(3):
-		enemies_to_spawn.append(FlamePig)
-	num_enemies = 15
-
-#	for i in range(1):
+#	for i in range(3):
+#		enemies_to_spawn.append(Turret)
+#	for i in range(0):
+#		enemies_to_spawn.append(Goblin)
+#	for i in range(3):
+#		enemies_to_spawn.append(ChaseGhost)
+#	for i in range(10):
+#		enemies_to_spawn.append(Bandit)
+#	for i in range(10):
 #		enemies_to_spawn.append(RifleMan)
-#	num_enemies = 1
-	
+#	for i in range(3):
+#		enemies_to_spawn.append(FlamePig)
+#	num_enemies = 15
+
+	for i in range(1):
+		enemies_to_spawn.append(ChaseGhostAStar)
+	num_enemies = 1
+
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):
 		add_enemy(enemies_to_spawn[i])
