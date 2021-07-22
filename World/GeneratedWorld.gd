@@ -38,7 +38,7 @@ func generate_level():
 #	remove tiles for all vectors in var map
 	for location in map:
 #		tileMap.set_cellv(location, -1) #clears the cell
-		tileMap.set_cellv(location, 1)
+		tileMap.set_cellv(location, 3)
 	tileMap.update_bitmask_region(borders.position, borders.end)
 	
 	
@@ -80,9 +80,9 @@ func add_enemies():
 #		enemies_to_spawn.append(FlamePig)
 #	num_enemies = 15
 
-	for i in range(1):
+	for i in range(100):
 		enemies_to_spawn.append(ChaseGhostAStar)
-	num_enemies = 1
+	num_enemies = 50
 
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):

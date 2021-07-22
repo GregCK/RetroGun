@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/ghost.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Ghost/ChaseGhostAStar.gd" type="Script" id=2]
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HitBoxes/Hitbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://HitBoxes/SoftCollision.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.77207
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.17678
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 6.41471
+
+[sub_resource type="CircleShape2D" id=4]
 
 [node name="ChaseGhostAStar" type="KinematicBody2D" groups=[
 "enemies",
@@ -28,3 +39,32 @@ width = 2.0
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 4 )]
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
+
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 2 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 7 )]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 4 )
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]

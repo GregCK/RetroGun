@@ -12,14 +12,14 @@ onready var playerCast = null
 var parent = null
 var player : Player = null
 
+var path: Array = [] #contains destination points
+var levelNavigation: Navigation2D = null
+
 var velocity = Vector2.ZERO
 
 func _ready():
 	parent = get_parent()
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+
 
 
 func _on_Hurtbox_area_entered(area):
@@ -96,6 +96,21 @@ func can_smell_player():
 		i = i - 1
 	
 	return null
+
+func navigate(speed):
+	if path.size() > 0:
+		velocity = global_position.direction_to(path[1]) * speed
+		pass
+	
+#	if reached destination, remove point from path
+	if global_position == path[0]:
+		path.pop_front()
+
+func generate_path_to_player():
+	if levelNavigation != null and player != null:
+		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
+		return path
+
 
 func set_player(p):
 	player = p
