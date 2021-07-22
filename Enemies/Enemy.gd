@@ -47,17 +47,7 @@ func spawn_portal_spawner():
 	parent.call_deferred("add_child", portal)
 	portal.position = position
 
-#func can_see_player():
-#	if player != null:
-#		var player_pos = player.get_global_position()
-#		var ray_pos = playerCast.get_global_position()
-#		var ray_vector = player_pos - ray_pos
-#		playerCast.set_cast_to(ray_vector)
-#		var coll = playerCast.get_collider()
-#		if playerCast.is_colliding() and coll.is_in_group("player"):
-#			return true
-#		else:
-#			return false
+
 
 func get_distance_to_player():
 	if player != null:
@@ -83,6 +73,18 @@ func can_see_player():
 				return true
 			else:
 				return false
+
+#func can_see_player():
+#	if player != null:
+#		var player_pos = player.get_global_position()
+#		var ray_pos = playerCast.get_global_position()
+#		var ray_vector = player_pos - ray_pos
+#		playerCast.set_cast_to(ray_vector)
+#		var coll = playerCast.get_collider()
+#		if playerCast.is_colliding() and coll.is_in_group("player"):
+#			return true
+#		else:
+#			return false
 
 func can_smell_player():
 	var scents = get_tree().get_nodes_in_group("scents")
@@ -111,9 +113,19 @@ func generate_path_to_player():
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
 		return path
 
+func generate_path_to_position(position):
+	if levelNavigation != null:
+		path = levelNavigation.get_simple_path(global_position, position, false)
+		return path
+
 
 func set_player(p):
 	player = p
+
+func set_level_nav():
+	var tree = get_tree()
+	if tree.has_group("LevelNavigation"):
+		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
 	
 func move():
 	velocity = move_and_slide(velocity)

@@ -68,7 +68,6 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
@@ -105,6 +104,11 @@ one_shot = true
 [node name="PauseTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Line2D" type="Line2D" parent="." groups=[
+"enemies",
+]]
+width = 2.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="StrafeTimer" to="." method="_on_StrafeTimer_timeout"]

@@ -8,7 +8,7 @@ onready var firePoint = $FirePoint
 onready var animationPlayer = $AnimationPlayer
 onready var strafeTimer = $StrafeTimer
 onready var pauseTimer = $PauseTimer
-
+onready var line2d = $Line2D
 
 enum State{
 	IDLE,
@@ -26,6 +26,7 @@ const move_speed = 80
 
 func _ready():
 	playerCast = $PlayerCast
+	set_level_nav()
 	set_state(State.STRAFE)
 
 func _physics_process(delta):
@@ -92,12 +93,10 @@ func follow_state():
 	if can_see_player():
 		set_state(State.PAUSE)
 	else:
-		var smell_dir = can_smell_player()
-		if smell_dir == null:
-			set_state(State.STRAFE)
-			return
-		velocity = smell_dir * move_speed
-		velocity = move_and_slide(velocity)
+		if player and levelNavigation:
+			line2d.points = generate_path_to_player()
+			navigate(move_speed)
+			move()
 		
 
 

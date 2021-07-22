@@ -11,9 +11,7 @@ var speed : int = 40
 
 func _ready():
 	yield(get_tree(), "idle_frame")
-	var tree = get_tree()
-	if tree.has_group("LevelNavigation"):
-		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
+	set_level_nav()
 #	if tree.has_group("player"):
 #		player = tree.get_nodes_in_group("player")[0]
 
@@ -22,7 +20,9 @@ func _physics_process(delta):
 	if player and levelNavigation:
 		line2d.points = generate_path_to_player()
 		navigate(speed)
+		
 	if softCollision.is_colliding():
 		velocity = velocity + (softCollision.get_push_vector() * delta * 400)
+		
 	move()
 
