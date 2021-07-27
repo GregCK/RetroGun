@@ -3,7 +3,7 @@ extends Node
 const titleScreen = preload("res://TitleScreen/TitleScreen.tscn")
 
 
-export var max_health = 1 setget set_max_health
+export (int) var max_health = 1 setget set_max_health
 var health = max_health setget set_health
 
 signal no_health

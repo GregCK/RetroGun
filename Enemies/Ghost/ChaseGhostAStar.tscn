@@ -9,21 +9,21 @@
 [ext_resource path="res://HitBoxes/SoftCollision.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=8]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 8 )
 shader_param/active = false
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 6.77207
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 7.17678
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 6.41471
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 
 [node name="ChaseGhostAStar" type="KinematicBody2D" groups=[
 "enemies",
@@ -32,13 +32,13 @@ collision_layer = 4
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="." groups=[
 "enemies",
@@ -54,21 +54,21 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
 collision_layer = 64
 collision_mask = 64
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

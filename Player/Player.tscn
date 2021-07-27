@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/guySS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://Assets/empty health.png" type="Texture" id=14]
 [ext_resource path="res://Assets/full health.png" type="Texture" id=15]
 [ext_resource path="res://Player/HealthUI.gd" type="Script" id=16]
+[ext_resource path="res://Player/LineOfSightRayCast.gd" type="Script" id=17]
+[ext_resource path="res://Player/LineOfSight.gd" type="Script" id=18]
+[ext_resource path="res://Assets/SKULLSS.png" type="Texture" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -88,6 +91,66 @@ tracks/0/keys = {
 "values": [ 2, 3, 4, 5, 6 ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "down"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "left"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
 [sub_resource type="Animation" id=6]
 
 [sub_resource type="CapsuleShape2D" id=7]
@@ -101,7 +164,14 @@ collision_layer = 2
 collision_mask = 33
 script = ExtResource( 2 )
 
+[node name="SkullSprite" type="Sprite" parent="."]
+texture = ExtResource( 19 )
+vframes = 2
+hframes = 2
+frame = 1
+
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 3
@@ -128,6 +198,12 @@ script = ExtResource( 8 )
 anims/Dash = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/Run = SubResource( 5 )
+
+[node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/down = SubResource( 8 )
+anims/left = SubResource( 9 )
+anims/right = SubResource( 10 )
+anims/up = SubResource( 11 )
 
 [node name="Weapon" type="Position2D" parent="."]
 position = Vector2( 0, -3.253 )
@@ -196,6 +272,10 @@ margin_right = 140.0
 margin_bottom = 5.0
 texture = ExtResource( 14 )
 expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HealthUIFull" type="TextureRect" parent="CanvasLayer/HealthUI"]
 modulate = Color( 1, 1, 1, 0.517647 )
@@ -203,12 +283,56 @@ margin_right = 140.0
 margin_bottom = 5.0
 texture = ExtResource( 15 )
 expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DashSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+
+[node name="LineOfSight" type="Node2D" parent="."]
+script = ExtResource( 18 )
+
+[node name="RayCast0" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( 0, 1500 )
+script = ExtResource( 17 )
+
+[node name="RayCast1" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( -1500, 1500 )
+script = ExtResource( 17 )
+
+[node name="RayCast2" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( -1500, 0 )
+script = ExtResource( 17 )
+
+[node name="RayCast3" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( -1500, -1500 )
+script = ExtResource( 17 )
+
+[node name="RayCast4" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( 0, -1500 )
+script = ExtResource( 17 )
+
+[node name="RayCast5" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( 1500, -1500 )
+script = ExtResource( 17 )
+
+[node name="RayCast6" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( 1500, 0 )
+script = ExtResource( 17 )
+
+[node name="RayCast7" type="RayCast2D" parent="LineOfSight"]
+enabled = true
+cast_to = Vector2( 1500, 1500 )
+script = ExtResource( 17 )
 [connection signal="timeout" from="PlayerCam/Timer" to="PlayerCam" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Weapon/Pistol/MuzzleFlareSprite/Timer" to="Weapon/Pistol" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Weapon/Pistol/GunPitchTimer" to="Weapon/Pistol" method="_on_GunPitchTimer_timeout"]

@@ -5,6 +5,7 @@ const scent_scene = preload("res://Player/Scent.tscn")
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var skullAnimationPlayer = $SkullAnimationPlayer
 onready var camera = $PlayerCam
 onready var center = $Weapon
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -35,6 +36,8 @@ enum State{
 }
 
 var current_state : int = -1 setget set_state
+
+
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -94,6 +97,7 @@ func move_state(delta):
 		set_flip(input_vector)
 		
 		animationPlayer.play("Run")
+		
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		animationPlayer.play("Idle")

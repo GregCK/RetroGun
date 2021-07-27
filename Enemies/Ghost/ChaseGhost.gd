@@ -4,7 +4,7 @@ extends "res://Enemies/Enemy.gd"
 
 onready var sprite = $Sprite
 onready var wallCast = $WallCast
-onready var softCollision = $SoftCollision
+
 
 enum State{
 	PATROL,
@@ -24,6 +24,7 @@ func _ready():
 	set_state(State.PATROL)
 	velocity = patrol_direction * speed
 	playerCast = $PlayerCast
+	softCollision = $SoftCollision
 
 
 

@@ -81,9 +81,9 @@ func add_enemies():
 #		enemies_to_spawn.append(FlamePig)
 #	num_enemies = 15
 
-	for i in range(1):
+	for i in range(10):
 		enemies_to_spawn.append(Shooter)
-	num_enemies = 1
+	num_enemies = 10
 
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):

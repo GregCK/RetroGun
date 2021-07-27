@@ -7,6 +7,7 @@ const PortalSpawner = preload("res://Enemies/PortalSpawner.tscn")
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
+var softCollision
 onready var playerCast = null
 
 var parent = null
@@ -99,6 +100,17 @@ func can_smell_player():
 	
 	return null
 
+func detect_softCollision(delta):
+	if softCollision != null:
+		if softCollision.is_colliding():
+			velocity = velocity + (softCollision.get_push_vector() * delta * 400)
+			if velocity.length() > 500:
+				pass
+			pass
+	else:
+		push_error("softCollision is null")
+
+
 func navigate(speed):
 	if path.size() > 0:
 		velocity = global_position.direction_to(path[1]) * speed
@@ -111,6 +123,10 @@ func navigate(speed):
 func generate_path_to_player():
 	if levelNavigation != null and player != null:
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
+		
+#		should fix stutter bug
+		if global_position == path[0]:
+			path.pop_front()
 		return path
 
 func generate_path_to_position(position):
