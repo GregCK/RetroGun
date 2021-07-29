@@ -10,6 +10,7 @@ onready var firePoint = $FirePoint
 onready var spellSound = $SpellSound
 onready var reactionTimer = $ReactionTimer
 onready var closeDistanceTimer = $CloseDistanceTimer
+onready var line2d = $Line2D
 
 enum State{
 	IDLE,
@@ -32,6 +33,7 @@ func _ready():
 	set_state(State.IDLE)
 
 func _physics_process(delta):
+	line2d.global_position = Vector2.ZERO
 	var see_player = can_see_player()
 	seeLabel.text = str(see_player)
 	
@@ -53,9 +55,19 @@ func _physics_process(delta):
 				next_state = decide_tactic()
 				
 		State.MOVE_TO_LAST_KNOWN_LOC:
-#			navigate_gradual(move_speed, delta)
-			navigate(move_speed)
+			line2d.points = generate_path_to_position(Globals.last_known_loc)
+			navigate_gradual(move_speed, delta)
+#			navigate(move_speed)
 			move()
+			
+			if see_player:
+				next_state = decide_tactic()
+			
+#			if almost at last_known_loc
+			var dis = (global_position - Globals.last_known_loc).length()
+			if dis < 2:
+				if !see_player:
+					set_state(State.IDLE)
 
 func set_state(new_state: int):
 	match new_state:
@@ -68,7 +80,8 @@ func set_state(new_state: int):
 		State.MOVE_TO_LAST_KNOWN_LOC:
 			if player and levelNavigation:
 #				generate_path_to_position(Globals.last_known_loc)
-				generate_path_to_player()
+#				generate_path_to_player()
+				pass
 	
 	
 	stateLabel.text = str(new_state)

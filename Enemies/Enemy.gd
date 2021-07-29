@@ -135,9 +135,9 @@ func generate_path_to_player():
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
 		
 #		should fix stutter bug
-#		if global_position == path[0]:
-#			path.pop_front()
-#		return path
+		if global_position == path[0]:
+			path.pop_front()
+		return path
 
 func generate_path_to_position(position):
 	if levelNavigation != null:

@@ -111,7 +111,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 width = 2.0
 
 [node name="ReactionTimer" type="Timer" parent="."]
