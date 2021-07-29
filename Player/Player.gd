@@ -22,7 +22,7 @@ const DASH_SPEED = 300
 var velocity = Vector2.ZERO
 var dash_vector = Vector2.DOWN
 
-
+export(bool) var god_mode = true
 
 var world = null
 
@@ -161,5 +161,8 @@ func _on_Hurtbox_area_entered(area):
 
 func take_damage(damage):
 	PlayerStats.health -= damage
+	if god_mode:
+		if PlayerStats.health < (PlayerStats.max_health/2):
+			PlayerStats.health = PlayerStats.max_health
 	blinkAnimationPlayer.play("Start")
 	hurtSound.play()

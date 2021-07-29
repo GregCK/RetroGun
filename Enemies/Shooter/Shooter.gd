@@ -11,13 +11,13 @@ onready var delayedPauseTimer = $DelayedPauseTimer
 onready var pauseTimer = $PauseTimer
 onready var closeDistanceTimer = $CloseDistanceTimer
 onready var line2d = $Line2D
+onready var spellSound = $SpellSound
 
 enum State{
 	IDLE,
 	AIM,
 	STRAFE,
 	PAUSE,
-	DELAYED_PAUSE,
 	FOLLOW,
 	CLOSE_DISTANCE
 }
@@ -101,8 +101,7 @@ func set_state(new_state: int):
 			closeDistanceTimer.start()
 		State.DELAYED_PAUSE:
 			stateLabel.text = "DELAYED_PAUSE"
-			var delayTime = rand_range(0.1, 3.0)
-			delayedPauseTimer.start()
+
 			
 			
 	
@@ -122,8 +121,13 @@ func close_distance_state():
 
 func follow_state():
 	if can_see_player():
-#		set_state(State.PAUSE)
-		set_state(State.DELAYED_PAUSE)
+		if delayedPauseTimer.is_stopped ( ):
+			var delayTime = rand_range(0.1, 1.5)
+			delayedPauseTimer.start()
+		
+		generate_level_nav()
+		move()
+		
 	else:
 #		maybe do this at set_state
 		generate_level_nav()
@@ -146,6 +150,8 @@ func fire():
 	bullet.init(vec_to_player)
 	bullet.set_global_position(firePoint.get_global_position())
 	get_parent().add_child(bullet)
+	
+	spellSound.play()
 	
 	set_state(State.PAUSE)
 

@@ -91,7 +91,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 resource_name = "down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 resource_name = "left"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
@@ -121,7 +121,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 resource_name = "right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
@@ -136,7 +136,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 resource_name = "up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
@@ -151,9 +151,9 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=11]
 radius = 7.9375
 height = 4.25
 
@@ -200,10 +200,10 @@ anims/Idle = SubResource( 4 )
 anims/Run = SubResource( 5 )
 
 [node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 8 )
-anims/left = SubResource( 9 )
-anims/right = SubResource( 10 )
-anims/up = SubResource( 11 )
+anims/down = SubResource( 6 )
+anims/left = SubResource( 7 )
+anims/right = SubResource( 8 )
+anims/up = SubResource( 9 )
 
 [node name="Weapon" type="Position2D" parent="."]
 position = Vector2( 0, -3.253 )
@@ -225,7 +225,7 @@ position = Vector2( 13.3369, 0.99224 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/Pistol"]
-anims/recoil = SubResource( 6 )
+anims/recoil = SubResource( 10 )
 
 [node name="Firepoint" type="Position2D" parent="Weapon/Pistol"]
 position = Vector2( 23.7517, 1.961 )
@@ -247,7 +247,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 

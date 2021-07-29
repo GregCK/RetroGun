@@ -71,6 +71,7 @@ func can_see_player():
 		var sight_check = space_state.intersect_ray(position, player.position, [self], playerCast.collision_mask)
 		if sight_check:
 			if sight_check.collider.name == "Player":
+				Globals.last_known_loc = player.global_position
 				return true
 			else:
 				return false
@@ -112,8 +113,17 @@ func detect_softCollision(delta):
 
 
 func navigate(speed):
-	if path.size() > 0:
+	if path.size() > 1:
 		velocity = global_position.direction_to(path[1]) * speed
+		pass
+	
+#	if reached destination, remove point from path
+	if global_position == path[0]:
+		path.pop_front()
+
+func navigate_gradual(speed, delta, acceleration = 300):
+	if path.size() > 1:
+		velocity = velocity.move_toward(global_position.direction_to(path[1]) * speed, acceleration * delta)
 		pass
 	
 #	if reached destination, remove point from path
@@ -125,13 +135,17 @@ func generate_path_to_player():
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
 		
 #		should fix stutter bug
-		if global_position == path[0]:
-			path.pop_front()
-		return path
+#		if global_position == path[0]:
+#			path.pop_front()
+#		return path
 
 func generate_path_to_position(position):
 	if levelNavigation != null:
 		path = levelNavigation.get_simple_path(global_position, position, false)
+		
+#		should fix stutter bug
+		if global_position == path[0]:
+			path.pop_front()
 		return path
 
 

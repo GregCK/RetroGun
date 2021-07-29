@@ -10,6 +10,7 @@ var Bandit = load("res://Enemies/Bandit/Bandit.tscn")
 var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
 var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 var Shooter = load("res://Enemies/Shooter/Shooter.tscn")
+var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
 
 onready var tileMap = $LevelNavigation/TileMap
 
@@ -81,9 +82,9 @@ func add_enemies():
 #		enemies_to_spawn.append(FlamePig)
 #	num_enemies = 15
 
-	for i in range(10):
-		enemies_to_spawn.append(Shooter)
-	num_enemies = 10
+	for i in range(3):
+		enemies_to_spawn.append(AggresiveShooter)
+	num_enemies = 1
 
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):
