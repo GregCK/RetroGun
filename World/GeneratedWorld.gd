@@ -32,6 +32,8 @@ func _ready():
 
 
 func generate_level():
+	Globals.floor_num += 1
+	
 	var walker = Walker.new(Vector2(15, 10), borders)
 	map = walker.walk(200)
 	walker.queue_free()
@@ -68,8 +70,8 @@ func add_enemies():
 	var enemies_to_spawn = []
 	
 	
-#	for i in range(3):
-#		enemies_to_spawn.append(Turret)
+	for i in range(10):
+		enemies_to_spawn.append(Turret)
 #	for i in range(0):
 #		enemies_to_spawn.append(Goblin)
 #	for i in range(3):
@@ -82,9 +84,9 @@ func add_enemies():
 #		enemies_to_spawn.append(FlamePig)
 #	num_enemies = 15
 
-	for i in range(3):
+	for i in range(50):
 		enemies_to_spawn.append(AggresiveShooter)
-	num_enemies = 1
+	num_enemies = 5 + (Globals.floor_num / 3)
 
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):

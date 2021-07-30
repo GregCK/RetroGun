@@ -72,14 +72,24 @@ scale = Vector2( 0.255906, 0.255906 )
 texture = ExtResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+max_health = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
 [node name="SeeLabel" type="Label" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StateLabel" type="Label" parent="."]
+visible = false
+margin_top = -14.3125
+margin_right = 40.0
+margin_bottom = -0.3125
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -90,27 +100,20 @@ collision_mask = 11
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 5 )]
 
-[node name="StateLabel" type="Label" parent="."]
-margin_top = -14.3125
-margin_right = 40.0
-margin_bottom = -0.3125
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/aim = SubResource( 4 )
 
 [node name="FirePoint" type="Position2D" parent="."]
 
-[node name="StrafeTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="PauseTimer" type="Timer" parent="."]
+[node name="IdleWalkTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 width = 2.0
 
 [node name="ReactionTimer" type="Timer" parent="."]
@@ -131,8 +134,8 @@ shape = SubResource( 5 )
 stream = ExtResource( 8 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="timeout" from="StrafeTimer" to="." method="_on_StrafeTimer_timeout"]
-[connection signal="timeout" from="PauseTimer" to="." method="_on_PauseTimer_timeout"]
+[connection signal="timeout" from="IdleWalkTimer" to="." method="_on_IdleWalkTimer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]
 [connection signal="timeout" from="ReactionTimer" to="." method="_on_ReactionTimer_timeout"]
 [connection signal="timeout" from="CloseDistanceTimer" to="." method="_on_CloseDistanceTimer_timeout"]
 

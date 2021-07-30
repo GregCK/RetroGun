@@ -15,6 +15,8 @@ func _init(starting_position, new_borders):
 	step_history.append(position)
 	borders = new_borders
 
+
+#may make a map smaller than steps amount of tiles because they may overlap
 func walk(steps):
 	create_room(position)
 	for step in steps:

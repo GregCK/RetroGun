@@ -165,13 +165,13 @@ collision_mask = 33
 script = ExtResource( 2 )
 
 [node name="SkullSprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 19 )
 vframes = 2
 hframes = 2
 frame = 1
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 material = SubResource( 1 )
 texture = ExtResource( 1 )
 vframes = 3

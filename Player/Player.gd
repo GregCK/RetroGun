@@ -14,8 +14,8 @@ onready var dashSound = $DashSound
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 
 
-const ACCELERATION = 500
-const MAX_SPEED = 100
+const ACCELERATION = 520
+const MAX_SPEED = 120
 const FRICTION = 500
 const DASH_SPEED = 300
 

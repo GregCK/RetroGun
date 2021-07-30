@@ -72,6 +72,7 @@ func can_see_player():
 		if sight_check:
 			if sight_check.collider.name == "Player":
 				Globals.last_known_loc = player.global_position
+				get_tree().call_group("enemies", "player_spotted")
 				return true
 			else:
 				return false
@@ -124,8 +125,8 @@ func navigate(speed):
 func navigate_gradual(speed, delta, acceleration = 300):
 	if path.size() > 1:
 		velocity = velocity.move_toward(global_position.direction_to(path[1]) * speed, acceleration * delta)
-		pass
-	
+	elif path.size() > 0:
+		velocity = velocity.move_toward(global_position.direction_to(path[0]) * speed, acceleration * delta)
 #	if reached destination, remove point from path
 	if global_position == path[0]:
 		path.pop_front()
