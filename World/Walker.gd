@@ -9,10 +9,12 @@ var borders = Rect2()
 var step_history = []
 var steps_since_turn = 0
 
+
 func _init(starting_position, new_borders):
 	assert(new_borders.has_point(starting_position))
 	position = starting_position
 	step_history.append(position)
+#	add_pos(position)
 	borders = new_borders
 
 
@@ -25,7 +27,8 @@ func walk(steps):
 			change_direction()
 		
 		if step():
-			step_history.append(position)
+#			step_history.append(position)
+			add_pos(position)
 		else:
 			change_direction()
 	return step_history
@@ -58,10 +61,15 @@ func create_room(position):
 		for x in size.x:
 			var new_step = top_left_corner + Vector2(x, y)
 			if borders.has_point(new_step):
-				step_history.append(new_step)
+#				step_history.append(new_step)
+				add_pos(new_step)
 	
 	
-	
+func add_pos(pos):
+	if step_history.has(pos):
+		pass
+	else:
+		step_history.append(pos)
 	
 	
 	

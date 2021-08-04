@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lust by Harris Heller.ogg-8d4242a8d8398289dbe565dae0910518.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Lust by Harris Heller.ogg"
+dest_files=[ "res://.import/Lust by Harris Heller.ogg-8d4242a8d8398289dbe565dae0910518.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

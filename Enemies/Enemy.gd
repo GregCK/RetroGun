@@ -17,6 +17,7 @@ var path: Array = [] #contains destination points
 var levelNavigation: Navigation2D = null
 
 var velocity = Vector2.ZERO
+var knockback = Vector2.ZERO
 
 func _ready():
 	parent = get_parent()
@@ -26,7 +27,7 @@ func _ready():
 func _on_Hurtbox_area_entered(area):
 	blinkAnimationPlayer.play("Start")
 	stats.health -= area.damage
-#	knockback = area.knockback_vector * 120
+	knockback = area.knockback_vector * 150
 
 
 func _on_Stats_no_health():

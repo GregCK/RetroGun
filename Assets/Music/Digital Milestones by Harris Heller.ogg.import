@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Digital Milestones by Harris Heller.ogg-a075909e0679d7fe8fd1b382fd889f14.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Digital Milestones by Harris Heller.ogg"
+dest_files=[ "res://.import/Digital Milestones by Harris Heller.ogg-a075909e0679d7fe8fd1b382fd889f14.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

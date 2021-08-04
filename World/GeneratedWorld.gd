@@ -39,6 +39,7 @@ func generate_level():
 	walker.queue_free()
 	
 	
+	
 #	remove tiles for all vectors in var map
 	for location in map:
 #		tileMap.set_cellv(location, -1) #clears the cell
@@ -47,6 +48,8 @@ func generate_level():
 	
 	
 	add_player()
+	
+	
 	
 #	shuffles so do last
 	add_enemies()

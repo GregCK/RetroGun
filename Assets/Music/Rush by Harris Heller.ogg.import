@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rush by Harris Heller.ogg-58ccae85ea341c26fd047fab30faf9cc.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Rush by Harris Heller.ogg"
+dest_files=[ "res://.import/Rush by Harris Heller.ogg-58ccae85ea341c26fd047fab30faf9cc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

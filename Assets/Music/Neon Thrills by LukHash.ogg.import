@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Neon Thrills by LukHash.ogg-5c584e5283d2cf72ea791da027b186b7.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Neon Thrills by LukHash.ogg"
+dest_files=[ "res://.import/Neon Thrills by LukHash.ogg-5c584e5283d2cf72ea791da027b186b7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

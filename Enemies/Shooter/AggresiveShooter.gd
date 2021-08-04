@@ -13,6 +13,7 @@ onready var closeDistanceTimer = $CloseDistanceTimer
 onready var idleWalkTimer = $IdleWalkTimer
 onready var idleTimer = $IdleTimer
 onready var line2d = $Line2D
+onready var sprite = $Sprite
 
 enum State{
 	IDLE,
@@ -22,23 +23,32 @@ enum State{
 	MOVE_TO_LAST_KNOWN_LOC
 }
 
+export(int, "Pistol", "Shotgun") var weapon_type = 0
+
 var current_state : int = -1 setget set_state
 var engaged = false
 var next_state : int = -1
 var walk_dir = Vector2.ZERO
 
-const move_speed = 100
+const move_speed = 90
 const walk_speed = 40
 const FRICTION = 200
 const ACCELERATION = 300
+
+var adjustAngle
 
 func _ready():
 	playerCast = $PlayerCast
 	softCollision = $SoftCollision
 	set_level_nav()
 	set_state(State.IDLE)
+	adjustAngle = AdjustAngle.new()
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = move_and_slide(knockback)
+	
+	
 	line2d.global_position = Vector2.ZERO
 	var see_player = can_see_player()
 	seeLabel.text = str(see_player)
@@ -83,21 +93,26 @@ func _physics_process(delta):
 					set_state(State.IDLE)
 	
 	move()
+	set_flip()
 
 func set_state(new_state: int):
 	match new_state:
 		State.IDLE:
 			idleTimer.start()
+			animationPlayer.play("idle")
 		State.IDLE_WALK:
 			var x = rand_range(-1, 1)
 			var y = rand_range(-1, 1)
 			walk_dir = Vector2(x, y).normalized()
 			idleWalkTimer.start()
+			animationPlayer.play("walk")
 		State.AIM:
 			animationPlayer.play("aim")
 		State.CLOSE_DISTANCE:
 			closeDistanceTimer.start()
+			animationPlayer.play("walk")
 		State.MOVE_TO_LAST_KNOWN_LOC:
+			animationPlayer.play("walk")
 			if player and levelNavigation:
 #				generate_path_to_position(Globals.last_known_loc)
 #				generate_path_to_player()
@@ -124,6 +139,19 @@ func decide_tactic():
 			return State.CLOSE_DISTANCE
 
 func fire():
+	match weapon_type:
+		0:
+			fire_pistol()
+		1:
+			fire_shotgun()
+	
+	if can_see_player():
+		next_state = decide_tactic()
+	elif engaged:
+		set_state(State.MOVE_TO_LAST_KNOWN_LOC)
+
+
+func fire_pistol():
 	var bullet = Bullet.instance()
 	var vec_to_player = player.get_global_position() - firePoint.get_global_position()
 	vec_to_player = vec_to_player.normalized()
@@ -132,16 +160,26 @@ func fire():
 	get_parent().add_child(bullet)
 	
 	spellSound.play()
+
+func fire_shotgun():
+	for i in range(5):
+		var bullet = Bullet.instance()
+		var vec_to_player = player.get_global_position() - firePoint.get_global_position()
+		vec_to_player = vec_to_player.normalized()
+		vec_to_player = adjustAngle.randomly_rotate_vector(vec_to_player)
+		bullet.init(vec_to_player)
+		bullet.set_global_position(firePoint.get_global_position())
+		get_parent().add_child(bullet)
 	
-	if can_see_player():
-		next_state = decide_tactic()
-	else:
-		set_state(State.MOVE_TO_LAST_KNOWN_LOC)
-	
+	spellSound.play()
 
 func player_spotted():
 	if engaged and (current_state == State.IDLE or current_state == State.IDLE_WALK):
 		set_state(State.MOVE_TO_LAST_KNOWN_LOC)
+
+
+func set_flip():
+	sprite.flip_h = velocity.x < 0
 
 func _on_ReactionTimer_timeout():
 	set_state(next_state)
