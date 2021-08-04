@@ -1,15 +1,18 @@
 extends Position2D
 
+const Pistol = preload("res://Player/Weapons/Pistol.tscn")
 
-onready var pistol = $Pistol
-onready var firepoint = $Pistol/Firepoint
 
-onready var weapon = pistol
+
+
+var weapon
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var pistol = Pistol.instance()
+	add_child(pistol)
+	weapon = pistol
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
