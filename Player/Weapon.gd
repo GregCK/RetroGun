@@ -17,14 +17,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("click"):
-		var mouse_pos = get_global_mouse_position()
-		var self_pos = get_global_position()
-		var direction = mouse_pos - self_pos
-		direction = direction.normalized()
-		
-		weapon.attack(direction)
+#	if Input.is_action_just_pressed("click"):
+#		var mouse_pos = get_global_mouse_position()
+#		var self_pos = get_global_position()
+#		var direction = mouse_pos - self_pos
+#		direction = direction.normalized()
+#
+#		weapon.attack(direction)
+	
+	pass
 
 func _input(event):
-	if event.is_action_pressed("click"):
-		pass
+	if weapon != null:
+		weapon.handle_input()

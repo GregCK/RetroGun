@@ -37,6 +37,17 @@ func isFacingLeft():
 	else:
 		return false
 
+
+func handle_input():
+	if Input.is_action_just_pressed("click"):
+		var mouse_pos = get_global_mouse_position()
+		var self_pos = get_global_position()
+		var direction = mouse_pos - self_pos
+		direction = direction.normalized()
+
+		attack(direction)
+
+
 const default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
