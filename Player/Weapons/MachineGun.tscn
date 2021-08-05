@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Weapons/Pistol.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/pistol.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/MuzzleFlare.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Pistol.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+
+[node name="MachineGun" type="Node2D"]
+script = ExtResource( 1 )
+camera_shake = 50
+
+[node name="MuzzleFlareSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 19.5742, 0.822557 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="MuzzleFlareSprite"]
+wait_time = 0.04
+
+[node name="Pistol" type="Sprite" parent="."]
+position = Vector2( 13.3369, 0.99224 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/recoil = SubResource( 1 )
+
+[node name="Firepoint" type="Position2D" parent="."]
+position = Vector2( 23.7517, 1.961 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="GunPitchTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+[connection signal="timeout" from="MuzzleFlareSprite/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="GunPitchTimer" to="." method="_on_GunPitchTimer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
