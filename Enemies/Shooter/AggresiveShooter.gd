@@ -32,7 +32,7 @@ var walk_dir = Vector2.ZERO
 
 const move_speed = 90
 const walk_speed = 40
-const FRICTION = 200
+const FRICTION = 400
 const ACCELERATION = 300
 
 var adjustAngle

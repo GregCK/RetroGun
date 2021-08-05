@@ -1,6 +1,7 @@
 extends Node2D
 
-const Bullet = preload("res://Player/PlayerBullet.tscn")
+const Bullet = preload("res://Player/Bullets/PlayerBullet.tscn")
+const BigBullet = preload("res://Player/Bullets/PlayerBulletBig.tscn")
 
 onready var sprite = $Pistol
 onready var firepoint = $Firepoint
@@ -13,6 +14,10 @@ var world
 var rng =  RandomNumberGenerator.new()
 
 var can_shoot = true
+
+
+export(int, "regular", "big") var bullet_type
+export(int) var camera_shake
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,12 +53,18 @@ func handle_input():
 		attack(direction)
 
 
-const default_pitch = 0.7
+#const default_pitch = 0.7
+export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
 	if can_shoot:
 	#	create bullet
-		var bullet = Bullet.instance()
+		var bullet
+		match bullet_type:
+			0:
+				bullet = Bullet.instance()
+			1:
+				bullet = BigBullet.instance()
 		bullet.init(direction)
 		bullet.set_global_position( firepoint.get_global_position() )
 		world.add_child(bullet)
@@ -69,7 +80,7 @@ func attack(direction:Vector2):
 		muzzleFlareSprite.visible = true
 		muzzleFlareTimer.start()
 		
-		Globals.camera.shake(50, 0.1, 200)
+		Globals.camera.shake(camera_shake, 0.1, 200)
 		
 		can_shoot = false
 		shotTimer.start()

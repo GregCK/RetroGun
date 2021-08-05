@@ -7,9 +7,11 @@
 
 [sub_resource type="Animation" id=1]
 
-[node name="Pistol" type="Node2D"]
+[node name="HeavyPistol" type="Node2D"]
 script = ExtResource( 1 )
-camera_shake = 50
+bullet_type = 1
+camera_shake = 150
+default_pitch = 1.5
 
 [node name="MuzzleFlareSprite" type="Sprite" parent="."]
 visible = false
@@ -37,7 +39,7 @@ volume_db = -10.0
 wait_time = 0.5
 
 [node name="ShotTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.5
 one_shot = true
 [connection signal="timeout" from="MuzzleFlareSprite/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="GunPitchTimer" to="." method="_on_GunPitchTimer_timeout"]

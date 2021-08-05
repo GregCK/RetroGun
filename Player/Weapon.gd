@@ -1,31 +1,39 @@
 extends Position2D
 
 const Pistol = preload("res://Player/Weapons/Pistol.tscn")
+const HeavyPistol = preload("res://Player/Weapons/HeavyPistol.tscn")
 
-
-
-
+var Weapons = [Pistol, HeavyPistol]
+var weapons = []
 var weapon
+var current_weapon = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var pistol = Pistol.instance()
-	add_child(pistol)
-	weapon = pistol
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-#	if Input.is_action_just_pressed("click"):
-#		var mouse_pos = get_global_mouse_position()
-#		var self_pos = get_global_position()
-#		var direction = mouse_pos - self_pos
-#		direction = direction.normalized()
-#
-#		weapon.attack(direction)
+#	var pistol = Pistol.instance()
+#	add_child(pistol)
 	
-	pass
+#	var heavyPistol = HeavyPistol.instance()
+#	add_child(heavyPistol)
+	
+	for i in Weapons:
+		var gun = i.instance()
+		weapons.append(gun)
+		add_child(gun)
+	
+	weapon = weapons[current_weapon]
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("swap_weapon"):
+		swap_weapons()
+
+func swap_weapons():
+	current_weapon += 1
+	if current_weapon >= weapons.size():
+		current_weapon = 0
+	weapon = weapons[current_weapon]
 
 func _input(event):
 	if weapon != null:
