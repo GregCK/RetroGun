@@ -204,6 +204,16 @@ anims/up = SubResource( 9 )
 position = Vector2( 0, -3.253 )
 script = ExtResource( 5 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Weapon"]
+
+[node name="WeaponLabel" type="Label" parent="Weapon/CanvasLayer"]
+margin_top = -3.253
+margin_right = 40.0
+margin_bottom = 10.747
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Hurtbox" parent="." instance=ExtResource( 9 )]
 visible = false
 collision_layer = 8

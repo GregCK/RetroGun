@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player/Weapons/Pistol.gd" type="Script" id=1]
+[ext_resource path="res://Player/Weapons/HeavyPistol.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sounds/pistol.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/MuzzleFlare.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Pistol.png" type="Texture" id=4]
@@ -9,9 +9,6 @@
 
 [node name="HeavyPistol" type="Node2D"]
 script = ExtResource( 1 )
-bullet_type = 1
-camera_shake = 150
-default_pitch = 1.5
 
 [node name="MuzzleFlareSprite" type="Sprite" parent="."]
 visible = false

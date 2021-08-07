@@ -14,10 +14,9 @@ var rng =  RandomNumberGenerator.new()
 
 var can_shoot = true
 
-const weapon_name = "Pistol"
+const weapon_name = "Heavy Pistol"
 
-export(int, "regular", "big") var bullet_type
-var camera_shake = 50
+var camera_shake = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,18 +54,14 @@ func handle_input():
 		attack(direction)
 
 
-#const default_pitch = 0.7
-export(float) var default_pitch = 0.7
+const default_pitch = 1.5
+#export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
 	if can_shoot:
 	#	create bullet
 		var bullet
-		match bullet_type:
-			0:
-				bullet = Bullet.instance()
-			1:
-				bullet = BigBullet.instance()
+		bullet = BigBullet.instance()
 		bullet.init(direction)
 		bullet.set_global_position( firepoint.get_global_position() )
 		world.add_child(bullet)

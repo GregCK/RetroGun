@@ -3,11 +3,15 @@ extends Position2D
 const Pistol = preload("res://Player/Weapons/Pistol.tscn")
 const HeavyPistol = preload("res://Player/Weapons/HeavyPistol.tscn")
 const MachineGun = preload("res://Player/Weapons/MachineGun.tscn")
+const SpreadGun = preload("res://Player/Weapons/SpreadGun.tscn")
 
-var Weapons = [Pistol, HeavyPistol, MachineGun]
+onready var weaponLabel = $CanvasLayer/WeaponLabel
+
+var Weapons = [Pistol, HeavyPistol, MachineGun, SpreadGun]
 var weapons = []
 var weapon
 var current_weapon = 0
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +28,7 @@ func _ready():
 		add_child(gun)
 	
 	weapon = weapons[current_weapon]
+	weaponLabel.text = weapon.weapon_name
 
 
 func _process(delta):
@@ -38,6 +43,8 @@ func swap_weapons():
 	if current_weapon >= weapons.size():
 		current_weapon = 0
 	weapon = weapons[current_weapon]
+	
+	weaponLabel.text = weapon.weapon_name
 
 #func _input(event):
 #	if weapon != null:

@@ -11,10 +11,11 @@ onready var gunPitchTimer = $GunPitchTimer
 onready var shotTimer = $ShotTimer
 
 var rng =  RandomNumberGenerator.new()
+var adjustAngle = AdjustAngle.new()
 
 var can_shoot = true
 
-const weapon_name = "Pistol"
+const weapon_name = "Machine Gun"
 
 export(int, "regular", "big") var bullet_type
 var camera_shake = 50
@@ -46,7 +47,7 @@ func isFacingLeft():
 
 
 func handle_input():
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_pressed("click"):
 		var mouse_pos = get_global_mouse_position()
 		var self_pos = get_global_position()
 		var direction = mouse_pos - self_pos
@@ -67,6 +68,10 @@ func attack(direction:Vector2):
 				bullet = Bullet.instance()
 			1:
 				bullet = BigBullet.instance()
+		
+#		adjust angle
+		direction = adjustAngle.randomly_rotate_vector(direction, 0.05)
+		
 		bullet.init(direction)
 		bullet.set_global_position( firepoint.get_global_position() )
 		world.add_child(bullet)

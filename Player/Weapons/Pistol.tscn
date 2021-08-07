@@ -9,7 +9,6 @@
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource( 1 )
-camera_shake = 50
 
 [node name="MuzzleFlareSprite" type="Sprite" parent="."]
 visible = false
