@@ -5,10 +5,12 @@ var sprite
 var muzzleFlareSprite
 
 var world
+var player
 
 func _ready():
 	world = get_parent().get_parent().get_parent()
-
+	player = get_parent().get_parent()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

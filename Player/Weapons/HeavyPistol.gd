@@ -18,11 +18,15 @@ const weapon_name = "Heavy Pistol"
 
 var camera_shake = 150
 
+const knockback_amount = 100
+signal give_knockback(direction, amount)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent().get_parent().get_parent()
 	sprite = $Pistol
 	muzzleFlareSprite = $MuzzleFlareSprite
+	connect("give_knockback", player, "change_knockback")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -81,6 +85,8 @@ func attack(direction:Vector2):
 		
 		can_shoot = false
 		shotTimer.start()
+		
+		emit_signal("give_knockback", -direction, knockback_amount)
 
 
 

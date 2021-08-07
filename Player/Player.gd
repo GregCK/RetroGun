@@ -21,6 +21,7 @@ const DASH_SPEED = 300
 
 var velocity = Vector2.ZERO
 var dash_vector = Vector2.DOWN
+var knockback = Vector2.ZERO
 
 export(bool) var god_mode = true
 
@@ -60,6 +61,9 @@ func _process(delta):
 		get_tree().quit()
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = move_and_slide(knockback)
+	
 	match current_state:
 		State.MOVE:
 			move_state(delta)
@@ -133,6 +137,11 @@ func set_flip(input_vector):
 		sprite.set_flip_h(true)
 	elif input_vector.x > 0:
 		sprite.set_flip_h(false)
+
+func change_knockback(direction, amount):
+	var knockback_adjustment = direction * amount
+	knockback += knockback_adjustment
+
 
 func add_scent():
 #	generate scent
