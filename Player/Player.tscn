@@ -200,13 +200,12 @@ anims/left = SubResource( 7 )
 anims/right = SubResource( 8 )
 anims/up = SubResource( 9 )
 
-[node name="Weapon" type="Position2D" parent="."]
-position = Vector2( 0, -3.253 )
+[node name="WeaponManager" type="Position2D" parent="."]
 script = ExtResource( 5 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Weapon"]
+[node name="CanvasLayer" type="CanvasLayer" parent="WeaponManager"]
 
-[node name="WeaponLabel" type="Label" parent="Weapon/CanvasLayer"]
+[node name="WeaponLabel" type="Label" parent="WeaponManager/CanvasLayer"]
 margin_top = -3.253
 margin_right = 40.0
 margin_bottom = 10.747
@@ -215,7 +214,6 @@ __meta__ = {
 }
 
 [node name="Hurtbox" parent="." instance=ExtResource( 9 )]
-visible = false
 collision_layer = 8
 collision_mask = 0
 
@@ -265,6 +263,7 @@ __meta__ = {
 stream = ExtResource( 10 )
 
 [node name="LineOfSight" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 18 )
 
 [node name="RayCast0" type="RayCast2D" parent="LineOfSight"]

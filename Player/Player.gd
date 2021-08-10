@@ -7,7 +7,6 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var skullAnimationPlayer = $SkullAnimationPlayer
 onready var camera = $PlayerCam
-onready var center = $Weapon
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
 onready var dashSound = $DashSound

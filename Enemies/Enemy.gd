@@ -28,6 +28,7 @@ func _on_Hurtbox_area_entered(area):
 	blinkAnimationPlayer.play("Start")
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 150
+	pass
 
 
 func _on_Stats_no_health():

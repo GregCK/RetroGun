@@ -25,11 +25,13 @@ func init(new_direction:Vector2):
 func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 	if get_slide_count() != 0:
-		for i in range(3):
-			create_death_effect()
-		
-		queue_free()
+		die()
 
+func die():
+	for i in range(3):
+		create_death_effect()
+
+	queue_free()
 
 func create_death_effect():
 		var deathEffect = DeathEffect.instance()
