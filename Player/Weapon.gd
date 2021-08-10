@@ -9,10 +9,10 @@ const Sword = preload("res://Player/Weapons/Sword.tscn")
 onready var weaponLabel = $CanvasLayer/WeaponLabel
 
 #var Weapons = [Pistol, HeavyPistol, MachineGun, SpreadGun, Sword]
-var Weapons = [HeavyPistol,Sword]
+var Weapons = [Pistol, HeavyPistol,Sword]
 var weapons = []
 var weapon
-var current_weapon = 0
+var current_weapon = -1
 
 
 
@@ -29,8 +29,10 @@ func _ready():
 		weapons.append(gun)
 		add_child(gun)
 	
-	weapon = weapons[current_weapon]
-	weaponLabel.text = weapon.weapon_name
+	for i in weapons:
+		i.set_visible(false)
+	
+	swap_weapons()
 
 
 func _process(delta):
@@ -41,10 +43,16 @@ func _process(delta):
 		weapon.handle_input()
 
 func swap_weapons():
+	if weapon:
+		weapon.set_visible(false)
+	
+	
 	current_weapon += 1
 	if current_weapon >= weapons.size():
 		current_weapon = 0
 	weapon = weapons[current_weapon]
+	
+	weapon.set_visible(true)
 	
 	weaponLabel.text = weapon.weapon_name
 

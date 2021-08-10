@@ -16,6 +16,7 @@ onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 const ACCELERATION = 520
 const MAX_SPEED = 120
 const FRICTION = 500
+const KNOCKBACK_FRICTION = 1000
 const DASH_SPEED = 300
 
 var velocity = Vector2.ZERO
@@ -60,7 +61,7 @@ func _process(delta):
 		get_tree().quit()
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
 	knockback = move_and_slide(knockback)
 	
 	match current_state:

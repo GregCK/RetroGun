@@ -18,7 +18,7 @@ const weapon_name = "Heavy Pistol"
 
 var camera_shake = 150
 
-const knockback_amount = 100
+const knockback_amount = 200
 signal give_knockback(direction, amount)
 
 # Called when the node enters the scene tree for the first time.

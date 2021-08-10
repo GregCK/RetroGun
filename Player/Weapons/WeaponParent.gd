@@ -30,3 +30,6 @@ func isFacingLeft():
 		return true
 	else:
 		return false
+
+func set_visible(value:bool):
+	sprite.visible = value
