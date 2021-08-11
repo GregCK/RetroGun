@@ -57,7 +57,8 @@ anims/Explode = SubResource( 1 )
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 collision_layer = 0
 collision_mask = 24
-damage = 10
+damage = 8
+knockback_amount = 5
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2.09 )

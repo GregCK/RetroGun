@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Upper Cut-SoundBible.com-1272257235 Mike Koenig.wav-51422b5ad869bed29c5be293c717348e.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Upper Cut-SoundBible.com-1272257235 Mike Koenig.wav"
+dest_files=[ "res://.import/Upper Cut-SoundBible.com-1272257235 Mike Koenig.wav-51422b5ad869bed29c5be293c717348e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

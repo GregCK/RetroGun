@@ -52,13 +52,13 @@ func _physics_process(delta):
 func set_look_direction():
 #	determine which way to look
 	var dir = Vector2.ZERO
-	if abs(velocity.x) > abs(velocity.y):
-		if velocity.x < 0:
+	if abs(velocity.x) >= abs(velocity.y):
+		if velocity.x < 0.0:
 			dir = Vector2.LEFT
 		else:
 			dir = Vector2.RIGHT
 	else:
-		if velocity.y < 0:
+		if velocity.y < 0.0:
 			dir = Vector2.UP
 		else:
 			dir = Vector2.DOWN

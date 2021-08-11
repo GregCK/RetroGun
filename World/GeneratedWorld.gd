@@ -15,7 +15,7 @@ var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
 var TNT = load("res://Objects/TNT.tscn")
 
 onready var tileMap = $LevelNavigation/TileMap
-
+onready var label = $CanvasLayer/Label
 
 
 var borders = Rect2(1, 1, 95, 67) #size of the grid in generated world 
@@ -31,6 +31,10 @@ var player_pos
 func _ready():
 	randomize()
 	generate_level()
+	
+	var floor_num = Globals.floor_num
+	var label_text = "Floor: " + str(floor_num)
+	label.text = label_text
 
 
 func generate_level():
@@ -75,15 +79,15 @@ func add_enemies():
 	var enemies_to_spawn = []
 	
 #
-#	for i in range(10):
-#		enemies_to_spawn.append(Turret)
+	for i in range(15):
+		enemies_to_spawn.append(Turret)
 
 
 	for i in range(10):
 		enemies_to_spawn.append(ChaseGhostAStar)
 
-#	for i in range(50):
-#		enemies_to_spawn.append(AggresiveShooter)
+	for i in range(50):
+		enemies_to_spawn.append(AggresiveShooter)
 		
 		
 	num_enemies = 5 + (Globals.floor_num)
