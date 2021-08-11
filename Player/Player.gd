@@ -5,6 +5,7 @@ const scent_scene = preload("res://Player/Scent.tscn")
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var rollAnimationPlayer = $AnimationPlayer/AnimationPlayer
 onready var skullAnimationPlayer = $SkullAnimationPlayer
 onready var camera = $PlayerCam
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -83,6 +84,10 @@ func set_state(new_state: int):
 			velocity = dash_vector * DASH_SPEED
 			hurtboxCollisionShape.disabled = true
 			animationPlayer.play("Dash")
+			if !sprite.is_flipped_h():
+				rollAnimationPlayer.play("RollCW")
+			else:
+				rollAnimationPlayer.play("RollCCW")
 			dashSound.play()
 			
 	current_state = new_state 

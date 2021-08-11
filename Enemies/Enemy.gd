@@ -104,6 +104,10 @@ func can_smell_player():
 	
 	return null
 
+
+#must be called to softcollide
+#needs to move gradually to work correctly ie, navigate_gradual. 
+#change velocity over time instead of setting it
 func detect_softCollision(delta):
 	if softCollision != null:
 		if softCollision.is_colliding():
@@ -112,6 +116,7 @@ func detect_softCollision(delta):
 				pass
 			pass
 	else:
+#		softCollision var must be set in child's ready function
 		push_error("softCollision is null")
 
 

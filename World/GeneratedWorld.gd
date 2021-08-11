@@ -12,6 +12,8 @@ var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 var Shooter = load("res://Enemies/Shooter/Shooter.tscn")
 var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
 
+var TNT = load("res://Objects/TNT.tscn")
+
 onready var tileMap = $LevelNavigation/TileMap
 
 
@@ -49,7 +51,7 @@ func generate_level():
 	
 	add_player()
 	
-	
+	add_object()
 	
 #	shuffles so do last
 	add_enemies()
@@ -72,35 +74,22 @@ func add_enemies():
 	var num_enemies = 1
 	var enemies_to_spawn = []
 	
-	
+#
+#	for i in range(10):
+#		enemies_to_spawn.append(Turret)
+
+
 	for i in range(10):
-		enemies_to_spawn.append(Turret)
-#	for i in range(0):
-#		enemies_to_spawn.append(Goblin)
-#	for i in range(3):
-#		enemies_to_spawn.append(ChaseGhost)
-#	for i in range(10):
-#		enemies_to_spawn.append(Bandit)
-#	for i in range(10):
-#		enemies_to_spawn.append(RifleMan)
-#	for i in range(3):
-#		enemies_to_spawn.append(FlamePig)
-#	num_enemies = 15
+		enemies_to_spawn.append(ChaseGhostAStar)
 
-	for i in range(50):
-		enemies_to_spawn.append(AggresiveShooter)
-	num_enemies = 5 + (Globals.floor_num / 3)
-
+#	for i in range(50):
+#		enemies_to_spawn.append(AggresiveShooter)
+		
+		
+	num_enemies = 5 + (Globals.floor_num)
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):
 		add_enemy(enemies_to_spawn[i])
-
-
-##	spawn X of each enemies
-#	for i in range(0):
-#		add_enemy(Turret)
-#	for i in range(100):
-#		add_enemy(ChaseGhost)
 
 
 
@@ -113,25 +102,44 @@ func add_enemy(enemy_type):
 #			enemy = ChaseGhost.instance()
 	enemy = enemy_type.instance()
 	
+#	replace by find_open_position()
+#	var enemy_pos
+#	while true:
+#		var i = randi() % map.size()
+#		enemy_pos = (map[i] * tile_size) + offset
+#		var distance_to_player = enemy_pos.distance_to(player_pos)
+#		if distance_to_player > 250 and !taken_positions.has(enemy_pos):
+#			break
 	
-	var enemy_pos
-	while true:
-		var i = randi() % map.size()
-		enemy_pos = (map[i] * tile_size) + offset
-		var distance_to_player = enemy_pos.distance_to(player_pos)
-		if distance_to_player > 250 and !taken_positions.has(enemy_pos):
-			break
 	
-	
-	
+	var enemy_pos = find_open_position()
 	enemy.position = enemy_pos
 	
 	
 	add_child(enemy)
 	enemies.append(enemy)
-	taken_positions.append(enemy_pos)
 
 
+
+
+
+func add_object():
+	var object = TNT.instance()
+	var object_pos = find_open_position()
+	object.position = object_pos
+	add_child(object)
+	
+
+
+func find_open_position():
+	var pos
+	while true:
+		var i = randi() % map.size()
+		pos = (map[i] * tile_size) + offset
+		var distance_to_player = pos.distance_to(player_pos)
+		if distance_to_player > 250 and !taken_positions.has(pos):
+			taken_positions.append(pos)
+			return pos
 
 func reload_level():
 	get_tree().reload_current_scene()

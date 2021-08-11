@@ -9,8 +9,9 @@ const Sword = preload("res://Player/Weapons/Sword.tscn")
 onready var weaponLabel = $CanvasLayer/WeaponLabel
 
 #var Weapons = [Pistol, HeavyPistol, MachineGun, SpreadGun, Sword]
-var Weapons = [Pistol, HeavyPistol,Sword]
+var Weapons = [Pistol, HeavyPistol, MachineGun, SpreadGun, Sword]
 var weapons = []
+var equiped_weapons = []
 var weapon
 var current_weapon = -1
 
