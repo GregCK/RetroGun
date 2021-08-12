@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+# warning-ignore:unused_signal
 signal state_changed(new_state)
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
@@ -37,7 +38,7 @@ func _on_Stats_no_health():
 	parent.add_child(effect)
 	
 	
-	var enemies = get_tree().get_nodes_in_group("enemies").size()
+#	var enemies = get_tree().get_nodes_in_group("enemies").size()
 	
 	spawn_portal_spawner()
 	

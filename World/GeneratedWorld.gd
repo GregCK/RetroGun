@@ -11,6 +11,7 @@ var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
 var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 var Shooter = load("res://Enemies/Shooter/Shooter.tscn")
 var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
+var TNTEnemy = load("res://Enemies/TNTEnemy/TNTEnemy.tscn")
 
 var TNT = load("res://Objects/TNT.tscn")
 var WeaponPickup = load("res://Objects/Pickups/WeaponPickup.tscn")
@@ -81,17 +82,20 @@ func add_enemies():
 	var enemies_to_spawn = []
 	
 #
-	for i in range(15):
-		enemies_to_spawn.append(Turret)
-
-
+#	for i in range(15):
+#		enemies_to_spawn.append(Turret)
+#
+#
+#	for i in range(10):
+#		enemies_to_spawn.append(ChaseGhostAStar)
+#
+#	for i in range(50):
+#		enemies_to_spawn.append(AggresiveShooter)
+		
 	for i in range(10):
-		enemies_to_spawn.append(ChaseGhostAStar)
-
-	for i in range(50):
-		enemies_to_spawn.append(AggresiveShooter)
-		
-		
+		enemies_to_spawn.append(TNTEnemy)
+	
+	
 	num_enemies = 1 + (Globals.floor_num)
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):

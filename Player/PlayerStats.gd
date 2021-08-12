@@ -50,7 +50,9 @@ func _on_PlayerStats_no_health():
 	get_tree().change_scene_to(titleScreen)
 
 
-func pop_random_weapon():
+func pick_random_weapon():
 	unequiped_weapons.shuffle()
-	return unequiped_weapons.pop_front()
+	return unequiped_weapons[0]
 	
+func remove_from_unequiped_pool(weapon):
+	unequiped_weapons.erase(weapon)

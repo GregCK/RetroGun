@@ -1,6 +1,11 @@
 extends "res://Enemies/Enemy.gd"
 
 onready var sprite = $Sprite
+onready var stateLabel = $StateLabel
+onready var animationPlayer = $AnimationPlayer
+onready var rollAnimationPlayer = $AnimationPlayer/AnimationPlayer
+onready var diveTimer = $DiveTimer
+onready var explosionCreator = $ExplosionCreator
 
 
 enum State{
@@ -27,12 +32,19 @@ func set_state(new_state:int):
 		State.IDLE:
 			pass
 		State.CLOSE_DISTANCE:
-			pass
+			animationPlayer.play("Walk")
 		State.DIVE:
-			pass
+			animationPlayer.play("Fuse")
+			if get_vector_to_player().x < 0:
+				rollAnimationPlayer.play("RollCCW")
+			else:
+				rollAnimationPlayer.play("RollCW")
+			velocity = get_vector_to_player().normalized() * dive_speed
+			diveTimer.start()
 	
 	
 	current_state = new_state
+	stateLabel.text = str(new_state)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -60,6 +72,8 @@ func _physics_process(delta):
 	move()
 	set_flip()
 	
+	
+	
 
 
 
@@ -70,3 +84,8 @@ func _physics_process(delta):
 
 func set_flip():
 	sprite.flip_h = velocity.x < 0
+
+
+func _on_DiveTimer_timeout():
+	explosionCreator.create_explosion_effect()
+	stats.set_health(0)
