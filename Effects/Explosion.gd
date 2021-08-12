@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var animationPlayer = $AnimationPlayer
-const camera_shake = 200
+const camera_shake = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

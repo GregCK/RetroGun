@@ -18,7 +18,7 @@ texture = ExtResource( 3 )
 [node name="Timer" type="Timer" parent="MuzzleFlareSprite"]
 wait_time = 0.04
 
-[node name="Pistol" type="Sprite" parent="."]
+[node name="WeaponSprite" type="Sprite" parent="."]
 position = Vector2( 13.3369, 0.99224 )
 texture = ExtResource( 4 )
 

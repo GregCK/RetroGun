@@ -3,7 +3,7 @@ extends Node2D
 const HitEffect = preload("res://Effects/HitEffect.tscn")
 
 onready var animationPlayer = $AnimationPlayer
-onready var sprite = $Sprite
+onready var sprite = $SlashSprite
 onready var weaponSprite = $WeaponSprite
 onready var hitbox = $Hitbox
 onready var sound = $Sound

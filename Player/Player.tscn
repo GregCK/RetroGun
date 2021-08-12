@@ -72,7 +72,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 resource_name = "RollCCW"
 length = 0.2
 step = 0.01
@@ -89,7 +89,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=6]
 resource_name = "RollCW"
 length = 0.2
 step = 0.01
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -122,7 +122,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=8]
 resource_name = "RollCCW"
 length = 0.2
 tracks/0/type = "value"
@@ -138,7 +138,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=9]
 resource_name = "RollCW"
 length = 0.2
 tracks/0/type = "value"
@@ -154,8 +154,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "down"
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -169,8 +168,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "left"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -184,8 +182,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "right"
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -199,8 +196,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "up"
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -214,7 +210,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=14]
 radius = 7.9375
 height = 4.25
 
@@ -258,19 +254,19 @@ script = ExtResource( 8 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 3 )
 anims/Idle = SubResource( 4 )
-anims/RollCCW = SubResource( 11 )
-anims/RollCW = SubResource( 12 )
-anims/Run = SubResource( 5 )
+anims/RollCCW = SubResource( 5 )
+anims/RollCW = SubResource( 6 )
+anims/Run = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationPlayer"]
-anims/RollCCW = SubResource( 13 )
-anims/RollCW = SubResource( 14 )
+anims/RollCCW = SubResource( 8 )
+anims/RollCW = SubResource( 9 )
 
 [node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 6 )
-anims/left = SubResource( 7 )
-anims/right = SubResource( 8 )
-anims/up = SubResource( 9 )
+anims/down = SubResource( 10 )
+anims/left = SubResource( 11 )
+anims/right = SubResource( 12 )
+anims/up = SubResource( 13 )
 
 [node name="WeaponManager" type="Position2D" parent="."]
 script = ExtResource( 5 )
@@ -290,7 +286,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 10 )
+shape = SubResource( 14 )
 
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 

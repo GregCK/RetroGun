@@ -13,6 +13,7 @@ var Shooter = load("res://Enemies/Shooter/Shooter.tscn")
 var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
 
 var TNT = load("res://Objects/TNT.tscn")
+var WeaponPickup = load("res://Objects/Pickups/WeaponPickup.tscn")
 
 onready var tileMap = $LevelNavigation/TileMap
 onready var label = $CanvasLayer/Label
@@ -55,7 +56,8 @@ func generate_level():
 	
 	add_player()
 	
-	add_object()
+	add_object(TNT)
+	add_object(WeaponPickup)
 	
 #	shuffles so do last
 	add_enemies()
@@ -90,7 +92,7 @@ func add_enemies():
 		enemies_to_spawn.append(AggresiveShooter)
 		
 		
-	num_enemies = 5 + (Globals.floor_num)
+	num_enemies = 1 + (Globals.floor_num)
 	enemies_to_spawn.shuffle()
 	for i in range(num_enemies):
 		add_enemy(enemies_to_spawn[i])
@@ -127,8 +129,8 @@ func add_enemy(enemy_type):
 
 
 
-func add_object():
-	var object = TNT.instance()
+func add_object(new_object):
+	var object = new_object.instance()
 	var object_pos = find_open_position()
 	object.position = object_pos
 	add_child(object)

@@ -18,12 +18,12 @@ var can_shoot = true
 const weapon_name = "Spread Gun"
 
 export(int, "regular", "big") var bullet_type
-var camera_shake = 50
+var camera_shake = 25
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent().get_parent().get_parent()
-	sprite = $Pistol
+	sprite = $WeaponSprite
 	muzzleFlareSprite = $MuzzleFlareSprite
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -24,7 +24,7 @@ signal give_knockback(direction, amount)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent().get_parent().get_parent()
-	sprite = $Pistol
+	sprite = $WeaponSprite
 	muzzleFlareSprite = $MuzzleFlareSprite
 	connect("give_knockback", player, "change_knockback")
 
