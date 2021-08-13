@@ -61,6 +61,9 @@ func create_hit_effect():
 	main.add_child(effect)
 	effect.global_position = global_position
 
+#currently does not work
+func set_knockback_amount(new_amount):
+	hitbox.set_knockback_amount(new_amount)
 
 func _on_Hitbox_area_entered(area):
 	create_hit_effect()

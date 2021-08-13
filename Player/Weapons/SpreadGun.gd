@@ -17,8 +17,11 @@ var can_shoot = true
 
 const weapon_name = "Spread Gun"
 
-export(int, "regular", "big") var bullet_type
+var ammo = 200
+
 var camera_shake = 25
+
+signal ammo_changed(ammo)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,11 +66,11 @@ func attack(direction:Vector2):
 	if can_shoot:
 	#	create bullet
 		var bullet
-		match bullet_type:
-			0:
-				bullet = Bullet.instance()
-			1:
-				bullet = BigBullet.instance()
+		bullet = Bullet.instance()
+
+		
+#		set small amount of bullet knockback
+#		bullet.set_knockback_amount(0.5)
 		
 #		adjust angle
 		direction = adjustAngle.randomly_rotate_vector(direction, 0.4)
@@ -92,6 +95,8 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 
+		ammo -=1
+		emit_signal("ammo_changed", ammo)
 
 
 

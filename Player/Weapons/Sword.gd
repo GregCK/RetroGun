@@ -13,6 +13,7 @@ onready var swingReset = $SwingReset
 onready var current_swing_sound = sound
 
 const weapon_name = "Sword"
+const ammo = null
 const knockback_amount = 250
 const camera_shake = 40
 

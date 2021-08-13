@@ -16,10 +16,13 @@ var can_shoot = true
 
 const weapon_name = "Heavy Pistol"
 
+var ammo = 30
+
 var camera_shake = 150
 
 const knockback_amount = 200
 signal give_knockback(direction, amount)
+signal ammo_changed(ammo)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,7 +65,7 @@ const default_pitch = 1.5
 #export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-	if can_shoot:
+	if can_shoot and ammo>0:
 	#	create bullet
 		var bullet
 		bullet = BigBullet.instance()
@@ -86,7 +89,10 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 		
+		ammo -= 1
+		
 		emit_signal("give_knockback", -direction, knockback_amount)
+		emit_signal("ammo_changed", ammo)
 
 
 

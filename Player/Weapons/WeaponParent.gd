@@ -1,11 +1,14 @@
 extends Node2D
 
 
+
+
 var sprite
 var muzzleFlareSprite
 
 var world
 var player
+
 
 func _ready():
 	world = get_parent().get_parent().get_parent()

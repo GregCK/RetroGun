@@ -15,6 +15,7 @@ var rng =  RandomNumberGenerator.new()
 var can_shoot = true
 
 const weapon_name = "Pistol"
+const ammo = null
 
 export(int, "regular", "big") var bullet_type
 var camera_shake = 50

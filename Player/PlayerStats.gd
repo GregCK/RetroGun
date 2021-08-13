@@ -11,8 +11,11 @@ const RocketLauncher = preload("res://Player/Weapons/RocketLauncher.tscn")
 const SpreadGun = preload("res://Player/Weapons/SpreadGun.tscn")
 const Sword = preload("res://Player/Weapons/Sword.tscn")
 onready var unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun, Sword]
+#onready var unequiped_weapons = [HeavyPistol]
 
 var weapons = [Pistol]
+var ammos = [null]
+var weapon_ammo_array = [weapons, ammos]
 var current_weapon_index = -1
 
 export (int) var max_health = 1 setget set_max_health
@@ -25,7 +28,7 @@ signal max_health_changed(value)
 
 func _ready():
 	self.health = max_health
-	unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun, Sword]
+#	unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun, Sword]
 
 func set_max_health(value):
 	max_health = value

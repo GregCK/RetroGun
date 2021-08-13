@@ -15,10 +15,14 @@ var adjustAngle = AdjustAngle.new()
 
 var can_shoot = true
 
+var ammo = 100
+
 const weapon_name = "Machine Gun"
 
 export(int, "regular", "big") var bullet_type
 var camera_shake = 50
+
+signal ammo_changed(ammo)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -92,6 +96,8 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 
+		ammo -=1
+		emit_signal("ammo_changed", ammo)
 
 
 

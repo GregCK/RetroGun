@@ -30,7 +30,7 @@ func _on_Hurtbox_area_entered(area):
 	if player.name == "Player":
 		var weaponManager = player.get_node("WeaponManager")
 		weaponManager.add_weapon(my_weapon)
-		PlayerStats.remove_from_unequiped_pool(my_weapon)
+#		PlayerStats.remove_from_unequiped_pool(my_weapon)
 		queue_free()
 	else:
 		push_error("area.parent should be the player")

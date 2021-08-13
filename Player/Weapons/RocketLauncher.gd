@@ -15,10 +15,14 @@ var can_shoot = true
 
 const weapon_name = "Rocket Launcher"
 
+var ammo = 3
+
 var camera_shake = 150
 
 const knockback_amount = 200
 signal give_knockback(direction, amount)
+
+signal ammo_changed(ammo)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -87,7 +91,8 @@ func attack(direction:Vector2):
 		
 		emit_signal("give_knockback", -direction, knockback_amount)
 
-
+		ammo -=1
+		emit_signal("ammo_changed", ammo)
 
 
 func _on_Timer_timeout():
