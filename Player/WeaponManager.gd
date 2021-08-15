@@ -77,7 +77,8 @@ func swap_weapons():
 
 
 func add_weapon(new_weapon):
-	if !check_if_has_weapon(new_weapon):
+	var matching_weapon = get_matching_weapon(new_weapon)
+	if matching_weapon == null:
 		PlayerStats.weapons.append(new_weapon)
 		var gun = new_weapon.instance()
 		weapons.append(gun)
@@ -88,17 +89,22 @@ func add_weapon(new_weapon):
 			gun.connect("ammo_changed", self, "update_ammoLabel")
 	else:
 #		give them more ammo
-		weapon.ammo += new_weapon.instance().ammo
+		
+		var new_weapon_ammo = new_weapon.instance().ammo
+		if new_weapon_ammo != null:
+#			find weapn of same name
+			matching_weapon.ammo += new_weapon_ammo
+#			update_ammoLabel()
 	
 	
 
-func check_if_has_weapon(new_weapon):
+func get_matching_weapon(new_weapon):
 	var new_weapon_name = new_weapon.instance().weapon_name
 	for w in weapons:
 		var w_weapon_name = w.weapon_name
 		if w_weapon_name == new_weapon_name:
-			return true
-	return false
+			return w
+	return null
 
 
 func update_ammoLabel(ammo):

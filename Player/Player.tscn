@@ -73,7 +73,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=5]
 resource_name = "RollCCW"
 length = 0.2
 step = 0.01
@@ -90,7 +90,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=6]
 resource_name = "RollCW"
 length = 0.2
 step = 0.01
@@ -107,7 +107,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=7]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=8]
 resource_name = "RollCCW"
 length = 0.2
 tracks/0/type = "value"
@@ -139,7 +139,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=9]
 resource_name = "RollCW"
 length = 0.2
 tracks/0/type = "value"
@@ -155,7 +155,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -255,16 +255,16 @@ script = ExtResource( 8 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 3 )
 anims/Idle = SubResource( 4 )
-anims/RollCCW = SubResource( 15 )
-anims/RollCW = SubResource( 16 )
-anims/Run = SubResource( 17 )
+anims/RollCCW = SubResource( 5 )
+anims/RollCW = SubResource( 6 )
+anims/Run = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationPlayer"]
-anims/RollCCW = SubResource( 18 )
-anims/RollCW = SubResource( 19 )
+anims/RollCCW = SubResource( 8 )
+anims/RollCW = SubResource( 9 )
 
 [node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 20 )
+anims/down = SubResource( 10 )
 anims/left = SubResource( 11 )
 anims/right = SubResource( 12 )
 anims/up = SubResource( 13 )
