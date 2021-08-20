@@ -15,13 +15,12 @@ onready var ammoLabel = $CanvasLayer/AmmoLabel
 var weapons = []
 var equiped_weapons = []
 var weapon
-var current_weapon = -1
+#var current_weapon = -1
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_weapon = PlayerStats.current_weapon_index
 	
 	for i in PlayerStats.weapons:
 		var gun = i.instance()
@@ -34,12 +33,12 @@ func _ready():
 	for weap in weapons:
 		weap.set_visible(false)
 	
-	if current_weapon == -1:
+	if PlayerStats.current_weapon_index == -1:
 		swap_weapons()
 	else:
 #		set and make visible weapon
-		if current_weapon < weapons.size():
-			weapon = weapons[current_weapon]
+		if PlayerStats.current_weapon_index < weapons.size():
+			weapon = weapons[PlayerStats.current_weapon_index]
 			weapon.set_visible(true)
 			weaponLabel.text = weapon.weapon_name
 			ammoLabel.text = str(weapon.ammo)
@@ -61,11 +60,10 @@ func swap_weapons():
 		weapon.set_visible(false)
 	
 	
-	current_weapon += 1
-	PlayerStats.current_weapon_index = current_weapon
-	if current_weapon >= weapons.size():
-		current_weapon = 0
-	weapon = weapons[current_weapon]
+	PlayerStats.current_weapon_index += 1
+	if PlayerStats.current_weapon_index >= weapons.size():
+		PlayerStats.current_weapon_index = 0
+	weapon = weapons[PlayerStats.current_weapon_index]
 	
 	weapon.set_visible(true)
 	

@@ -77,7 +77,10 @@ func _physics_process(delta):
 
 
 
-
+func _on_Stats_no_health():
+	explosionCreator.create_explosion_effect()
+	spawn_portal_spawner()
+	queue_free()
 
 
 
