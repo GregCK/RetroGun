@@ -15,6 +15,7 @@ var TNTEnemy = load("res://Enemies/TNTEnemy/TNTEnemy.tscn")
 
 var TNT = load("res://Objects/TNT.tscn")
 var WeaponPickup = load("res://Objects/Pickups/WeaponPickup.tscn")
+var HealthPickup = load("res://Objects/Pickups/HealthPickup.tscn")
 
 onready var tileMap = $LevelNavigation/TileMap
 onready var label = $CanvasLayer/Label
@@ -57,12 +58,14 @@ func generate_level():
 	
 	add_player()
 	
-	add_object(TNT)
-	add_object(WeaponPickup)
+	add_objects()
 	
 #	shuffles so do last
 	add_enemies()
 	
+
+
+
 
 
 func add_player():
@@ -130,7 +133,10 @@ func add_enemy(enemy_type):
 	enemies.append(enemy)
 
 
-
+func add_objects():
+	add_object(TNT)
+	add_object(WeaponPickup)
+	add_object(HealthPickup)
 
 
 func add_object(new_object):

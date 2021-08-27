@@ -21,15 +21,23 @@ var weapon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+#	instance each weapon in weapons
 	for i in PlayerStats.weapons:
 		var gun = i.instance()
 		weapons.append(gun)
 		add_child(gun)
 		if gun.has_signal("ammo_changed"):
 			gun.connect("ammo_changed", self, "update_ammoLabel")
+
+# add the already instanced weapon in equiped_weapons
+#	for i in PlayerStats.equiped_weapons:
+#		var gun = i
+#		weapons.append(gun)
+#		add_child(gun)
+#		if gun.has_signal("ammo_changed"):
+#			gun.connect("ammo_changed", self, "update_ammoLabel")
 	
-	var i = 0
+
 	for weap in weapons:
 		weap.set_visible(false)
 	
