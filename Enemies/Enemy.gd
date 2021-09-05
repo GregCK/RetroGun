@@ -5,6 +5,7 @@ signal state_changed(new_state)
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const PortalSpawner = preload("res://Enemies/PortalSpawner.tscn")
+const HealthPickup = preload("res://Objects/Pickups/HealthPickup.tscn")
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
@@ -19,6 +20,8 @@ var levelNavigation: Navigation2D = null
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
+
+
 
 func _ready():
 	parent = get_parent()
@@ -41,7 +44,7 @@ func _on_Stats_no_health():
 #	var enemies = get_tree().get_nodes_in_group("enemies").size()
 	
 	spawn_portal_spawner()
-	
+	spawn_health()
 	queue_free()
 	
 
@@ -51,7 +54,14 @@ func spawn_portal_spawner():
 	parent.call_deferred("add_child", portal)
 	portal.position = position
 
-
+func spawn_health():
+	var health = PlayerStats.get_health_pickups()
+	for i in health:
+		var apple = HealthPickup.instance()
+#		apple.set_child(parent)
+#		parent.add_child(apple)
+		parent.call_deferred("add_child", apple)
+		apple.position = position
 
 func get_distance_to_player():
 	if player != null:

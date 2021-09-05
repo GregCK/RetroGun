@@ -221,6 +221,7 @@ height = 4.25
 collision_layer = 2
 collision_mask = 33
 script = ExtResource( 2 )
+god_mode = false
 
 [node name="SkullSprite" type="Sprite" parent="."]
 visible = false

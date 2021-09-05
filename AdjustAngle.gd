@@ -16,3 +16,4 @@ func randomly_rotate_vector(vec:Vector2, amount = 0.15):
 	adjusted_vector = adjusted_vector.normalized()
 	
 	return adjusted_vector
+

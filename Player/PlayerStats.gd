@@ -44,12 +44,18 @@ func set_max_health(value):
 
 func set_health(value):
 	health = value
+	if health > max_health:
+		health = max_health
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
 
 
-
+func get_health_pickups():
+	if health < max_health / 2:
+		return 1
+	
+	return 0
 
 
 
