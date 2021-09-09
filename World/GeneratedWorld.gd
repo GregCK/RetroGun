@@ -86,18 +86,18 @@ func add_enemies():
 	var enemies_to_spawn = []
 	
 ##
-#	for i in range(15):
-#		enemies_to_spawn.append(Turret)
-#
-#
-#	for i in range(10):
-#		enemies_to_spawn.append(ChaseGhostAStar)
-#
-#	for i in range(50):
-#		enemies_to_spawn.append(AggresiveShooter)
-#
-#	for i in range(10):
-#		enemies_to_spawn.append(TNTEnemy)
+	for i in range(15):
+		enemies_to_spawn.append(Turret)
+
+
+	for i in range(10):
+		enemies_to_spawn.append(ChaseGhostAStar)
+
+	for i in range(50):
+		enemies_to_spawn.append(AggresiveShooter)
+
+	for i in range(10):
+		enemies_to_spawn.append(TNTEnemy)
 	
 	for i in range(10):
 		enemies_to_spawn.append(Bouncer)

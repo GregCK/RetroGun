@@ -52,6 +52,7 @@ MusicPlayer="*res://MusicPlayer.tscn"
 
 window/size/width=320
 window/size/height=180
+window/size/fullscreen=true
 window/size/test_width=1280
 window/size/test_height=720
 mouse_cursor/custom_image="res://Assets/cross hairs 3.png"
@@ -134,6 +135,7 @@ swap_weapon={
 2d_physics/layer_7="SoftCollision"
 2d_physics/layer_8="EnemyBullet"
 2d_physics/layer_9="ExplodingBarrel"
+2d_physics/layer_10="Pickup"
 
 [rendering]
 

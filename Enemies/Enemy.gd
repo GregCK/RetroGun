@@ -6,6 +6,7 @@ signal state_changed(new_state)
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const PortalSpawner = preload("res://Enemies/PortalSpawner.tscn")
 const HealthPickup = preload("res://Objects/Pickups/HealthPickup.tscn")
+const SmallHealthPickup = preload("res://Objects/Pickups/SmallHealthPickup.tscn")
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var stats = $Stats
@@ -21,7 +22,7 @@ var levelNavigation: Navigation2D = null
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
-
+var last_weapon_hit_by
 
 func _ready():
 	parent = get_parent()
@@ -29,9 +30,17 @@ func _ready():
 
 
 func _on_Hurtbox_area_entered(area):
-	blinkAnimationPlayer.play("Start")
-	stats.health -= area.damage
-	knockback = area.knockback_vector * 150
+	if not area.get("damage") == null:
+#		area has damage variable
+		last_weapon_hit_by = area.get_parent()
+
+		blinkAnimationPlayer.play("Start")
+		stats.health -= area.damage
+		knockback = area.knockback_vector * 150
+		
+		
+	else:
+		push_error("area did not have damage variable")
 	pass
 
 
@@ -55,13 +64,15 @@ func spawn_portal_spawner():
 	portal.position = position
 
 func spawn_health():
-	var health = PlayerStats.get_health_pickups()
-	for i in health:
-		var apple = HealthPickup.instance()
-#		apple.set_child(parent)
-#		parent.add_child(apple)
-		parent.call_deferred("add_child", apple)
-		apple.position = position
+	if last_weapon_hit_by.name == "Sword":
+		var health_pickups = PlayerStats.get_health_pickups()
+	
+		for i in health_pickups:
+			var dot = SmallHealthPickup.instance()
+			parent.call_deferred("add_child", dot)
+			dot.position = position
+
+
 
 func get_distance_to_player():
 	if player != null:

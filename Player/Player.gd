@@ -12,6 +12,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var hurtSound = $HurtSound
 onready var dashSound = $DashSound
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
+onready var pickupMagnet = $PickupMagnet
 
 
 const ACCELERATION = 520
@@ -180,3 +181,10 @@ func take_damage(damage):
 			PlayerStats.health = PlayerStats.max_health
 	blinkAnimationPlayer.play("Start")
 	hurtSound.play()
+
+
+
+
+
+
+

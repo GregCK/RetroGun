@@ -34,9 +34,21 @@ tracks/1/keys = {
 "method": "animation_finished"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 47.3239
+radius = 41.2733
 
 [node name="Explosion" type="Node2D"]
 script = ExtResource( 4 )
@@ -46,6 +58,7 @@ stream = ExtResource( 3 )
 autoplay = true
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1.732 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 hframes = 6
@@ -58,10 +71,10 @@ anims/Explode = SubResource( 1 )
 collision_layer = 0
 collision_mask = 280
 damage = 8
-knockback_amount = 5
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2.09 )
 shape = SubResource( 2 )
+disabled = true
 
 [editable path="Hitbox"]

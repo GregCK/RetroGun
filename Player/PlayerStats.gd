@@ -10,11 +10,11 @@ const MachineGun = preload("res://Player/Weapons/MachineGun.tscn")
 const RocketLauncher = preload("res://Player/Weapons/RocketLauncher.tscn")
 const SpreadGun = preload("res://Player/Weapons/SpreadGun.tscn")
 const Sword = preload("res://Player/Weapons/Sword.tscn")
-#onready var unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun, Sword]
-onready var unequiped_weapons = [HeavyPistol]
+onready var unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun, Sword]
+#onready var unequiped_weapons = [HeavyPistol]
 
 #var equiped_weapons = []
-var weapons = [Pistol]
+var weapons = [Sword,Pistol]
 var ammos = [null]
 var weapon_ammo_array = [weapons, ammos]
 
@@ -52,11 +52,7 @@ func set_health(value):
 
 
 func get_health_pickups():
-	if health < max_health / 2:
-		return 1
-	
-	return 0
-
+	return 1
 
 
 func _on_PlayerStats_no_health():
