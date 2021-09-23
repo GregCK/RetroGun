@@ -11,6 +11,7 @@ var FlamePig = load("res://Enemies/FlamePig/FlamePig.tscn")
 var RifleMan = load("res://Enemies/Bandit/RifleMan.tscn")
 var Shooter = load("res://Enemies/Shooter/Shooter.tscn")
 var AggresiveShooter = load("res://Enemies/Shooter/AggresiveShooter.tscn")
+var CautionShooter = load("res://Enemies/Shooter/CautionShooter.tscn")
 var TNTEnemy = load("res://Enemies/TNTEnemy/TNTEnemy.tscn")
 var Bouncer = load("res://Enemies/Bouncer/Bouncer.tscn")
 
@@ -94,7 +95,7 @@ func add_enemies():
 		enemies_to_spawn.append(ChaseGhostAStar)
 
 	for i in range(50):
-		enemies_to_spawn.append(AggresiveShooter)
+		enemies_to_spawn.append(CautionShooter)
 
 	for i in range(10):
 		enemies_to_spawn.append(TNTEnemy)

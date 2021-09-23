@@ -9,6 +9,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var firePoint = $FirePoint
 onready var shotTimer = $ShotTimer
 onready var spellSound = $SpellSound
+onready var eyeSprite = $EyeSprite
 
 export var shots_to_fire = 3
 var shots_fired = 0
@@ -39,6 +40,11 @@ func _physics_process(delta):
 				set_state(State.AIM)
 		State.AIM:
 			pass
+			
+	
+	
+	if player != null:
+		eyeSprite.look_at(player.get_global_position())
 
 
 
@@ -64,6 +70,8 @@ func fire():
 	get_parent().add_child(bullet)
 	
 	shots_fired += 1
+	
+	animationPlayer.play("blink")
 	
 	shotTimer.start()
 	

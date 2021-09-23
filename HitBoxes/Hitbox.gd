@@ -4,7 +4,7 @@ extends Area2D
 var knockback_vector = Vector2.ZERO
 
 export var damage = 3
-export var knockback_amount = 2.0
+export var knockback_amount = 1.0
 
 func set_knockback_amount(new_amount):
 	knockback_amount = new_amount

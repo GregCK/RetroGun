@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=1]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=2]
@@ -7,11 +7,28 @@
 [ext_resource path="res://Enemies/Goblin/Turret.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sounds/retro spell.wav" type="AudioStream" id=6]
 [ext_resource path="res://Assets/turret.png" type="Texture" id=7]
+[ext_resource path="res://Assets/eye2.png" type="Texture" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/active = false
+
+[sub_resource type="Animation" id=7]
+resource_name = "blink"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("EyeSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "lower"
@@ -94,6 +111,7 @@ hframes = 2
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink = SubResource( 7 )
 anims/lower = SubResource( 2 )
 anims/summon = SubResource( 3 )
 anims/walk = SubResource( 4 )
@@ -130,6 +148,9 @@ one_shot = true
 
 [node name="SpellSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="EyeSprite" type="Sprite" parent="."]
+texture = ExtResource( 8 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]

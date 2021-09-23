@@ -3,7 +3,7 @@
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Fonts/Pixeled_5.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Enemies/Bouncer/Bouncer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Shooter/CautionShooter.tscn" type="PackedScene" id=4]
 
 [node name="TestLvl1" type="Node2D"]
 
@@ -29,5 +29,5 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 95, 109 )
 
-[node name="Bouncer" parent="." instance=ExtResource( 4 )]
-position = Vector2( 225, 111 )
+[node name="CautionShooter" parent="." instance=ExtResource( 4 )]
+position = Vector2( 247, 100.5 )

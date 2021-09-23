@@ -7,6 +7,7 @@ onready var animationPlayer = $AnimationPlayer
 const move_speed = 50
 var move_dir
 
+const FRICTION = 400
 
 var rng
 
@@ -20,6 +21,10 @@ func _ready():
 	velocity = move_dir * move_speed
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = move_and_slide(knockback)
+	
+	
 	move()
 	if get_slide_count() != 0:
 		var col = get_slide_collision(0)
