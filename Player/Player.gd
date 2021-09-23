@@ -179,7 +179,7 @@ func take_damage(damage):
 	if god_mode:
 		if PlayerStats.health < (PlayerStats.max_health/2):
 			PlayerStats.health = PlayerStats.max_health
-	blinkAnimationPlayer.play("Start")
+#	blinkAnimationPlayer.play("Start")
 	hurtSound.play()
 
 
@@ -188,3 +188,11 @@ func take_damage(damage):
 
 
 
+
+
+func _on_Hurtbox_invincibility_ended():
+	blinkAnimationPlayer.play("Stop")
+
+
+func _on_Hurtbox_invincibility_started():
+	blinkAnimationPlayer.play("Start")
