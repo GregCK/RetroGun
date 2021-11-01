@@ -40,7 +40,8 @@ func _on_Hurtbox_area_entered(area):
 		
 		
 	else:
-		push_error("area did not have damage variable")
+#		push_error("area did not have damage variable")
+		pass
 	pass
 
 

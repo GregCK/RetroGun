@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/BouncerShooter.png" type="Texture" id=1]
-[ext_resource path="res://Enemies/Bouncer/Bouncer.gd" type="Script" id=2]
+[ext_resource path="res://Assets/BouncerShooterPink.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/Bouncer/MomentumBouncer.gd" type="Script" id=2]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Effects/FlashWhite.shader" type="Shader" id=6]
-[ext_resource path="res://Enemies/Parts/Turrets.tscn" type="PackedScene" id=7]
+[ext_resource path="res://HitBoxes/Hitbox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Parts/Turrets.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.05455
@@ -57,10 +58,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1, 2 ]
+"values": [ 1 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -69,7 +70,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.6, 0.7 ),
+"times": PoolRealArray( 0.5, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -94,7 +95,10 @@ tracks/2/keys = {
 } ]
 }
 
-[node name="Bouncer" type="KinematicBody2D" groups=[
+[sub_resource type="CircleShape2D" id=6]
+radius = 8.11964
+
+[node name="MomentumBouncer" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
@@ -111,7 +115,7 @@ hframes = 3
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 4 )]
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 3
+max_health = 6
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 2147483664
@@ -128,11 +132,20 @@ autostart = true
 anims/default = SubResource( 4 )
 anims/fire = SubResource( 5 )
 
-[node name="Turrets" parent="." instance=ExtResource( 7 )]
+[node name="Hitbox" parent="." instance=ExtResource( 7 )]
+collision_layer = 0
+collision_mask = 264
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 6 )
+
+[node name="Turrets" parent="." instance=ExtResource( 8 )]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 
 [editable path="Hurtbox"]
+
+[editable path="Hitbox"]
 
 [editable path="Turrets"]
