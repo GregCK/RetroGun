@@ -14,7 +14,8 @@ var world = null
 
 
 func _ready():
-	connect("leaving_level", world, "reload_level")
+#	connect("leaving_level", world, "reload_level")
+	connect("leaving_level", LevelSelector, "next_level")
 
 
 
