@@ -36,7 +36,7 @@ volume_db = -10.0
 wait_time = 0.5
 
 [node name="ShotTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.3
 one_shot = true
 [connection signal="timeout" from="MuzzleFlareSprite/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="GunPitchTimer" to="." method="_on_GunPitchTimer_timeout"]

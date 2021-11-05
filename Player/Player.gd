@@ -13,6 +13,7 @@ onready var hurtSound = $HurtSound
 onready var dashSound = $DashSound
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 onready var pickupMagnet = $PickupMagnet
+onready var weaponIcons = $WeaponManager/CanvasLayer/WeaponIcons
 
 
 const ACCELERATION = 520
@@ -56,6 +57,9 @@ func _ready():
 	add_child(scentTimer) #to process
 	scentTimer.wait_time = scentWaitTime
 	scentTimer.start() #to start
+	
+	add_weapon_icons()
+
 
 
 func _process(delta):
@@ -167,6 +171,19 @@ func dash_animation_finished():
 	hurtboxCollisionShape.disabled = false
 	set_state(State.MOVE)
 	
+
+func add_weapon_icons():
+#	for w in PlayerStats.weapons:
+#		var new_sprite = TextureRect.new()
+#		var weapon = w.instance()
+#		var texture = weapon.get_node("WeaponSprite").get_texture()
+#		new_sprite.set_texture(texture)
+#		weaponIcons.add_child(new_sprite)
+#		weaponIcons.add_spacer(true)
+	
+	for w in PlayerStats.weapons:
+		pass
+	pass
 
 func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:

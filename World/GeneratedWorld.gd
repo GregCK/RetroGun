@@ -35,6 +35,7 @@ var player_pos
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	Globals.floor_num += 1
 	generate_level()
 	
 	var floor_num = Globals.floor_num
@@ -43,7 +44,6 @@ func _ready():
 
 
 func generate_level():
-	Globals.floor_num += 1
 	
 	var walker = Walker.new(Vector2(15, 10), borders)
 	map = walker.walk(200)
@@ -94,8 +94,11 @@ func add_enemies():
 	for i in range(10):
 		enemies_to_spawn.append(ChaseGhostAStar)
 
-	for i in range(50):
+	for i in range(30):
 		enemies_to_spawn.append(CautionShooter)
+	
+	for i in range(20):
+		enemies_to_spawn.append(AggresiveShooter)
 
 	for i in range(10):
 		enemies_to_spawn.append(TNTEnemy)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/guy3SS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Fonts/Pixeled_5.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Player/PickupMagnet.gd" type="Script" id=5]
 [ext_resource path="res://HitBoxes/PlayerHurtbox.gd" type="Script" id=6]
+[ext_resource path="res://Assets/heavy pistol pink.png" type="Texture" id=7]
 [ext_resource path="res://Effects/ShakeCam.gd" type="Script" id=8]
 [ext_resource path="res://HitBoxes/Hurtbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/Evade.wav" type="AudioStream" id=10]
@@ -18,6 +19,12 @@
 [ext_resource path="res://Player/LineOfSightRayCast.gd" type="Script" id=17]
 [ext_resource path="res://Player/LineOfSight.gd" type="Script" id=18]
 [ext_resource path="res://Assets/SKULLSS.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Pistol.png" type="Texture" id=20]
+[ext_resource path="res://Assets/machine gun.png" type="Texture" id=21]
+[ext_resource path="res://Assets/sword_neon.png" type="Texture" id=22]
+[ext_resource path="res://Assets/smg2.png" type="Texture" id=23]
+[ext_resource path="res://Assets/rocket launcher.png" type="Texture" id=24]
+[ext_resource path="res://Player/WeaponIcons.gd" type="Script" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -299,6 +306,61 @@ custom_fonts/font = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WeaponIcons" type="HBoxContainer" parent="WeaponManager/CanvasLayer"]
+anchor_left = 0.584
+anchor_top = 0.045
+anchor_right = 0.951
+anchor_bottom = 0.045
+margin_left = -40.0
+margin_bottom = 40.0
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sword" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+margin_right = 4.0
+margin_bottom = 40.0
+texture = ExtResource( 22 )
+
+[node name="Pistol" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+margin_left = 8.0
+margin_right = 15.0
+margin_bottom = 40.0
+texture = ExtResource( 20 )
+
+[node name="HeavyPistol" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+margin_left = 19.0
+margin_right = 27.0
+margin_bottom = 40.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MachineGun" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 31.0
+margin_right = 44.0
+margin_bottom = 40.0
+texture = ExtResource( 21 )
+
+[node name="RocketeLauncher" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 48.0
+margin_right = 60.0
+margin_bottom = 40.0
+texture = ExtResource( 24 )
+
+[node name="SpreadGun" type="TextureRect" parent="WeaponManager/CanvasLayer/WeaponIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 64.0
+margin_right = 70.0
+margin_bottom = 40.0
+texture = ExtResource( 23 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 9 )]
 collision_layer = 8
