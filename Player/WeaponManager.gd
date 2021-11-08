@@ -23,15 +23,15 @@ var weapon
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	instance each weapon in weapons
-	for i in PlayerStats.weapons:
-		var gun = i.instance()
-		weapons.append(gun)
-		add_child(gun)
-		if gun.has_signal("ammo_changed"):
-			gun.connect("ammo_changed", self, "update_ammoLabel")
-
-	for weap in weapons:
-		weap.set_visible(false)
+#	for i in PlayerStats.weapons:
+#		var gun = i.instance()
+#		weapons.append(gun)
+#		add_child(gun)
+#		if gun.has_signal("ammo_changed"):
+#			gun.connect("ammo_changed", self, "update_ammoLabel")
+#
+#	for weap in weapons:
+#		weap.set_visible(false)
 
 
 #	instance each weapon in weapons
@@ -46,18 +46,20 @@ func _ready():
 		weap.set_visible(false)
 
 	
-	if PlayerStats.current_weapon_index == -1:
-#		swap_weapons()
-		equip_weapon(1)
-	else:
-#		set and make visible weapon
-		if PlayerStats.current_weapon_index < weapons.size():
-			weapon = weapons[PlayerStats.current_weapon_index]
-			weapon.set_visible(true)
-			weaponLabel.text = weapon.weapon_name
-			ammoLabel.text = str(weapon.ammo)
-		else:
-			push_error("current_weapon is out of bounds")
+	equip_weapon(PlayerStats.equip_weapon_index)
+	
+#	if PlayerStats.current_weapon_index == -1:
+##		swap_weapons()
+#		equip_weapon(1)
+#	else:
+##		set and make visible weapon
+#		if PlayerStats.current_weapon_index < weapons.size():
+#			weapon = weapons[PlayerStats.current_weapon_index]
+#			weapon.set_visible(true)
+#			weaponLabel.text = weapon.weapon_name
+#			ammoLabel.text = str(weapon.ammo)
+#		else:
+#			push_error("current_weapon is out of bounds")
 	
 	pass
 
@@ -90,45 +92,50 @@ func _input(event):
 	elif event.is_action_pressed("9"):
 		equip_weapon(8)
 
+
+#makes so player can use weapon that has already been picked up
 func equip_weapon(w):
-#	make sure the weapon is valid
+#	make sure the weapon is valid / has the weapon on body
+#	sets ammo label
 	if w >= all_weapons.size() or w < 0:
 		return
 	match w:
 		0:
 			if PlayerStats.sword < 1:
 				return
+			ammoLabel.text = ""
 		1:
 			if PlayerStats.pistol < 1:
 				return
+			ammoLabel.text = str(PlayerStats.pistolAmmo)
 		2:
 			if PlayerStats.heavyPistol < 1:
 				return
+			ammoLabel.text = str(PlayerStats.heavyPistolAmmo)
 		3:
 			if PlayerStats.machineGun < 1:
 				return
+			ammoLabel.text = str(PlayerStats.machineGunAmmo)
 		4:
 			if PlayerStats.rocketLauncher < 1:
 				return
+			ammoLabel.text = str(PlayerStats.rocketLaucherAmmo)
 		5:
 			if PlayerStats.spreadGun < 1:
 				return
+			SpreadGun.text = str(PlayerStats.spreadGunAmmo)
 	
 	
 #	equip the weapon
 	if weapon:
 		weapon.set_visible(false)
 	
-	PlayerStats.current_weapon_index = w
-#	weapon = weapons[w]
+
+	PlayerStats.equip_weapon_index = w
 	weapon = all_weapons[w]
 	weapon.set_visible(true)
 
 	weaponLabel.text = weapon.weapon_name
-	if weapon.ammo != null:
-		ammoLabel.text = str(weapon.ammo)
-	else:
-		ammoLabel.text = ""
 
 
 
@@ -174,8 +181,12 @@ func equip_weapon(w):
 #			matching_weapon.ammo += new_weapon_ammo
 ##			update_ammoLabel()
 
+
+#adds weapon to list of player weapons on body
 func add_weapon(new_weapon):
-	var name = new_weapon.instance().name
+	var weap_instance = new_weapon.instance()
+	var name = weap_instance.name
+	var new_ammo
 	match name:
 		"Sword":
 			pass
@@ -183,16 +194,28 @@ func add_weapon(new_weapon):
 			pass
 		"HeavyPistol":
 			PlayerStats.heavyPistol += 1
+			PlayerStats.heavyPistolAmmo += weap_instance.ammo
+			new_ammo = PlayerStats.heavyPistolAmmo
 			$CanvasLayer/WeaponIcons/HeavyPistol.set_modulate(Color(1,1,1,1))
 		"MachineGun":
 			PlayerStats.machineGun += 1
+			PlayerStats.machineGunAmmo += weap_instance.ammo
+			new_ammo = PlayerStats.machineGunAmmo
 			$CanvasLayer/WeaponIcons/MachineGun.set_modulate(Color(1,1,1,1))
 		"RocketLauncher":
 			PlayerStats.rocketLauncher += 1
+			PlayerStats.rocketLaucherAmmo += weap_instance.ammo
+			new_ammo = PlayerStats.rocketLaucherAmmo
 			$CanvasLayer/WeaponIcons/RocketeLauncher.set_modulate(Color(1,1,1,1))
 		"SpreadGun":
 			PlayerStats.spreadGun += 1
+			PlayerStats.spreadGunAmmo += weap_instance.ammo
+			new_ammo = PlayerStats.spreadGunAmmo
 			$CanvasLayer/WeaponIcons/SpreadGun.set_modulate(Color(1,1,1,1))
+	
+#	if holding weapon that is added, update ammo label
+	if is_weapon_equiped(weap_instance):
+		update_ammoLabel(new_ammo)
 
 func get_matching_weapon(new_weapon):
 	var new_weapon_name = new_weapon.instance().weapon_name
@@ -206,6 +229,10 @@ func get_matching_weapon(new_weapon):
 func update_ammoLabel(ammo):
 	ammoLabel.text = str(ammo)
 
-#func _input(event):
-#	if weapon != null:
-#		weapon.handle_input()
+func is_weapon_equiped(w):
+	var equiped_weapon_name = weapon.name
+	var check_weapon_name = w.name
+	if equiped_weapon_name == check_weapon_name:
+		return true
+	else:
+		return false

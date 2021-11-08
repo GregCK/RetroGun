@@ -181,8 +181,8 @@ func add_weapon_icons():
 #		weaponIcons.add_child(new_sprite)
 #		weaponIcons.add_spacer(true)
 	
-	for w in PlayerStats.weapons:
-		pass
+#	for w in PlayerStats.weapons:
+#		pass
 	pass
 
 func _on_Hurtbox_area_entered(area):

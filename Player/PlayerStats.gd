@@ -10,8 +10,9 @@ const MachineGun = preload("res://Player/Weapons/MachineGun.tscn")
 const RocketLauncher = preload("res://Player/Weapons/RocketLauncher.tscn")
 const SpreadGun = preload("res://Player/Weapons/SpreadGun.tscn")
 const Sword = preload("res://Player/Weapons/Sword.tscn")
-onready var unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun]
-#onready var unequiped_weapons = [HeavyPistol]
+
+#onready var unequiped_weapons = [HeavyPistol, MachineGun, RocketLauncher, SpreadGun]
+onready var unequiped_weapons = [HeavyPistol]
 
 #var equiped_weapons = []
 var weapons = [Sword,Pistol]
@@ -26,9 +27,16 @@ var machineGun = 0
 var rocketLauncher = 0
 var spreadGun = 0
 
+#equiped weapon ammo
+var pistolAmmo = 0
+var heavyPistolAmmo = 0
+var machineGunAmmo = 0
+var rocketLaucherAmmo = 0
+var spreadGunAmmo = 0
+
 #weaponManager
 #var current_weapon_index = -1
-var equip_weapon_index = -1
+var equip_weapon_index = 1
 
 
 export (int) var max_health = 1 setget set_max_health

@@ -65,7 +65,7 @@ const default_pitch = 1.5
 #export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-	if can_shoot and ammo>0:
+	if can_shoot and PlayerStats.heavyPistolAmmo>0:
 	#	create bullet
 		var bullet
 		bullet = BigBullet.instance()
@@ -89,10 +89,11 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 		
-		ammo -= 1
+		PlayerStats.heavyPistolAmmo -= 1
 		
 		emit_signal("give_knockback", -direction, knockback_amount)
-		emit_signal("ammo_changed", ammo)
+#		emit_signal("ammo_changed", ammo)
+		emit_signal("ammo_changed", PlayerStats.heavyPistolAmmo)
 
 
 

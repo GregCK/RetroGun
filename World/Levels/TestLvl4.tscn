@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Enemies/Bouncer/MomentumBouncer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/Bouncer/Bouncer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Shooter/BurstAggresiveShooter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Shooter/BurstCautionShooter.tscn" type="PackedScene" id=8]
 
 [node name="TestLvl" type="Node2D"]
 script = ExtResource( 4 )
@@ -41,3 +42,6 @@ position = Vector2( 428.856, 270.768 )
 
 [node name="BurstAggresiveShooter" parent="." instance=ExtResource( 7 )]
 position = Vector2( 328.79, 186.679 )
+
+[node name="BurstCautionShooter" parent="." instance=ExtResource( 8 )]
+position = Vector2( 176.588, 298.517 )
