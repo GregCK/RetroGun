@@ -123,7 +123,7 @@ func equip_weapon(w):
 		5:
 			if PlayerStats.spreadGun < 1:
 				return
-			SpreadGun.text = str(PlayerStats.spreadGunAmmo)
+			ammoLabel.text = str(PlayerStats.spreadGunAmmo)
 	
 	
 #	equip the weapon

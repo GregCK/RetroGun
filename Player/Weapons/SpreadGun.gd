@@ -9,6 +9,7 @@ onready var audioStreamPlayer = $AudioStreamPlayer
 onready var muzzleFlareTimer = $MuzzleFlareSprite/Timer
 onready var gunPitchTimer = $GunPitchTimer
 onready var shotTimer = $ShotTimer
+onready var click = $Click
 
 var rng =  RandomNumberGenerator.new()
 var adjustAngle = AdjustAngle.new()
@@ -63,7 +64,7 @@ func handle_input():
 export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-	if can_shoot:
+	if can_shoot and PlayerStats.spreadGunAmmo > 0:
 	#	create bullet
 		var bullet
 		bullet = Bullet.instance()
@@ -95,8 +96,10 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 
-		ammo -=1
-		emit_signal("ammo_changed", ammo)
+		PlayerStats.spreadGunAmmo -=1
+		emit_signal("ammo_changed", PlayerStats.spreadGunAmmo)
+	elif PlayerStats.spreadGunAmmo <= 0:
+		click.play()
 
 
 

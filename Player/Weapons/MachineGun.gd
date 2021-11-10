@@ -3,12 +3,12 @@ extends "res://Player/Weapons/WeaponParent.gd"
 const Bullet = preload("res://Player/Bullets/PlayerBullet.tscn")
 const BigBullet = preload("res://Player/Bullets/PlayerBulletBig.tscn")
 
-
 onready var firepoint = $Firepoint
 onready var audioStreamPlayer = $AudioStreamPlayer
 onready var muzzleFlareTimer = $MuzzleFlareSprite/Timer
 onready var gunPitchTimer = $GunPitchTimer
 onready var shotTimer = $ShotTimer
+onready var click = $Click
 
 var rng =  RandomNumberGenerator.new()
 var adjustAngle = AdjustAngle.new()
@@ -64,7 +64,7 @@ func handle_input():
 export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-	if can_shoot:
+	if can_shoot and PlayerStats.machineGunAmmo > 0:
 	#	create bullet
 		var bullet
 		match bullet_type:
@@ -96,8 +96,10 @@ func attack(direction:Vector2):
 		can_shoot = false
 		shotTimer.start()
 
-		ammo -=1
-		emit_signal("ammo_changed", ammo)
+		PlayerStats.machineGunAmmo -=1
+		emit_signal("ammo_changed", PlayerStats.machineGunAmmo)
+	elif PlayerStats.machineGunAmmo <= 0:
+		click.play()
 
 
 

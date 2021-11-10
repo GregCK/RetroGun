@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sounds/50 Cal Machine Gun Load.wav" type="AudioStream" id=1]
+[ext_resource path="res://Effects/WeaponPickupSoundEffect.gd" type="Script" id=2]
+
+[node name="WeaponPickupSoundEffect" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+autoplay = true
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

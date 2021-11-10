@@ -6,6 +6,7 @@ const BigBullet = preload("res://Player/Bullets/PlayerBulletBig.tscn")
 
 onready var firepoint = $Firepoint
 onready var audioStreamPlayer = $AudioStreamPlayer
+onready var click = $Click
 onready var muzzleFlareTimer = $MuzzleFlareSprite/Timer
 onready var gunPitchTimer = $GunPitchTimer
 onready var shotTimer = $ShotTimer
@@ -16,7 +17,7 @@ var can_shoot = true
 
 const weapon_name = "Heavy Pistol"
 
-var ammo = 30
+var ammo = 10
 
 var camera_shake = 150
 
@@ -94,6 +95,8 @@ func attack(direction:Vector2):
 		emit_signal("give_knockback", -direction, knockback_amount)
 #		emit_signal("ammo_changed", ammo)
 		emit_signal("ammo_changed", PlayerStats.heavyPistolAmmo)
+	elif PlayerStats.heavyPistolAmmo <= 0:
+		click.play()
 
 
 

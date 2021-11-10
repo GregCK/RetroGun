@@ -8,6 +8,7 @@ onready var audioStreamPlayer = $AudioStreamPlayer
 onready var muzzleFlareTimer = $MuzzleFlareSprite/Timer
 onready var gunPitchTimer = $GunPitchTimer
 onready var shotTimer = $ShotTimer
+onready var click = $Click
 
 var rng =  RandomNumberGenerator.new()
 
@@ -65,7 +66,7 @@ const default_pitch = 1.5
 #export(float) var default_pitch = 0.7
 var pitch : float = default_pitch
 func attack(direction:Vector2):
-	if can_shoot:
+	if can_shoot and PlayerStats.rocketLaucherAmmo > 0:
 	#	create rocket
 		var rocket
 		rocket = Rocket.instance()
@@ -91,8 +92,10 @@ func attack(direction:Vector2):
 		
 		emit_signal("give_knockback", -direction, knockback_amount)
 
-		ammo -=1
-		emit_signal("ammo_changed", ammo)
+		PlayerStats.rocketLaucherAmmo -=1
+		emit_signal("ammo_changed", PlayerStats.rocketLaucherAmmo)
+	elif PlayerStats.rocketLaucherAmmo <= 0:
+		click.play()
 
 
 func _on_Timer_timeout():

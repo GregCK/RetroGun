@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Weapons/SpreadGun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sounds/pistol.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/MuzzleFlare.png" type="Texture" id=3]
 [ext_resource path="res://Assets/smg2.png" type="Texture" id=4]
+[ext_resource path="res://Effects/Click.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -38,6 +39,8 @@ wait_time = 0.5
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="Click" parent="." instance=ExtResource( 5 )]
 [connection signal="timeout" from="MuzzleFlareSprite/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="GunPitchTimer" to="." method="_on_GunPitchTimer_timeout"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
