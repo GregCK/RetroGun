@@ -16,7 +16,7 @@ var weapons = []
 var all_weapons = []
 #var equiped_weapons = []
 var weapon
-#var current_weapon = -1
+var current_weapon = -1
 
 
 
@@ -91,7 +91,81 @@ func _input(event):
 		equip_weapon(7)
 	elif event.is_action_pressed("9"):
 		equip_weapon(8)
+	elif event.is_action_pressed("scroll_down"):
+		var new_w = find_scroll_down(current_weapon)
+		equip_weapon(new_w)
+	elif event.is_action_pressed("scroll_up"):
+		var new_w = find_scroll_up(current_weapon)
+		equip_weapon(new_w)
 
+
+func find_scroll_down(curr_index):
+	while true:
+		match curr_index:
+			0:#sword
+				if PlayerStats.pistol > 0:
+					return 1
+				else:
+					curr_index = 1
+			1:#pistol
+				if PlayerStats.heavyPistol > 0:
+					return 2
+				else:
+					curr_index = 2
+			2:#heavy pistol
+				if PlayerStats.machineGun > 0:
+					return 3
+				else:
+					curr_index = 3
+			3:#machine gun
+				if PlayerStats.rocketLauncher > 0:
+					return 4
+				else:
+					curr_index = 4
+			4:#rockt launcher
+				if PlayerStats.spreadGun > 0:
+					return 5
+				else:
+					curr_index = 5
+			5:#spreadgun
+				if PlayerStats.sword > 0:
+					return 0
+				else:
+					curr_index = 0
+
+func find_scroll_up(curr_index):
+	while true:
+		match curr_index:
+			0:#sword
+				if PlayerStats.spreadGun > 0:
+					return 5
+				else:
+					curr_index = 5
+			1:#pistol
+				if PlayerStats.sword > 0:
+					return 0
+				else:
+					curr_index = 0
+			2:#heavy pistol
+				if PlayerStats.pistol > 0:
+					return 1
+				else:
+					curr_index = 1
+			3:#machine gun
+				if PlayerStats.heavyPistol > 0:
+					return 2
+				else:
+					curr_index = 2
+			4:#rockt launcher
+				if PlayerStats.machineGun > 0:
+					return 3
+				else:
+					curr_index = 3
+			5:#spreadgun
+				if PlayerStats.rocketLauncher > 0:
+					return 4
+				else:
+					curr_index = 4
 
 #makes so player can use weapon that has already been picked up
 func equip_weapon(w):
@@ -124,6 +198,9 @@ func equip_weapon(w):
 			if PlayerStats.spreadGun < 1:
 				return
 			ammoLabel.text = str(PlayerStats.spreadGunAmmo)
+	
+#	remember current weapon
+	current_weapon = w
 	
 	
 #	equip the weapon
