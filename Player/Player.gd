@@ -14,6 +14,7 @@ onready var dashSound = $DashSound
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 onready var pickupMagnet = $PickupMagnet
 onready var weaponIcons = $WeaponManager/CanvasLayer/WeaponIcons
+onready var dashTimer = $DashTimer
 
 
 const ACCELERATION = 520
@@ -36,7 +37,8 @@ var scentWaitTime = 0.1
 
 enum State{
 	MOVE,
-	DASH
+	DASH,
+	PORTAL
 }
 
 var current_state : int = -1 setget set_state
@@ -58,7 +60,7 @@ func _ready():
 	scentTimer.wait_time = scentWaitTime
 	scentTimer.start() #to start
 	
-	add_weapon_icons()
+
 
 
 
@@ -75,6 +77,8 @@ func _physics_process(delta):
 			move_state(delta)
 		State.DASH:
 			move()
+		State.PORTAL:
+			portal_state(delta)
 	set_camera(delta)
 
 
@@ -95,6 +99,10 @@ func set_state(new_state: int):
 				rollAnimationPlayer.play("RollCCW")
 			dashSound.play()
 			
+			dashTimer.start()
+			
+		State.PORTAL:
+			animationPlayer.play("RollLoop")
 	current_state = new_state 
 
 
@@ -120,9 +128,20 @@ func move_state(delta):
 	move()
 	
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and dashTimer.get_time_left() == 0:
 		set_state(State.DASH)
 	
+
+func portal_state(delta):
+	var vec_to_portal = get_vector_to_portal()
+	var dist_to_portal = vec_to_portal.length()
+	vec_to_portal = vec_to_portal.normalized()
+	
+	var portal_gravity = 500 / dist_to_portal
+	
+	velocity = velocity.move_toward(vec_to_portal * (portal_gravity), ACCELERATION * delta)
+	
+	move()
 
 
 func move():
@@ -172,18 +191,21 @@ func dash_animation_finished():
 	set_state(State.MOVE)
 	
 
-func add_weapon_icons():
-#	for w in PlayerStats.weapons:
-#		var new_sprite = TextureRect.new()
-#		var weapon = w.instance()
-#		var texture = weapon.get_node("WeaponSprite").get_texture()
-#		new_sprite.set_texture(texture)
-#		weaponIcons.add_child(new_sprite)
-#		weaponIcons.add_spacer(true)
-	
-#	for w in PlayerStats.weapons:
-#		pass
+var portal = null
+func set_portal():
+	portal = get_parent().get_node("Portal")
+	set_state(State.PORTAL)
 	pass
+	
+
+func get_vector_to_portal():
+	if portal != null:
+		var portal_pos = portal.position
+		var my_pos = position
+		var difference:Vector2 = portal_pos - my_pos
+		return difference
+	return null
+
 
 func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:

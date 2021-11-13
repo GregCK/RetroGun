@@ -1,6 +1,6 @@
 extends Node
 
-const titleScreen = preload("res://TitleScreen/TitleScreen.tscn")
+const titleScreen = preload("res://Menus/TitleScreen/TitleScreen.tscn")
 
 const Pistol = preload("res://Player/Weapons/Pistol.tscn")
 
