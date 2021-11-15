@@ -38,7 +38,8 @@ var scentWaitTime = 0.1
 enum State{
 	MOVE,
 	DASH,
-	PORTAL
+	PORTAL,
+	DEAD
 }
 
 var current_state : int = -1 setget set_state
@@ -79,6 +80,8 @@ func _physics_process(delta):
 			move()
 		State.PORTAL:
 			portal_state(delta)
+		State.DASH:
+			pass
 	set_camera(delta)
 
 
@@ -103,6 +106,9 @@ func set_state(new_state: int):
 			
 		State.PORTAL:
 			animationPlayer.play("RollLoop")
+		
+		State.DEAD:
+			pass
 	current_state = new_state 
 
 
@@ -220,13 +226,19 @@ func take_damage(damage):
 			PlayerStats.health = PlayerStats.max_health
 #	blinkAnimationPlayer.play("Start")
 	hurtSound.play()
+	
+	if PlayerStats.health <= 0:
+		play_dead()
 
 
 
 
-
-
-
+func play_dead():
+	sprite.visible = false
+#	hurtboxCollisionShape.disabled = true
+	hurtboxCollisionShape.set_deferred("disabled", true)
+	set_state(State.DEAD)
+	$WeaponManager.queue_free()
 
 
 func _on_Hurtbox_invincibility_ended():

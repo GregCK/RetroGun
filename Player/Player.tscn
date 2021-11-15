@@ -116,7 +116,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=7]
 resource_name = "RollLoop"
 length = 0.2
 loop = true
@@ -133,7 +133,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -149,8 +149,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "RollCCW"
+[sub_resource type="Animation" id=9]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:rotation_degrees")
@@ -165,8 +164,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "RollCW"
+[sub_resource type="Animation" id=10]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:rotation_degrees")
@@ -181,7 +179,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -195,7 +193,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -209,7 +207,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -223,7 +221,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkullSprite:frame")
 tracks/0/interp = 1
@@ -237,11 +235,11 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=14]
+[sub_resource type="CapsuleShape2D" id=15]
 radius = 7.9375
 height = 4.25
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=16]
 radius = 66.2193
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -287,18 +285,18 @@ anims/Dash = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/RollCCW = SubResource( 5 )
 anims/RollCW = SubResource( 6 )
-anims/RollLoop = SubResource( 16 )
-anims/Run = SubResource( 7 )
+anims/RollLoop = SubResource( 7 )
+anims/Run = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationPlayer"]
-anims/RollCCW = SubResource( 8 )
-anims/RollCW = SubResource( 9 )
+anims/RollCCW = SubResource( 9 )
+anims/RollCW = SubResource( 10 )
 
 [node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 10 )
-anims/left = SubResource( 11 )
-anims/right = SubResource( 12 )
-anims/up = SubResource( 13 )
+anims/down = SubResource( 11 )
+anims/left = SubResource( 12 )
+anims/right = SubResource( 13 )
+anims/up = SubResource( 14 )
 
 [node name="WeaponManager" type="Position2D" parent="."]
 script = ExtResource( 3 )
@@ -386,7 +384,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 
 [node name="Timer" type="Timer" parent="Hurtbox"]
 
@@ -485,7 +483,7 @@ collision_mask = 2147484160
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 [connection signal="timeout" from="PlayerCam/Timer" to="PlayerCam" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

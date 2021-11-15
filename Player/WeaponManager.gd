@@ -18,7 +18,7 @@ var all_weapons = []
 var weapon
 var current_weapon = -1
 
-
+var dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

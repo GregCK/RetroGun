@@ -1,5 +1,9 @@
 extends Node
 
+
+onready var panelContainer = $DeathUI/PanelContainer
+
+
 const titleScreen = preload("res://Menus/TitleScreen/TitleScreen.tscn")
 
 const Pistol = preload("res://Player/Weapons/Pistol.tscn")
@@ -48,7 +52,7 @@ signal max_health_changed(value)
 
 
 func _ready():
-	self.health = max_health
+	reset_health()
 #	equiped_weapons.append(Pistol.instance()) 
 
 
@@ -66,15 +70,19 @@ func set_health(value):
 		emit_signal("no_health")
 
 
+func reset_health():
+	self.health = max_health
+
 func get_health_pickups():
 	return 1
 
 
 func _on_PlayerStats_no_health():
-	health = max_health
+#	health = max_health
 	Globals.floor_num = 1
 # warning-ignore:return_value_discarded
-	get_tree().change_scene_to(titleScreen)
+#	get_tree().change_scene_to(titleScreen)
+	panelContainer.visible = true
 
 
 func pick_random_weapon():
@@ -83,3 +91,9 @@ func pick_random_weapon():
 	
 func remove_from_unequiped_pool(weapon):
 	unequiped_weapons.erase(weapon)
+
+
+func _on_Button_pressed():
+	get_tree().change_scene_to(titleScreen)
+	panelContainer.visible = false
+	reset_health()
