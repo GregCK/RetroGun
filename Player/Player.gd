@@ -17,11 +17,11 @@ onready var weaponIcons = $WeaponManager/CanvasLayer/WeaponIcons
 onready var dashTimer = $DashTimer
 
 
-const ACCELERATION = 520
+const ACCELERATION = 560
 const MAX_SPEED = 120
 const FRICTION = 500
 const KNOCKBACK_FRICTION = 1000
-const DASH_SPEED = 300
+const DASH_SPEED = 350
 
 var velocity = Vector2.ZERO
 var dash_vector = Vector2.DOWN

@@ -31,6 +31,14 @@ var machineGun = 0
 var rocketLauncher = 0
 var spreadGun = 0
 
+func reset_weapons():
+	sword = 1
+	pistol = 1
+	heavyPistol = 0
+	machineGun = 0
+	rocketLauncher = 0
+	spreadGun = 0
+
 #equiped weapon ammo
 var pistolAmmo = 0
 var heavyPistolAmmo = 0
@@ -83,6 +91,7 @@ func _on_PlayerStats_no_health():
 # warning-ignore:return_value_discarded
 #	get_tree().change_scene_to(titleScreen)
 	panelContainer.visible = true
+	reset_weapons()
 
 
 func pick_random_weapon():
@@ -97,3 +106,4 @@ func _on_Button_pressed():
 	get_tree().change_scene_to(titleScreen)
 	panelContainer.visible = false
 	reset_health()
+	Globals.floor_num = 0

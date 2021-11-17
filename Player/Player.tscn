@@ -485,12 +485,12 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
 shape = SubResource( 16 )
 [connection signal="timeout" from="PlayerCam/Timer" to="PlayerCam" method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PickupMagnet" to="PickupMagnet" method="_on_PickupMagnet_body_entered"]
 
