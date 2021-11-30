@@ -66,9 +66,13 @@ func generate_level():
 	add_enemies()
 	
 
+func _input(event):
+	if event.is_action_pressed("escape"):
+		_on_pause_button_pressed()
 
-
-
+func _on_pause_button_pressed():
+	get_tree().paused = true
+	$CanvasLayer/Pause.show()
 
 func add_player():
 	var player = Player.instance()
@@ -151,7 +155,6 @@ func add_object(new_object):
 	var object_pos = find_open_position()
 	object.position = object_pos
 	add_child(object)
-	
 
 
 func find_open_position():
@@ -163,6 +166,7 @@ func find_open_position():
 		if distance_to_player > 250 and !taken_positions.has(pos):
 			taken_positions.append(pos)
 			return pos
+
 
 func reload_level():
 	get_tree().reload_current_scene()
