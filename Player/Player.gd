@@ -65,9 +65,6 @@ func _ready():
 
 
 
-func _process(delta):
-	if Input.is_action_just_pressed("escape"):
-		get_tree().quit()
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)

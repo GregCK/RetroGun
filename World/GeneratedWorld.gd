@@ -66,13 +66,7 @@ func generate_level():
 	add_enemies()
 	
 
-func _input(event):
-	if event.is_action_pressed("escape"):
-		_on_pause_button_pressed()
 
-func _on_pause_button_pressed():
-	get_tree().paused = true
-	$CanvasLayer/Pause.show()
 
 func add_player():
 	var player = Player.instance()

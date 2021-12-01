@@ -25,12 +25,3 @@ custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Pause" type="Label" parent="CanvasLayer"]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-text = "Helllo"
-__meta__ = {
-"_edit_use_anchors_": false
-}

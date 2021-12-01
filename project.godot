@@ -54,6 +54,7 @@ Globals="*res://Globals.gd"
 PlayerStats="*res://Player/PlayerStats.tscn"
 MusicPlayer="*res://MusicPlayer.tscn"
 LevelSelector="*res://World/LevelSelector.tscn"
+Pause="*res://Pause.tscn"
 
 [display]
 
