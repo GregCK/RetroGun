@@ -68,3 +68,4 @@ func set_knockback_amount(new_amount):
 func _on_Hitbox_area_entered(area):
 	create_hit_effect()
 	queue_free()
+	PlayerStats.set_guts(PlayerStats.guts + 3)

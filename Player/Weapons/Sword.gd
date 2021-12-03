@@ -18,6 +18,7 @@ const knockback_amount = 250
 const camera_shake = 40
 
 signal give_knockback(direction, amount)
+signal sword_damage_changed(multiple)
 
 var isAttacking = false
 var onFirstSwing:bool = true
@@ -25,7 +26,8 @@ var onFirstSwing:bool = true
 func _ready():
 	var player = get_parent().get_parent()
 	connect("give_knockback", player, "change_knockback")
-
+	PlayerStats.connect("guts_changed", self, "set_damage")
+	set_damage(PlayerStats.guts)
 
 func _process(delta):
 	if !isAttacking:
@@ -47,6 +49,9 @@ func set_swing(value:bool):
 		weaponSprite.rotation_degrees = 180
 
 func attack():
+	if PlayerStats.guts <= 0:
+		$BreathSound.play()
+		return
 	if isAttacking == false:
 		isAttacking = true
 		
@@ -63,6 +68,9 @@ func attack():
 		
 		onFirstSwing = !onFirstSwing
 		set_swing(onFirstSwing)
+		
+#		guts
+		PlayerStats.set_guts(PlayerStats.guts - 3)
 
 func attack_animation_finished():
 	isAttacking = false
@@ -83,3 +91,16 @@ func _on_Hitbox_area_entered(area):
 		area.get_parent().queue_free()
 	else:
 		create_hit_effect()
+
+func set_damage(guts):
+	var multiple = (guts / PlayerStats.max_guts) + 1
+	hitbox.damage = hitbox.base_damage * multiple
+	emit_signal("sword_damage_changed", multiple)
+
+
+func get_damage():
+	return hitbox.damage
+
+
+func get_damage_multiple():
+	return (PlayerStats.guts / PlayerStats.max_guts) + 1

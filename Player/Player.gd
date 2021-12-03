@@ -15,6 +15,7 @@ onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
 onready var pickupMagnet = $PickupMagnet
 onready var weaponIcons = $WeaponManager/CanvasLayer/WeaponIcons
 onready var dashTimer = $DashTimer
+onready var gutsUI = $CanvasLayer/GutsUI
 
 
 const ACCELERATION = 560
@@ -26,6 +27,7 @@ const DASH_SPEED = 350
 var velocity = Vector2.ZERO
 var dash_vector = Vector2.DOWN
 var knockback = Vector2.ZERO
+
 
 export(bool) var god_mode = true
 
@@ -61,6 +63,7 @@ func _ready():
 	scentTimer.wait_time = scentWaitTime
 	scentTimer.start() #to start
 	
+
 
 
 
@@ -214,7 +217,12 @@ func _on_Hurtbox_area_entered(area):
 	if not area.get("damage") == null:
 		take_damage(area.damage)
 	else:
-		print("area does not have damage car")
+#		print("area does not have damage car")
+		pass
+
+
+	
+	
 
 func take_damage(damage):
 	PlayerStats.health -= damage
@@ -244,3 +252,8 @@ func _on_Hurtbox_invincibility_ended():
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")
+
+
+func _on_GutsTimer_timeout():
+	if PlayerStats.guts < PlayerStats.max_guts:
+		PlayerStats.set_guts(PlayerStats.guts + 1)

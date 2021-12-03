@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Assets/guy3SS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://Assets/Sounds/hurt1.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/empty health.png" type="Texture" id=14]
 [ext_resource path="res://Assets/full health.png" type="Texture" id=15]
-[ext_resource path="res://Player/HealthUI.gd" type="Script" id=16]
+[ext_resource path="res://Player/GutsUI.gd" type="Script" id=16]
 [ext_resource path="res://Player/LineOfSightRayCast.gd" type="Script" id=17]
 [ext_resource path="res://Player/LineOfSight.gd" type="Script" id=18]
 [ext_resource path="res://Assets/SKULLSS.png" type="Texture" id=19]
@@ -25,6 +25,9 @@
 [ext_resource path="res://Assets/smg2.png" type="Texture" id=23]
 [ext_resource path="res://Assets/rocket launcher.png" type="Texture" id=24]
 [ext_resource path="res://Player/WeaponIcons.gd" type="Script" id=25]
+[ext_resource path="res://Assets/full guts.png" type="Texture" id=26]
+[ext_resource path="res://Assets/empty guts.png" type="Texture" id=27]
+[ext_resource path="res://Player/HealthUI.gd" type="Script" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -304,6 +307,20 @@ script = ExtResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="WeaponManager"]
 
 [node name="WeaponLabel" type="Label" parent="WeaponManager/CanvasLayer"]
+anchor_top = 0.068
+anchor_bottom = 0.068
+margin_left = 3.11217
+margin_top = 8.53353
+margin_right = 43.1122
+margin_bottom = 22.5335
+custom_fonts/font = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwordDamageLabel" type="Label" parent="WeaponManager/CanvasLayer"]
+anchor_top = -0.015
+anchor_bottom = -0.015
 margin_left = 3.11217
 margin_top = 8.53353
 margin_right = 43.1122
@@ -400,7 +417,7 @@ margin_left = 2.70287
 margin_top = 2.55269
 margin_right = 42.7029
 margin_bottom = 42.5527
-script = ExtResource( 16 )
+script = ExtResource( 28 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -421,6 +438,43 @@ modulate = Color( 1, 1, 1, 0.517647 )
 margin_right = 140.0
 margin_bottom = 5.0
 texture = ExtResource( 15 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GutsUI" type="Control" parent="CanvasLayer"]
+anchor_top = 0.05
+anchor_right = 0.015
+anchor_bottom = 0.05
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GutsUIEmpty" type="TextureRect" parent="CanvasLayer/GutsUI"]
+modulate = Color( 1, 1, 1, 0.517647 )
+margin_left = 2.70287
+margin_top = 2.55269
+margin_right = 142.703
+margin_bottom = 7.55269
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GutsUIFull" type="TextureRect" parent="CanvasLayer/GutsUI"]
+modulate = Color( 1, 1, 1, 0.517647 )
+margin_left = 2.70287
+margin_top = 2.55269
+margin_right = 142.703
+margin_bottom = 7.55269
+texture = ExtResource( 26 )
 expand = true
 stretch_mode = 2
 __meta__ = {
@@ -484,14 +538,19 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
 shape = SubResource( 16 )
+
+[node name="GutsTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 [connection signal="timeout" from="PlayerCam/Timer" to="PlayerCam" method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PickupMagnet" to="PickupMagnet" method="_on_PickupMagnet_body_entered"]
+[connection signal="timeout" from="GutsTimer" to="." method="_on_GutsTimer_timeout"]
 
 [editable path="Hurtbox"]

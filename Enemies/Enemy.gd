@@ -46,6 +46,8 @@ func _on_Hurtbox_area_entered(area):
 
 
 func _on_Stats_no_health():
+	Globals.camera.frame_freeze(0.1, 0.35)
+	
 	var effect = EnemyDeathEffect.instance()
 	effect.set_global_position(get_global_position())
 	parent.add_child(effect)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Breathing-SoundBible.com-612134025.wav-0c0a34b264781b14123c48e7950a6c73.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Breathing-SoundBible.com-612134025.wav"
+dest_files=[ "res://.import/Breathing-SoundBible.com-612134025.wav-0c0a34b264781b14123c48e7950a6c73.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

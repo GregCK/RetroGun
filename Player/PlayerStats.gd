@@ -58,6 +58,13 @@ signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
 
+export (int) var max_guts = 25 setget set_max_guts
+var guts = max_guts setget set_guts
+signal guts_changed(value)
+signal max_guts_changed(value)
+
+
+
 
 func _ready():
 	reset_health()
@@ -69,6 +76,12 @@ func set_max_health(value):
 	self.health = min(health, max_health)
 	emit_signal("max_health_changed", max_health)
 
+func set_max_guts(value):
+	max_guts = value
+	self.guts = guts
+	emit_signal("max_guts_changed", max_guts)
+
+
 func set_health(value):
 	health = value
 	if health > max_health:
@@ -76,6 +89,12 @@ func set_health(value):
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
+
+func set_guts(value):
+	guts = value
+	emit_signal("guts_changed", guts)
+	if guts > max_guts * 4:
+		guts = max_guts * 4
 
 
 func reset_health():

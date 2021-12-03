@@ -41,6 +41,9 @@ func _ready():
 		add_child(gun)
 		if gun.has_signal("ammo_changed"):
 			gun.connect("ammo_changed", self, "update_ammoLabel")
+		if gun.has_signal("sword_damage_changed"):
+			gun.connect("sword_damage_changed", self, "update_swordDamageLabel")
+			update_swordDamageLabel(gun.get_damage_multiple())
 
 	for weap in all_weapons:
 		weap.set_visible(false)
@@ -178,6 +181,8 @@ func equip_weapon(w):
 			if PlayerStats.sword < 1:
 				return
 			ammoLabel.text = ""
+#			$CanvasLayer/SwordDamageLabel.text = str(get_node("Sword").get_damage_multiple())
+			update_swordDamageLabel(get_node("Sword").get_damage_multiple())
 		1:
 			if PlayerStats.pistol < 1:
 				return
@@ -305,6 +310,9 @@ func get_matching_weapon(new_weapon):
 
 func update_ammoLabel(ammo):
 	ammoLabel.text = str(ammo)
+
+func update_swordDamageLabel(multiple):
+	$CanvasLayer/SwordDamageLabel.text = str(multiple) + "X Sword Damage"
 
 func is_weapon_equiped(w):
 	var equiped_weapon_name = weapon.name

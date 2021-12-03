@@ -35,6 +35,11 @@ func shake(new_shake, shake_time=0.4, shake_limit=100):
 
 
 
+func frame_freeze(timeScale, duration):
+	Engine.time_scale = timeScale
+	yield(get_tree().create_timer(duration * timeScale),"timeout")
+	Engine.time_scale = 1.0
+
 
 
 func _on_Timer_timeout():
