@@ -5,6 +5,7 @@ var paused = false
 
 func _ready():
 	$Control.hide()
+	$Options.hide()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _input(event):
@@ -26,6 +27,7 @@ func set_pause(value:bool):
 	else:
 		paused = false
 		$Control.hide()
+		$Options.hide()
 		get_tree().paused = false
 
 func _on_ResumeButton_pressed():
@@ -36,3 +38,14 @@ func _on_ResumeButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+
+func _on_Options_pressed():
+	$Control.hide()
+	$Options.show()
+	$Options.set_music_button_text()
+
+
+func _on_Button_pressed():
+	$Options.hide()
+	$Control.show()

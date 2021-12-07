@@ -12,12 +12,18 @@ var current_song = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
 #	load_songs()
 	randomize()
 	songs.shuffle()
 	stream = songs[0]
 	if autoplay == true:
 		play()
+
+
+
+
+
 
 #doesn't work
 func load_songs():
@@ -38,3 +44,17 @@ func load_songs():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_MusicPlayer_finished():
+	if is_playing():
+		next_song()
+
+
+func next_song():
+	current_song += 1
+	if current_song >= songs.size():
+		current_song = 0
+	
+	stream = songs[current_song]
+	play()

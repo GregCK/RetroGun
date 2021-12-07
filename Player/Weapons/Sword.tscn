@@ -101,7 +101,8 @@ offset = Vector2( 0, -10.73 )
 
 [node name="BreathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-pitch_scale = 2.0
+volume_db = -20.104
+pitch_scale = 2.66
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 
 [editable path="Hitbox"]

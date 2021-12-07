@@ -199,6 +199,7 @@ scroll_up={
 2d_physics/layer_8="EnemyBullet"
 2d_physics/layer_9="ExplodingBarrel"
 2d_physics/layer_10="Pickup"
+2d_physics/layer_11="Hole"
 
 [rendering]
 

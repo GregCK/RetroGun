@@ -111,6 +111,7 @@ func _on_PlayerStats_no_health():
 #	get_tree().change_scene_to(titleScreen)
 	panelContainer.visible = true
 	reset_weapons()
+	PlayerStats.guts = max_guts
 
 
 func pick_random_weapon():

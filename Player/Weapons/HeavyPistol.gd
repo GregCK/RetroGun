@@ -17,7 +17,7 @@ var can_shoot = true
 
 const weapon_name = "Heavy Pistol"
 
-var ammo = 10
+var ammo = 20
 
 var camera_shake = 150
 

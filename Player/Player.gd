@@ -154,7 +154,7 @@ func move():
 	velocity = move_and_slide(velocity)
 
 
-func set_camera(delta):
+func set_camera(_delta):
 	var mouse_pos = get_global_mouse_position()
 	var player_pos = get_global_position()
 
@@ -257,3 +257,8 @@ func _on_Hurtbox_invincibility_started():
 func _on_GutsTimer_timeout():
 	if PlayerStats.guts < PlayerStats.max_guts:
 		PlayerStats.set_guts(PlayerStats.guts + 1)
+
+
+func _on_GutsDownTimer_timeout():
+	if PlayerStats.guts > PlayerStats.max_guts:
+		PlayerStats.set_guts(PlayerStats.guts - 1)

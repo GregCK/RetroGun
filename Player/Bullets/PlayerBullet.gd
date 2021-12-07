@@ -31,10 +31,10 @@ func init(new_direction:Vector2):
 	
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = move_and_slide(velocity)
 	if get_slide_count() != 0:
-		for i in range(3):
+		for _i in range(3):
 			create_death_effect()
 		
 		queue_free()

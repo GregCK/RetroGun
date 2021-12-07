@@ -250,7 +250,7 @@ radius = 66.2193
 ]]
 z_index = 1
 collision_layer = 2
-collision_mask = 33
+collision_mask = 1057
 script = ExtResource( 2 )
 god_mode = false
 
@@ -539,6 +539,9 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
 shape = SubResource( 16 )
 
+[node name="GutsDownTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="GutsTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
@@ -551,6 +554,7 @@ autostart = true
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PickupMagnet" to="PickupMagnet" method="_on_PickupMagnet_body_entered"]
+[connection signal="timeout" from="GutsDownTimer" to="." method="_on_GutsDownTimer_timeout"]
 [connection signal="timeout" from="GutsTimer" to="." method="_on_GutsTimer_timeout"]
 
 [editable path="Hurtbox"]

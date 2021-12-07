@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Pause.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/Pixeled_5.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Options.gd" type="Script" id=3]
 
 [node name="Pause" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -9,6 +10,9 @@ script = ExtResource( 1 )
 [node name="Control" type="Control" parent="."]
 margin_right = 321.0
 margin_bottom = 181.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 anchor_left = 0.5
@@ -41,11 +45,65 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuitButton" type="Button" parent="Control/VBoxContainer"]
+[node name="Options" type="Button" parent="Control/VBoxContainer"]
 margin_top = 42.0
 margin_right = 64.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 2 )
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer"]
+margin_top = 66.0
+margin_right = 64.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 2 )
 text = "Quit"
+
+[node name="Options" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+margin_top = 49.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Button" parent="Options/VBoxContainer"]
+margin_right = 76.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 2 )
+text = "Music:"
+
+[node name="Button" type="Button" parent="Options/VBoxContainer"]
+margin_top = 24.0
+margin_right = 76.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 2 )
+text = "Next Song"
+
+[node name="Back" type="Button" parent="Options"]
+margin_left = -64.5415
+margin_top = 33.6738
+margin_right = -52.5415
+margin_bottom = 53.6738
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Control/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Music" to="Options" method="_on_Music_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Button" to="Options" method="_on_Button_pressed"]
+[connection signal="pressed" from="Options/Back" to="." method="_on_Button_pressed"]

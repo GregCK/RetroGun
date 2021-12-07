@@ -10,7 +10,7 @@ func init(new_direction:Vector2):
 	direction = new_direction
 	velocity = new_direction * speed
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = move_and_slide(velocity)
 
 
