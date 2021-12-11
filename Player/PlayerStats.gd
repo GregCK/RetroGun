@@ -105,11 +105,12 @@ func get_health_pickups():
 
 
 func _on_PlayerStats_no_health():
-#	health = max_health
-	Globals.floor_num = 1
-# warning-ignore:return_value_discarded
-#	get_tree().change_scene_to(titleScreen)
+	reset_game_globals()
 	panelContainer.visible = true
+
+
+func reset_game_globals():
+	Globals.floor_num = 0
 	reset_weapons()
 	PlayerStats.guts = max_guts
 

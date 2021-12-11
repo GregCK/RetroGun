@@ -31,9 +31,12 @@ func set_pause(value:bool):
 		get_tree().paused = false
 
 func _on_ResumeButton_pressed():
-	get_tree().paused = false
-	$Control.hide()
+	resume()
 	
+func resume():
+	get_tree().paused = false
+	paused = false
+	$Control.hide()
 
 
 func _on_QuitButton_pressed():
@@ -49,3 +52,10 @@ func _on_Options_pressed():
 func _on_Button_pressed():
 	$Options.hide()
 	$Control.show()
+
+
+const titleScreen = preload("res://Menus/TitleScreen/TitleScreen.tscn")
+func _on_TitleScreen_pressed():
+	get_tree().change_scene_to(titleScreen)
+	PlayerStats.reset_game_globals()
+	resume()

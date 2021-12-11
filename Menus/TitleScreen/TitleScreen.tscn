@@ -71,7 +71,7 @@ __meta__ = {
 [node name="Logo" type="AnimatedSprite" parent="Menu"]
 position = Vector2( 140, -38 )
 frames = SubResource( 9 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]

@@ -83,6 +83,8 @@ func _physics_process(delta):
 		State.DASH:
 			pass
 	set_camera(delta)
+	
+	
 
 
 

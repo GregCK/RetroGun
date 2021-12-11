@@ -160,7 +160,7 @@ func navigate_gradual(speed, delta, acceleration = 300):
 	elif path.size() > 0:
 		velocity = velocity.move_toward(global_position.direction_to(path[0]) * speed, acceleration * delta)
 #	if reached destination, remove point from path
-	if global_position == path[0]:
+	if path.size() > 0 and global_position == path[0]:
 		path.pop_front()
 
 func generate_path_to_player():
@@ -168,7 +168,7 @@ func generate_path_to_player():
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
 		
 #		should fix stutter bug
-		if global_position == path[0]:
+		if path.size() > 0 and global_position == path[0]:
 			path.pop_front()
 		return path
 
@@ -177,7 +177,7 @@ func generate_path_to_position(position):
 		path = levelNavigation.get_simple_path(global_position, position, false)
 		
 #		should fix stutter bug
-		if global_position == path[0]:
+		if path.size() > 0 and global_position == path[0]:
 			path.pop_front()
 		return path
 
