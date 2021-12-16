@@ -212,6 +212,7 @@ func equip_weapon(w):
 	if weapon:
 		weapon.set_visible(false)
 	
+	$WeaponSoundEffect.play()
 
 	PlayerStats.equip_weapon_index = w
 	weapon = all_weapons[w]

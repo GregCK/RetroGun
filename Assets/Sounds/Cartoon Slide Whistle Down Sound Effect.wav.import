@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cartoon Slide Whistle Down Sound Effect.wav-41a791c28eca40c4d383a5f997d2aa69.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cartoon Slide Whistle Down Sound Effect.wav"
+dest_files=[ "res://.import/Cartoon Slide Whistle Down Sound Effect.wav-41a791c28eca40c4d383a5f997d2aa69.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

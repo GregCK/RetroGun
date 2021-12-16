@@ -41,6 +41,7 @@ enum State{
 	MOVE,
 	DASH,
 	PORTAL,
+	FALL
 	DEAD
 }
 
@@ -80,6 +81,8 @@ func _physics_process(delta):
 			move()
 		State.PORTAL:
 			portal_state(delta)
+		State.FALL:
+			fall_state(delta)
 		State.DASH:
 			pass
 	set_camera(delta)
@@ -109,8 +112,14 @@ func set_state(new_state: int):
 		State.PORTAL:
 			animationPlayer.play("RollLoop")
 		
+		State.FALL:
+			animationPlayer.play("Fall")
+			hurtboxCollisionShape.disabled = true
+			velocity = Vector2.ZERO
+		
 		State.DEAD:
 			pass
+		
 	current_state = new_state 
 
 
@@ -151,6 +160,9 @@ func portal_state(delta):
 	
 	move()
 
+
+func fall_state(delta):
+	velocity = Vector2.ZERO
 
 func move():
 	velocity = move_and_slide(velocity)
@@ -197,7 +209,26 @@ func dash_animation_finished():
 	velocity = velocity / 2
 	hurtboxCollisionShape.disabled = false
 	set_state(State.MOVE)
+
+func fall_animation_finished():
+	hurtboxCollisionShape.disabled = false
+	set_state(State.MOVE)
+	emit_signal("fall", scent_trail)
+	sprite.scale.x = 1
+	sprite.scale.y = 1
+	sprite.rotation_degrees = 0
+
+
+func over_hole():
+	if current_state == State.MOVE:
+		fall_in_hole()
+
+signal fall
+func fall_in_hole():
+	set_state(State.FALL)
+	$FallSound.play()
 	
+
 
 var portal = null
 func set_portal():
