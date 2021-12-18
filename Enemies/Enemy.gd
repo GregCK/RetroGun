@@ -26,6 +26,11 @@ var last_weapon_hit_by
 
 func _ready():
 	parent = get_parent()
+	var fallAnimationPlayer = get_node_or_null("FallAnimationPlayer")
+	if fallAnimationPlayer != null:
+		fallAnimationPlayer.connect("animation_finished", self, "on_fall_animation_finished")
+	else:
+		pass
 
 
 
@@ -44,7 +49,7 @@ func _on_Hurtbox_area_entered(area):
 		pass
 	pass
 
-
+signal die
 func _on_Stats_no_health():
 	Globals.camera.frame_freeze(0.1, 0.35)
 	
@@ -53,12 +58,18 @@ func _on_Stats_no_health():
 	parent.add_child(effect)
 	
 	
-#	var enemies = get_tree().get_nodes_in_group("enemies").size()
+	emit_signal("die", self)
 	
 	spawn_portal_spawner()
 	spawn_health()
 	queue_free()
-	
+
+func fall():
+	$FallAnimationPlayer.play("Fall")
+
+func on_fall_animation_finished(animation):
+	stats.set_health(0)
+
 
 func spawn_portal_spawner():
 	var portal = PortalSpawner.instance()
@@ -67,7 +78,7 @@ func spawn_portal_spawner():
 	portal.position = position
 
 func spawn_health():
-	if last_weapon_hit_by.name == "Sword":
+	if last_weapon_hit_by != null and last_weapon_hit_by.name == "Sword":
 		var health_pickups = PlayerStats.get_health_pickups()
 	
 		for i in health_pickups:
