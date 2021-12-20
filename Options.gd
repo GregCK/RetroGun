@@ -1,10 +1,7 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+signal close
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,3 +22,7 @@ func _on_Music_pressed():
 
 func _on_Button_pressed():
 	MusicPlayer.next_song()
+
+
+func _on_Back_pressed():
+	emit_signal("close")

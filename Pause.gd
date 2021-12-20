@@ -7,6 +7,8 @@ func _ready():
 	$Control.hide()
 	$Options.hide()
 	pause_mode = Node.PAUSE_MODE_PROCESS
+	
+	$Options.connect("close", self, "options_close")
 
 func _input(event):
 	if event.is_action_pressed("escape"):
@@ -49,9 +51,11 @@ func _on_Options_pressed():
 	$Options.set_music_button_text()
 
 
-func _on_Button_pressed():
+func options_close():
 	$Options.hide()
 	$Control.show()
+
+
 
 
 const titleScreen = preload("res://Menus/TitleScreen/TitleScreen.tscn")

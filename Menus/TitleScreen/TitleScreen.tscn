@@ -71,7 +71,7 @@ __meta__ = {
 [node name="Logo" type="AnimatedSprite" parent="Menu"]
 position = Vector2( 140, -38 )
 frames = SubResource( 9 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
@@ -103,4 +103,5 @@ custom_fonts/font = SubResource( 10 )
 text = "Verision 1.0
 Made by Greg Knowles"
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Quit" to="." method="_on_Quit_pressed"]
