@@ -127,7 +127,7 @@ hframes = 2
 frame = 1
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 100
+max_health = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )

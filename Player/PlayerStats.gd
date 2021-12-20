@@ -101,7 +101,9 @@ func reset_health():
 	self.health = max_health
 
 func get_health_pickups():
-	return 1
+	var missing_health = max_health - health
+	var health_pickups = int(missing_health / 5) + 1
+	return health_pickups
 
 
 func _on_PlayerStats_no_health():
